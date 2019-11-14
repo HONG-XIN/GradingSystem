@@ -1,0 +1,5 @@
+# ignore bin folder
+## project compiler output folder
+/bin
+## intelliJ folder
+/.idea
