@@ -3,3 +3,4 @@
 /bin
 ## intelliJ folder
 /.idea
+*.iml
