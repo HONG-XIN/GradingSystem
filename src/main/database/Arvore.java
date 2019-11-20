@@ -11,11 +11,13 @@ public class Arvore implements Serializable {
 
     private String species;
     private int idade;
+    private String color;
 
-    public Arvore(int id, String species, int idade) {
+    public Arvore(int id, String species, int idade, String color) {
         this.id = id;
         this.species = species;
         this.idade = idade;
+        this.color = color;
     }
 
     public Arvore() { }
@@ -44,12 +46,21 @@ public class Arvore implements Serializable {
         this.idade = idade;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @Override
     public String toString() {
         return "Arvore{" +
                 "id=" + id +
                 ", species='" + species + '\'' +
                 ", idade=" + idade +
+                ", color='" + color + '\'' +
                 '}';
     }
 }
