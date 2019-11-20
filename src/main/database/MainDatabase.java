@@ -1,6 +1,6 @@
 package main.database;
 
-public class Main {
+public class MainDatabase {
 
     public static void main(String[] args) {
 
