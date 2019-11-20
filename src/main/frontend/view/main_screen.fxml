@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.frontend.controller.MainController">
-  <center>
-    <ListView fx:id="lvVeiculos" prefHeight="200.0" prefWidth="200.0" />
-  </center>
-  <top>
-    <ToolBar>
-      <items>
-        <Button mnemonicParsing="false" onAction="#btNovoAction" text="Novo" />
-        <Button mnemonicParsing="false" text="Editar" />
-        <Button mnemonicParsing="false" text="Apagar" />
-      </items>
-    </ToolBar>
-  </top>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" text="Novo" />
+            <Button mnemonicParsing="false" text="Editar" />
+            <Button mnemonicParsing="false" text="Apagar" />
+        </items>
+      </ToolBar>
+   </top>
+   <center>
+      <ListView fx:id="lvVeiculos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
