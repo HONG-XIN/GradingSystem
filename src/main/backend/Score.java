@@ -1,6 +1,16 @@
 package main.backend;
 
+import org.dizitart.no2.IndexType;
+import org.dizitart.no2.objects.Id;
+import org.dizitart.no2.objects.Index;
+import org.dizitart.no2.objects.Indices;
+
+@Indices({
+        @Index(value = "ScoreValue", type = IndexType.NonUnique),
+        @Index(value = "ScoreType", type = IndexType.NonUnique)
+})
 public class Score {
+    @Id
     double ScoreValue;
     int ScoreType;       //0 is total score  1 is percentage score
     public Score(){
