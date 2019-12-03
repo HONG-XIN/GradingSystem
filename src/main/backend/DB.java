@@ -1,10 +1,10 @@
 package main.backend;
 
-import org.dizitart.no2.Document;
-import org.dizitart.no2.Nitrite;
-import org.dizitart.no2.NitriteBuilder;
-import org.dizitart.no2.NitriteCollection;
+import org.dizitart.no2.*;
+import org.dizitart.no2.objects.Cursor;
 import org.dizitart.no2.objects.ObjectRepository;
+
+import java.util.List;
 
 public class DB {
     public static void initialize(){
@@ -14,7 +14,12 @@ public class DB {
         ObjectRepository<Student> StudentRepository = db.getRepository(Student.class);
         Student stu = new Student("123", "a", "b");
         StudentRepository.insert(stu);
-
+        Cursor<Student> cursor = StudentRepository.find();
+        /*List<Student> subEmployeeList
+                = StudentRepository.find().project(Student.class).toList();
+        for(Student student : subEmployeeList) {
+            System.out.println(student.getStudentID());
+        }*/
     }
 
     public static void main(String[] args){
