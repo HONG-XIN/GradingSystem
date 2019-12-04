@@ -1,6 +1,6 @@
 package main.backend;
 
-public class IdNumberTemplate extends IdNumber{
+public class IdNumberTemplate extends IdNumber {
     public IdNumberTemplate(){
         super();
     }

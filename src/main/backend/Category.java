@@ -16,17 +16,17 @@ public class Category {
         dueDate = new Date();
     }
 
-    public Category(String id, String name, double percentage) {
+    public Category(String id, String name, double weight) {
         this();
         setId(id);
         setName(name);
-        setWeight(percentage);
+        setWeight(weight);
     }
 
-    public Category(String categoryId, String categoryName, double percentage,
+    public Category(String id, String name, double weight,
                     int day, int month, int year,
                     int dueDay, int dueMonth, int dueYear) {
-        this(categoryId, categoryName, percentage);
+        this(id, name, weight);
         setAssignDate(day, month, year);
         setDueDate(dueDay, dueMonth, dueYear);
     }

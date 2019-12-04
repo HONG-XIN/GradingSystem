@@ -1,18 +1,9 @@
 package main.backend;
 
-import org.dizitart.no2.IndexType;
-import org.dizitart.no2.objects.Id;
-import org.dizitart.no2.objects.Index;
-import org.dizitart.no2.objects.Indices;
-
-@Indices({
-        @Index(value = "value", type = IndexType.NonUnique),
-        @Index(value = "type", type = IndexType.NonUnique)
-})
 public class Score {
-    @Id
+
     private double value;
-    private int type;       //0 is normal score  1 is deduction score
+    private int type;       //0 is percent score  1 is deduction score
 
     public Score() {
         this.value = 0;
@@ -24,20 +15,20 @@ public class Score {
         this.type = type;
     }
     //accessor
-    public double getScoreValue() {
+    public double getValue() {
         return value;
     }
 
-    public int getScoreType(){
+    public int getType(){
         return this.type;
     }
 
     //mutator
-    public void setScoreValue(double value){
+    public void setValue(double value){
         this.value = value;
     }
 
-    public void setScoreType(int type){
+    public void setType(int type){
         this.type = type;
     }
 }

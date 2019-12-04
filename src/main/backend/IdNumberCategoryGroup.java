@@ -1,6 +1,6 @@
 package main.backend;
 
-public class IdNumberCategoryGroup extends IdNumber{
+public class IdNumberCategoryGroup extends IdNumber {
     public IdNumberCategoryGroup() {
         super();
     }

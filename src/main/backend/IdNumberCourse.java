@@ -1,6 +1,6 @@
 package main.backend;
 
-public class IdNumberCourse extends IdNumber{
+public class IdNumberCourse extends IdNumber {
     public IdNumberCourse() {
         super();
     }

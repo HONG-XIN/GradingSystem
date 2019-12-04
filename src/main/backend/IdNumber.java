@@ -10,7 +10,7 @@ public class IdNumber {
 
     //constructor
     public IdNumber() {
-        this.id = "";
+        this.id = generateRandomNumber();
     }
 
     public IdNumber(String id) {
