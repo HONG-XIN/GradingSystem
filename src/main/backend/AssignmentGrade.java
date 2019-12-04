@@ -1,18 +1,18 @@
 package main.backend;
 
 public class AssignmentGrade {
-    private int assignmentID;
-    private int studentID;
+    private ID assignmentID;
+    private ID studentID;
     //private Score score;
     private double percent;
     //constructer
-    AssignmentGrade(int assignmentID, int studentID){
+    AssignmentGrade(ID assignmentID, ID studentID){
         this.assignmentID = assignmentID;
         this.studentID = studentID;
         //this.score = new Score(0);
         this.percent = 0;
     }
-    AssignmentGrade(int assignmentID, int studentID, /*Score score,*/ double percent){
+    AssignmentGrade(ID assignmentID, ID studentID, /*Score score,*/ double percent){
         this.assignmentID = assignmentID;
         this.studentID = studentID;
         //this.score = score;
@@ -68,11 +68,11 @@ public class AssignmentGrade {
         return false;
     }
     //accesser
-    public int getAssignmentID(){
-        return this.assignmentID;
+    public String getAssignmentID(){
+        return this.assignmentID.getID();
     }
-    public int getStudentID(){
-        return this.studentID;
+    public String getStudentID(){
+        return this.studentID.getID();
     }
     /*
     public Score getScore(){

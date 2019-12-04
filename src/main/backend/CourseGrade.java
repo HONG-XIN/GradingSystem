@@ -1,14 +1,14 @@
 package main.backend;
 
 public class CourseGrade {
-    private int courseID;
-    private int studentID;
+    private ID courseID;
+    private ID studentID;
     private int finalscore;
     private String letter;
     private int bonus;
     private String comment;
     //constructer
-    CourseGrade(int courseID, int studentID){
+    CourseGrade(ID courseID, ID studentID){
         this.courseID = courseID;
         this.studentID = studentID;
         this.finalscore = 0;
@@ -16,7 +16,7 @@ public class CourseGrade {
         this.bonus = 0;
         this.comment = "";
     }
-    CourseGrade(int courseID, int studentID, int finalscore){
+    CourseGrade(ID courseID, ID studentID, int finalscore){
         this.courseID = courseID;
         this.studentID = studentID;
         this.finalscore = finalscore;
@@ -35,7 +35,7 @@ public class CourseGrade {
         this.bonus = 0;
         this.comment = "";
     }
-    CourseGrade(int courseID, int studentID, String letter){
+    CourseGrade(ID courseID, ID studentID, String letter){
         this.courseID = courseID;
         this.studentID = studentID;
         this.letter = letter;
@@ -54,7 +54,7 @@ public class CourseGrade {
         this.bonus = 0;
         this.comment = "";
     }
-    CourseGrade(int courseID, int studentID, int finalscore, String letter){
+    CourseGrade(ID courseID, ID studentID, int finalscore, String letter){
         this.courseID = courseID;
         this.studentID = studentID;
         this.finalscore = finalscore;
@@ -62,7 +62,7 @@ public class CourseGrade {
         this.bonus = 0;
         this.comment = "";
     }
-    CourseGrade(int courseID, int studentID, int finalscore, String letter, int bonus){
+    CourseGrade(ID courseID, ID studentID, int finalscore, String letter, int bonus){
         this.courseID = courseID;
         this.studentID = studentID;
         this.finalscore = finalscore;
@@ -70,7 +70,7 @@ public class CourseGrade {
         this.bonus = bonus;
         this.comment = "";
     }
-    CourseGrade(int courseID, int studentID, int finalscore, String letter, int bonus, String comment){
+    CourseGrade(ID courseID, ID studentID, int finalscore, String letter, int bonus, String comment){
         this.courseID = courseID;
         this.studentID = studentID;
         this.finalscore = finalscore;
@@ -81,11 +81,11 @@ public class CourseGrade {
     //mutator
 
     //accesser
-    public int getCourseID(){
-        return this.courseID;
+    public String getCourseID(){
+        return this.courseID.getID();
     }
-    public int getStudentID(){
-        return this.studentID;
+    public String getStudentID(){
+        return this.studentID.getID();
     }
     public int getFinalscore(){
         return this.finalscore;
