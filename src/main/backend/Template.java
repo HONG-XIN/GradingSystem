@@ -2,30 +2,30 @@ package main.backend;
 import java.util.ArrayList;
 
 public class Template {
-    private IdNumberTemplate templateIdNumber;
-    private String templateName;
+    private IdNumberTemplate idNumber;
+    private String name;
     private ArrayList<IdNumberCategoryGroup> groupIdNumbers;
 
     //constructor
     public Template() {
-        templateIdNumber = new IdNumberTemplate();
-        templateName = "";
+        idNumber = new IdNumberTemplate();
+        name = "";
         groupIdNumbers = new ArrayList<>();
     }
 
-    public Template (String templateId, String templateName) {
+    public Template (String id, String name) {
         this();
-        setTemplateIdNumber(templateId);
-        setTemplateName(templateName);
+        setId(id);
+        setName(name);
     }
 
     //accessor
-    public String getTemplateId() {
-        return this.templateIdNumber.getId();
+    public String getId() {
+        return this.idNumber.getId();
     }
 
-    public String getTemplateName() {
-        return this.templateName;
+    public String getName() {
+        return this.name;
     }
 
     public ArrayList<IdNumberCategoryGroup> getCategoryGroups() {
@@ -33,12 +33,12 @@ public class Template {
     }
 
     //mutator
-    public void setTemplateIdNumber(String templateId) {
-        this.templateIdNumber.setId(templateId);
+    public void setId(String id) {
+        this.idNumber.setId(id);
     }
 
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     //functions

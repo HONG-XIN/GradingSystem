@@ -1,59 +1,72 @@
 package main.backend;
 
 public class Semester {
-    private int id;
+    private IdNumberSemester idNumber;
     private String name;
     private Date startDate;
     private Date endDate;
 
     public Semester() {
-        id = 0;
+        this.idNumber = new IdNumberSemester();
+        this.name = "";
+        startDate = new Date();
+        endDate = new Date();
     }
 
-    public Semester(int id, String name, Date startDate, Date endDate) {
-        this.id = id;
+    public Semester(String id, String name,
+                    int startDay, int startMonth, int startYear,
+                    int endDay, int endMonth, int endYear) {
+        this();
+        this.idNumber.setId(id);
         this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate.setDate(startDay, startMonth, startYear);
+        this.endDate.setDate(endDay, endMonth, endYear);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    //accessor
+    public String getId() {
+        return idNumber.getId();
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getStartDate() {
+        return startDate.toString();
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getEndDate() {
+        return endDate.toString();
+    }
+
+    //mutator
+    public void setId(String id) {
+        this.idNumber.setId(id);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
+    public void setStartDate(int startDay, int startMonth, int startYear) {
+        this.startDate.setDate(startDay, startMonth, startYear);
+    }
+
+    public void setEndDate(int endDay, int endMonth, int endYear) {
+        this.endDate.setDate(endDay, endMonth, endYear);
+    }
+
+    //check function
     public boolean checkDateInRange(Date date) {
-        if (startDate.compareTo(date) >= 0 && endDate.compareTo(date) <= 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return startDate.compareTo(date) >= 0 && endDate.compareTo(date) <= 0;
     }
 }

@@ -44,6 +44,12 @@ public class Date implements Comparable<Date> {
         this.year = year;
     }
 
+    public void setDate(int day, int month, int year) {
+        setDay(day);
+        setMonth(month);
+        setYear(year);
+    }
+
     //compare function
     public int compareTo(Date otherDate) {
         if (otherDate.year < year) {
@@ -54,13 +60,7 @@ public class Date implements Comparable<Date> {
             return -1;
         } else if (otherDate.month > month) {
             return 1;
-        } else if (otherDate.day < day) {
-            return -1;
-        } else if (otherDate.day > day) {
-            return 1;
-        } else {
-            return 0;
-        }
+        } else return Integer.compare(otherDate.day, day);
     }
 
     // override function
@@ -69,4 +69,5 @@ public class Date implements Comparable<Date> {
         String dateFormat = "%s/%s/%s";
         return String.format(dateFormat, day, month, year);
     }
+
 }

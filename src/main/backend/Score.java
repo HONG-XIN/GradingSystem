@@ -6,38 +6,38 @@ import org.dizitart.no2.objects.Index;
 import org.dizitart.no2.objects.Indices;
 
 @Indices({
-        @Index(value = "ScoreValue", type = IndexType.NonUnique),
-        @Index(value = "ScoreType", type = IndexType.NonUnique)
+        @Index(value = "value", type = IndexType.NonUnique),
+        @Index(value = "type", type = IndexType.NonUnique)
 })
 public class Score {
     @Id
-    private double scoreValue;
-    private int scoreType;       //0 is normal score  1 is deduction score
+    private double value;
+    private int type;       //0 is normal score  1 is deduction score
 
     public Score() {
-        this.scoreValue = 0;
-        this.scoreType = 0;
+        this.value = 0;
+        this.type = 0;
     }
 
-    public Score(double scoreValue, int scoreType){
-        this.scoreValue = scoreValue;
-        this.scoreType = scoreType;
+    public Score(double value, int type){
+        this.value = value;
+        this.type = type;
     }
     //accessor
     public double getScoreValue() {
-        return scoreValue;
+        return value;
     }
 
     public int getScoreType(){
-        return this.scoreType;
+        return this.type;
     }
 
     //mutator
-    public void setScoreValue(double scoreValue){
-        this.scoreValue = scoreValue;
+    public void setScoreValue(double value){
+        this.value = value;
     }
 
-    public void setScoreType(int scoreType){
-        this.scoreType = scoreType;
+    public void setScoreType(int type){
+        this.type = type;
     }
 }

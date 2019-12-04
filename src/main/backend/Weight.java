@@ -3,11 +3,11 @@ package main.backend;
 import java.text.DecimalFormat;
 
 public class Weight {
-    private double percentage;
+    private double value;
 
     //constructor
-    public Weight(double percentage) {
-        this.percentage = percentage;
+    public Weight(double value) {
+        this.value = value;
     }
 
     public Weight() {
@@ -15,19 +15,19 @@ public class Weight {
     }
 
     //accessor
-    public double getPercentage(){
-        return this.percentage;
+    public double getValue(){
+        return this.value;
     }
 
     //mutator
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
+    public void setValue(double value) {
+        this.value = value;
     }
 
     //override function
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(percentage) + "%";
+        return df.format(value) + "%";
     }
 }

@@ -9,6 +9,9 @@ public class IdNumberStudent extends IdNumber{
         super(studentId);
     }
 
+    /**
+     * 9 digit code U12345678
+     */
     //check function
     public static boolean isValidStudentId(String studentId) {
         if(studentId.length() != 9 && studentId.charAt(0) != 'U'){

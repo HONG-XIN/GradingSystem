@@ -6,24 +6,25 @@ import java.util.Random;
  * 9 digit code
  */
 public class IdNumber {
-    protected String idNumber;
+    protected String id;
 
     //constructor
-    public IdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
     public IdNumber() {
-        this.idNumber = "";
+        this.id = "";
+    }
+
+    public IdNumber(String id) {
+        this.id = id;
     }
 
     //accessor
     public String getId() {
-        return idNumber;
+        return id;
     }
 
     //mutator
-    public void setId(String idNumber) {
-        this.idNumber = idNumber;
+    public void setId(String id) {
+        this.id = id;
     }
 
     //generate function

@@ -1,26 +1,26 @@
 package main.backend;
 
 public class Category {
-    private IdNumberCategory categoryIdNumber;
-    private String categoryName;
-    private Weight categoryWeight;
+    private IdNumberCategory idNumber;
+    private String name;
+    private Weight weight;
     private Date assignDate;
     private Date dueDate;
 
     //constructor
     public Category() {
-        categoryIdNumber = new IdNumberCategory();
-        categoryName = "";
-        categoryWeight = new Weight();
+        idNumber = new IdNumberCategory();
+        name = "";
+        weight = new Weight();
         assignDate = new Date();
         dueDate = new Date();
     }
 
-    public Category(String categoryId, String categoryName, double percentage) {
+    public Category(String id, String name, double percentage) {
         this();
-        setCategoryId(categoryId);
-        setCategoryName(categoryName);
-        setCategoryWeight(percentage);
+        setId(id);
+        setName(name);
+        setWeight(percentage);
     }
 
     public Category(String categoryId, String categoryName, double percentage,
@@ -31,20 +31,20 @@ public class Category {
         setDueDate(dueDay, dueMonth, dueYear);
     }
     //accessor
-    public IdNumberCategory getCategoryNumber() {
-        return categoryIdNumber;
+    public IdNumberCategory getIdNumber() {
+        return idNumber;
     }
 
-    public String getCategoryId() {
-        return categoryIdNumber.getId();
+    public String getId() {
+        return idNumber.getId();
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getName() {
+        return name;
     }
 
-    public double getCategoryWeight() {
-        return categoryWeight.getPercentage();
+    public double getWeight() {
+        return weight.getValue();
     }
 
     public String getAssignDate() {
@@ -56,16 +56,16 @@ public class Category {
     }
 
     //mutator
-    public void setCategoryId(String categoryId) {
-        this.categoryIdNumber.setId(categoryId);
+    public void setId(String id) {
+        this.idNumber.setId(id);
     }
 
-    public void setCategoryName (String categoryName) {
-        this.categoryName = categoryName;
+    public void setName (String name) {
+        this.name = name;
     }
 
-    public void setCategoryWeight (double percentage) {
-        this.categoryWeight.setPercentage(percentage);
+    public void setWeight (double value) {
+        this.weight.setValue(value);
     }
 
     public void setAssignDate (int day, int month, int year) {

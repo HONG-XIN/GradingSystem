@@ -1,60 +1,59 @@
 package main.backend;
 
 public class Course {
-    private int id;
+
+    private IdNumberCourse idNumber;
     private String name;
     private Semester semester;
-    private String gradingCriteria;
-    private String template;
+    private IdNumberTemplate templateId;
 
+    //constructor
     public Course() {
-        id = 0;
+        this.idNumber = new IdNumberCourse();
+        this.name = "";
+        this.semester = new Semester();
+
     }
 
-    public Course(int id, String name, Semester semester, String gradingCriteria) {
-        this.id = id;
+    public Course(String id, String name, Semester semester, String templateId) {
+        this();
+        this.idNumber.setId(id);
         this.name = name;
         this.semester = semester;
-        this.gradingCriteria = gradingCriteria;
+        this.templateId.setId(templateId);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    //accessor
+    public String getId() {
+        return this.idNumber.getId();
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
     public Semester getSemester() {
         return semester;
+    }
+
+    public String getTemplateId() {
+        return templateId.getId();
+    }
+
+    //mutator
+    public void setId(String id) {
+        this.idNumber.setId(id);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setSemester(Semester semester) {
         this.semester = semester;
     }
 
-    public String getGradingCriteria() {
-        return gradingCriteria;
-    }
-
-    public void setGradingCriteria(String gradingCriteria) {
-        this.gradingCriteria = gradingCriteria;
+    public void setTemplateId(String templateId) {
+        this.templateId.setId(templateId);
     }
 }

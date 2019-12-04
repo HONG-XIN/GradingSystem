@@ -3,40 +3,40 @@ package main.backend;
 import java.util.ArrayList;
 
 public class CategoryGroup {
-    private IdNumberCategoryGroup groupIdNumber;
-    private String groupName;
-    private Weight groupWeight;
+    private IdNumberCategoryGroup idNumber;
+    private String name;
+    private Weight weight;
     private ArrayList<IdNumberCategory> idNumberCategories;
 
     //constructor
     public CategoryGroup() {
-        groupIdNumber = new IdNumberCategoryGroup();
-        groupName = "";
-        groupWeight = new Weight();
+        idNumber = new IdNumberCategoryGroup();
+        name = "";
+        weight = new Weight();
         idNumberCategories = new ArrayList<>();
     }
 
-    public CategoryGroup(String groupIdNumber, String groupName, double groupWeight) {
+    public CategoryGroup(String id, String name, double weight) {
         this();
-        setGroupIdNumber(groupIdNumber);
-        setGroupName(groupName);
-        setGroupWeight(groupWeight);
+        setId(id);
+        setName(name);
+        setWeight(weight);
     }
     //accessor
-    public IdNumberCategoryGroup getGroupIdNumber() {
-        return this.groupIdNumber;
+    public IdNumberCategoryGroup getIdNumber() {
+        return this.idNumber;
     }
 
-    public String getGroupId() {
-        return this.groupIdNumber.getId();
+    public String getId() {
+        return this.idNumber.getId();
     }
 
-    public String getGroupName() {
-        return this.groupName;
+    public String getName() {
+        return this.name;
     }
 
-    public double getGroupWeight() {
-        return this.groupWeight.getPercentage();
+    public double getWeight() {
+        return this.weight.getValue();
     }
 
     public ArrayList<IdNumberCategory> getCategoryIds() {
@@ -44,16 +44,16 @@ public class CategoryGroup {
     }
 
     //mutator
-    public void setGroupIdNumber(String groupId) {
-        this.groupIdNumber.setId(groupId);
+    public void setId(String id) {
+        this.idNumber.setId(id);
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setGroupWeight(double percentage) {
-        this.groupWeight.setPercentage(percentage);
+    public void setWeight(double value) {
+        this.weight.setValue(value);
     }
 
     //functions

@@ -1,9 +1,9 @@
 package main.backend;
 
 public class Name {
-    String firstName;
-    String middleName;
-    String lastName;
+    private String firstName;
+    private String middleName;
+    private String lastName;
 
     //constructor
     public Name() {
@@ -47,6 +47,12 @@ public class Name {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setName(String firstName, String middleName, String lastName) {
+        setFirstName(firstName);
+        setMiddleName(middleName);
+        setLastName(lastName);
     }
 
     // override function
