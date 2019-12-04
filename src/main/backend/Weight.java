@@ -1,5 +1,7 @@
 package main.backend;
 
+import java.text.DecimalFormat;
+
 public class Weight {
     private double percentage;
 
@@ -7,6 +9,7 @@ public class Weight {
     public Weight(double percentage) {
         this.percentage = percentage;
     }
+
     public Weight() {
         this(0);
     }
@@ -19,5 +22,12 @@ public class Weight {
     //mutator
     public void setPercentage(double percentage) {
         this.percentage = percentage;
+    }
+
+    //override function
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("#.##");
+        return df.format(percentage) + "%";
     }
 }
