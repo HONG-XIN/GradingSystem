@@ -11,26 +11,33 @@ import org.dizitart.no2.objects.Indices;
 })
 public class Score {
     @Id
-    double ScoreValue;
-    int ScoreType;       //0 is total score  1 is percentage score
-    public Score(){
-        this.ScoreValue = 0;
-        this.ScoreType = 0;
+    private double scoreValue;
+    private int scoreType;       //0 is normal score  1 is deduction score
+
+    public Score() {
+        this.scoreValue = 0;
+        this.scoreType = 0;
     }
-    public Score(double ScoreValue, int ScoreType){
-        this.ScoreType = ScoreType;
-        this.ScoreValue = ScoreValue;
+
+    public Score(double scoreValue, int scoreType){
+        this.scoreValue = scoreValue;
+        this.scoreType = scoreType;
     }
+    //accessor
     public double getScoreValue() {
-        return ScoreValue;
+        return scoreValue;
     }
-    public void setScoreValue(double ScoreValue){
-        this.ScoreValue = ScoreValue;
-    }
+
     public int getScoreType(){
-        return this.ScoreType;
+        return this.scoreType;
     }
-    public void setScoreType(int ScoreType){
-        this.ScoreType = ScoreType;
+
+    //mutator
+    public void setScoreValue(double scoreValue){
+        this.scoreValue = scoreValue;
+    }
+
+    public void setScoreType(int scoreType){
+        this.scoreType = scoreType;
     }
 }
