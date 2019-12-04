@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+  <tabs>
+    <Tab text="Students">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <items>
+                      <Button mnemonicParsing="false" text="Add Student" />
+                        <Button mnemonicParsing="false" text="Export" />
+                    </items>
+                  </ToolBar>
+               </bottom>
+               <top>
+                  <HBox prefHeight="31.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label text="Label" />
+                        <ChoiceBox prefWidth="150.0" />
+                        <Label text="Label" />
+                        <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+                     </children>
+                  </HBox>
+               </top>
+               <center>
+                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn prefWidth="103.0" text="Student Name" />
+                      <TableColumn prefWidth="102.0" text="Assingment 1" />
+                        <TableColumn prefWidth="101.0" text="Assignment 2" />
+                        <TableColumn minWidth="0.0" prefWidth="95.0" text="Assignment 3" />
+                        <TableColumn minWidth="0.0" prefWidth="198.0" text="ACTION" />
+                    </columns>
+                  </TableView>
+               </center>
+            </BorderPane>
+         </content>
+    </Tab>
+    <Tab text="Final Score">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+      <Tab text="Grading Criteria">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
