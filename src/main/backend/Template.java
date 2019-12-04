@@ -20,6 +20,10 @@ public class Template {
     }
 
     //accessor
+    public String getTemplateId() {
+        return this.templateIdNumber.getId();
+    }
+
     public String getTemplateName() {
         return this.templateName;
     }
@@ -30,8 +34,9 @@ public class Template {
 
     //mutator
     public void setTemplateIdNumber(String templateId) {
-        this.templateIdNumber.setCode(templateId);
+        this.templateIdNumber.setId(templateId);
     }
+
     public void setTemplateName(String templateName) {
         this.templateName = templateName;
     }

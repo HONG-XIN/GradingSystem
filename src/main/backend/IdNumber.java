@@ -6,39 +6,24 @@ import java.util.Random;
  * 9 digit code
  */
 public class IdNumber {
-    protected String code;
+    protected String idNumber;
 
     //constructor
-    public IdNumber(String code) {
-        this.code = code;
+    public IdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
     public IdNumber() {
-        this.code = "";
+        this.idNumber = "";
     }
 
     //accessor
-    public String getCode() {
-        return code;
+    public String getId() {
+        return idNumber;
     }
 
     //mutator
-    public void setCode(String code) {
-        checkCode(code);
-        this.code = code;
-    }
-
-    //check function
-    private void checkCode(String code) {
-        try {
-            if (code.length() != 9)
-                throw new NumberFormatException();
-            int codeInt = Integer.parseInt(code);
-            if (codeInt < 0)
-                throw new NumberFormatException();
-        } catch (NumberFormatException e) {
-            String alert = String.format("\"%s\" is not valid bank routing number.", code);
-            throw new IllegalArgumentException(alert);
-        }
+    public void setId(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     //generate function

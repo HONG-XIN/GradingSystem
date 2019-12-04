@@ -23,6 +23,14 @@ public class CategoryGroup {
         setGroupWeight(groupWeight);
     }
     //accessor
+    public IdNumberCategoryGroup getGroupIdNumber() {
+        return this.groupIdNumber;
+    }
+
+    public String getGroupId() {
+        return this.groupIdNumber.getId();
+    }
+
     public String getGroupName() {
         return this.groupName;
     }
@@ -36,9 +44,10 @@ public class CategoryGroup {
     }
 
     //mutator
-    public void setGroupIdNumber(String groupIdNumber) {
-        this.groupIdNumber.setCode(groupIdNumber);
+    public void setGroupIdNumber(String groupId) {
+        this.groupIdNumber.setId(groupId);
     }
+
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }

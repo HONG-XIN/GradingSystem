@@ -36,7 +36,7 @@ public class Category {
     }
 
     public String getCategoryId() {
-        return categoryIdNumber.getCode();
+        return categoryIdNumber.getId();
     }
 
     public String getCategoryName() {
@@ -57,7 +57,7 @@ public class Category {
 
     //mutator
     public void setCategoryId(String categoryId) {
-        this.categoryIdNumber.setCode(categoryId);
+        this.categoryIdNumber.setId(categoryId);
     }
 
     public void setCategoryName (String categoryName) {
