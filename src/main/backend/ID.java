@@ -16,6 +16,6 @@ public class ID {
     }
     //accesser
     public String getID(){
-        return String.format("06",this.number);
+        return String.format("%08",this.number);
     }
 }
