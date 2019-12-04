@@ -1,6 +1,7 @@
 package main.backend;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CategoryGroup {
     private IdNumberCategoryGroup idNumber;
@@ -21,6 +22,13 @@ public class CategoryGroup {
         setId(id);
         setName(name);
         setWeight(weight);
+    }
+    public CategoryGroup(String id, String name, double weight, ArrayList<IdNumberCategory> idNumberCategories){
+        this();
+        setId(id);
+        setName(name);
+        setWeight(weight);
+        addCategoryByCategoryList(idNumberCategories);
     }
     //accessor
     public IdNumberCategoryGroup getIdNumber() {
@@ -67,6 +75,14 @@ public class CategoryGroup {
 
     public void addCategoryByCategoryId(String categoryId) {
         this.idNumberCategories.add(new IdNumberCategory(categoryId));
+    }
+
+    public void addCategoryByCategoryList(ArrayList<IdNumberCategory> idNumberCategories){
+        Iterator<IdNumberCategory> iterator = idNumberCategories.iterator();
+        while(iterator.hasNext()){
+            IdNumberCategory next = iterator.next();
+            this.addCategoryByCategoryId(next.getId());
+        }
     }
 
     public void removeCategoryByCategoryId(String categoryId) {

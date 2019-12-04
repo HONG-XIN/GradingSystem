@@ -1,5 +1,6 @@
 package main.backend;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Template {
     private IdNumberTemplate idNumber;
@@ -17,6 +18,13 @@ public class Template {
         this();
         setId(id);
         setName(name);
+    }
+
+    public Template (String id, String name, ArrayList<IdNumberCategoryGroup> groupIdNumbers) {
+        this();
+        setId(id);
+        setName(name);
+        addGroupByGroupList(groupIdNumbers);
     }
 
     //accessor
@@ -44,6 +52,14 @@ public class Template {
     //functions
     public void addGroupByGroupNumber(IdNumberCategoryGroup groupIdNumber) {
         this.groupIdNumbers.add(groupIdNumber);
+    }
+
+    public void addGroupByGroupList(ArrayList<IdNumberCategoryGroup> groupIdNumbers) {
+        Iterator<IdNumberCategoryGroup> iterator = groupIdNumbers.iterator();
+        while(iterator.hasNext()){
+            IdNumberCategoryGroup next = iterator.next();
+            this.addGroupByGroupNumber(next);
+        }
     }
 
     public void removeGroupByGroupNumber(IdNumberCategoryGroup groupIdNumber) {
