@@ -1,5 +1,6 @@
 package main.backend;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 
 public class GradingSystem {
@@ -159,5 +160,17 @@ public class GradingSystem {
             categoryList[i][1] = category.getName();
         }
         return categoryList;
+    }
+
+    public void deleteCourseByCourse(Course course){ courses.remove(course); }
+
+    public boolean deleteCourseByCourseID(IdNumberCourse id){
+        for(Course course : this.courses){
+            if(course.checkCourseByID(id)){
+                courses.remove(course);
+                return true;
+            }
+        }
+        return false;
     }
 }

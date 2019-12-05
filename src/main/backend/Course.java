@@ -56,4 +56,12 @@ public class Course {
     public void setCriteria(Criteria criteria) {
         this.criteria = criteria;
     }
+
+    //function
+    public boolean checkCourseByID(IdNumberCourse id){
+        if(this.idNumber == id){
+            return true;
+        }
+        return false;
+    }
 }

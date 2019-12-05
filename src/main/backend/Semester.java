@@ -58,4 +58,6 @@ public class Semester {
     public boolean checkDateInRange(Date date) {
         return startDate.compareTo(date) >= 0 && endDate.compareTo(date) <= 0;
     }
+
+    public boolean checkSemsterSame(Semester filter){ return this.name == filter.name; }
 }
