@@ -8,6 +8,7 @@ public class GradingSystem {
     private ArrayList<Template> templates;
     private ArrayList<CategoryGroup> groups;
     private ArrayList<Category> categories;
+    private ArrayList<Student> students;
     private ArrayList<CategoryGrade> categoryGrades;
     private ArrayList<CourseGrade> courseGrades;
 
@@ -16,6 +17,7 @@ public class GradingSystem {
         this.templates = new ArrayList<>();
         this.groups = new ArrayList<>();
         this.categories = new ArrayList<>();
+        this.students = new ArrayList<>();
         this.categoryGrades = new ArrayList<>();
         this.courseGrades = new ArrayList<>();
     }
@@ -35,6 +37,10 @@ public class GradingSystem {
 
     public ArrayList<Category> getCategories() {
         return categories;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 
     public ArrayList<CategoryGrade> getCategoryGrades() {
@@ -57,6 +63,14 @@ public class GradingSystem {
         }
     }
 
+    public void createStudent(String firstName, String lastName, String BUID, StudentType type) {
+        students.add(new Student(firstName, lastName, BUID, type));
+    }
+
+    public void createStudent(String firstName, String middleName, String lastName, String BUID, StudentType type) {
+        students.add(new Student(firstName, middleName, lastName, BUID, type));
+    }
+
     //add functions
     public void addGroupInTemplate(String templateId, String name, double weight) {
         Template template = getTemplateById(templateId);
@@ -75,6 +89,21 @@ public class GradingSystem {
             Category category = new Category(name, totalScore, weight, assignDay, assignMonth, assignYear, dueDay, dueMonth, dueYear);
             categories.add(category);
             group.addCategoryByCategoryId(category.getId());
+        }
+    }
+
+    public void addStudentInCourse(String courseId, String studentId) {
+        courseGrades.add(new CourseGrade(courseId,studentId));
+        Course course = getCourseById(courseId);
+        String templateId = course.getTemplateId();
+        Template template = getTemplateById(templateId);
+        String[] groupIdList = template.getCategoryGroupIdList();
+        for(int i = 0; i < groupIdList.length; i++) {
+            CategoryGroup group = getGroupById(groupIdList[i]);
+            String[] categoryIdList = group.getCategoryIdList();
+            for (int j = 0; j < categoryIdList.length; j++) {
+                categoryGrades.add(new CategoryGrade(courseId, categoryIdList[i], studentId));
+            }
         }
     }
 
@@ -132,9 +161,20 @@ public class GradingSystem {
         return templateList;
     }
 
+    public String[][] getStudentList() {
+        int n = students.size();
+        if(n == 0) return null;
+        String[][] studentList = new String[n][2];
+        for(int i = 0; i < n; i++) {
+            studentList[i][0] = students.get(i).getId();
+            studentList[i][1] = students.get(i).getName();
+        }
+        return studentList;
+    }
+
     public String[][] getGroupListByTemplateId(String templateId) {
         Template template = getTemplateById(templateId);
-        String[] groupIdList = template.getCategoryGroupIds();
+        String[] groupIdList = template.getCategoryGroupIdList();
         int n = groupIdList.length;
         if(n == 0) return null;
         String[][] groupList = new String[n][2];

@@ -15,7 +15,11 @@ public class CourseGrade {
         this.letterGrade = ' ';
         this.comment = null;
     }
-
+    public CourseGrade(String courseId, String studentId) {
+        this();
+        setCourseId(courseId);
+        setStudentId(studentId);
+    }
     //accesser
     public String getCourseId(){
         return this.courseId.getId();
@@ -42,8 +46,16 @@ public class CourseGrade {
         this.courseId = courseId;
     }
 
+    public void setCourseId(String courseId) {
+        this.courseId.setId(courseId);
+    }
+
     public void setStudentId(IdNumberStudent studentId) {
         this.studentId = studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId.setId(studentId);
     }
 
     public void setFinalScore(double value) {

@@ -35,7 +35,7 @@ public class Template {
         return this.name;
     }
 
-    public String[] getCategoryGroupIds() {
+    public String[] getCategoryGroupIdList() {
         int n = groupIdNumbers.size();
         String[] groupIdList = new String[n];
         for(int i = 0; i < n; i++) {

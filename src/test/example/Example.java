@@ -2,6 +2,7 @@ package test.example;
 
 import main.backend.GradingSystem;
 import main.backend.Semester;
+import main.backend.StudentType;
 import main.debug.Debug;
 
 public class Example {
@@ -38,6 +39,7 @@ public class Example {
         Semester semester = new Semester("2019Fall",1,1,2019,2,2,2019);
         testGradSys.createCourseByTemplate(curTemplateId,"CS591P1", semester);
         String[][] curCourseList = testGradSys.getCourseList();
+        String courseId = curCourseList[0][0];
         Debug.printList(curCourseList);
 
         Debug.println("Adding Category hw1, weight 30 under Assignments");
@@ -55,6 +57,22 @@ public class Example {
         testGradSys.addCategoryInGroup(groupId, "Final",80, 60, 1,1,2019,2,2,2019);
         categoryList = testGradSys.getCategoryListByGroupId(groupId);
         Debug.printList(categoryList);
+
+        Debug.println("Adding student dezhou wang, U00000000, Graduate");
+        Debug.println("Adding student kaiyuan fan, U12345678, UnderGraduate");
+        testGradSys.createStudent("dezhou", "wang", "U00000000", StudentType.GRAD);
+        testGradSys.createStudent("kaiyuan", "fan", "U12345678", StudentType.UNDERGRAD);
+        String[][] studentList = testGradSys.getStudentList();
+        Debug.printList(studentList);
+        String studentId1 = studentList[0][0], studentId2 = studentList[1][0];
+        testGradSys.addStudentInCourse(courseId,studentId1);
+        testGradSys.addStudentInCourse(courseId,studentId2);
+
+
+
+
+
+
     }
 
 }

@@ -19,5 +19,6 @@ public class Debug implements DebugConstants {
             }
             System.out.println();
         }
+        System.out.println();
     }
 }
