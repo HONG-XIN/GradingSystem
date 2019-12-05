@@ -5,6 +5,7 @@ public class CourseGrade {
     private IdNumberStudent studentId;
     private Score finalScore;
     private char letterGrade;
+    private int bonus;
     private String comment;
 
     //constructor
@@ -13,6 +14,7 @@ public class CourseGrade {
         this.studentId = new IdNumberStudent();
         this.finalScore = new Score();
         this.letterGrade = ' ';
+        this.bonus = 0;
         this.comment = null;
     }
     public CourseGrade(String courseId, String studentId) {
@@ -41,6 +43,7 @@ public class CourseGrade {
         return this.comment;
     }
 
+    public int getBonus(){ return this.bonus;}
     //mutator
     public void setCourseId(IdNumberCourse courseId) {
         this.courseId = courseId;
@@ -69,4 +72,6 @@ public class CourseGrade {
     public void setComment (String comment) {
         this.comment = comment;
     }
+
+    public void setBonus(int bonus){ this.bonus = bonus;}
 }

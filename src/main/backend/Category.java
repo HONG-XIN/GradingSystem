@@ -95,4 +95,5 @@ public class Category {
         this.dueDate.setDate(day, month, year);
     }
 
+    public double getCategoryValue(){ return this.totalScore.getValue()*this.weight.getValue();}
 }

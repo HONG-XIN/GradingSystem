@@ -57,4 +57,12 @@ public class Criteria implements Cloneable{
     {
         return super.clone();
     }
+
+    public double getCriteriaValue(){
+        double total = 0;
+        for(CategoryGroup group : groups){
+            total = total + group.getGroupValue();
+        }
+        return total;
+    }
 }

@@ -74,4 +74,12 @@ public class CategoryGroup {
     public void removeCategory(Category category) {
         categories.remove(category);
     }
+
+    public double getGroupValue(){
+        double total = 0;
+        for(Category category : this.categories){
+            total = total + category.getCategoryValue();
+        }
+        return total*this.weight.getValue();
+    }
 }
