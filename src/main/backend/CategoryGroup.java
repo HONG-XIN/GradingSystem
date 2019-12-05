@@ -1,20 +1,19 @@
 package main.backend;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CategoryGroup {
     private IdNumberCategoryGroup idNumber;
     private String name;
     private Weight weight;
-    private ArrayList<IdNumberCategory> idNumberCategories;
+    private ArrayList<Category> categories;
 
     //constructor
     public CategoryGroup() {
         idNumber = new IdNumberCategoryGroup();
         name = "";
         weight = new Weight();
-        idNumberCategories = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     public CategoryGroup(String name, double weight) {
@@ -22,12 +21,12 @@ public class CategoryGroup {
         setName(name);
         setWeight(weight);
     }
-    public CategoryGroup(String id, String name, double weight, ArrayList<IdNumberCategory> idNumberCategories){
+    public CategoryGroup(String id, String name, double weight, ArrayList<Category> categories){
         this();
         setId(id);
         setName(name);
         setWeight(weight);
-        addCategoryByCategoryList(idNumberCategories);
+        setCategories(categories);
     }
     //accessor
     public IdNumberCategoryGroup getIdNumber() {
@@ -46,18 +45,10 @@ public class CategoryGroup {
         return this.weight.getValue();
     }
 
-    public ArrayList<IdNumberCategory> getCategoryIds() {
-        return this.idNumberCategories;
+    public ArrayList<Category> getCategories() {
+        return this.categories;
     }
 
-    public String[] getCategoryIdList() {
-        int n = idNumberCategories.size();
-        String[] categoryIdList = new String[n];
-        for(int i = 0; i < n; i++) {
-            categoryIdList[i] = idNumberCategories.get(i).getId();
-        }
-        return categoryIdList;
-    }
     //mutator
     public void setId(String id) {
         this.idNumber.setId(id);
@@ -71,28 +62,16 @@ public class CategoryGroup {
         this.weight.setValue(value);
     }
 
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+
     //functions
-    public void addCategoryByCategoryNumber(IdNumberCategory categoryIdNumber) {
-        this.idNumberCategories.add(categoryIdNumber);
+    public void addCategory(Category category) {
+        categories.add(category);
     }
 
-    public void removeCategoryByCategoryNumber(IdNumberCategory categoryIdNumber) {
-        this.idNumberCategories.remove(categoryIdNumber);
-    }
-
-    public void addCategoryByCategoryId(String categoryId) {
-        this.idNumberCategories.add(new IdNumberCategory(categoryId));
-    }
-
-    public void addCategoryByCategoryList(ArrayList<IdNumberCategory> idNumberCategories){
-        Iterator<IdNumberCategory> iterator = idNumberCategories.iterator();
-        while(iterator.hasNext()){
-            IdNumberCategory next = iterator.next();
-            this.addCategoryByCategoryId(next.getId());
-        }
-    }
-
-    public void removeCategoryByCategoryId(String categoryId) {
-        this.idNumberCategories.remove(new IdNumberCategory(categoryId));
+    public void removeCategory(Category category) {
+        categories.remove(category);
     }
 }

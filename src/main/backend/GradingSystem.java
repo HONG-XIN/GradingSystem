@@ -5,18 +5,14 @@ import java.util.ArrayList;
 public class GradingSystem {
 
     private ArrayList<Course> courses;
-    private ArrayList<Template> templates;
-    private ArrayList<CategoryGroup> groups;
-    private ArrayList<Category> categories;
+    private ArrayList<Criteria> criteriaTemplates;
     private ArrayList<Student> students;
     private ArrayList<CategoryGrade> categoryGrades;
     private ArrayList<CourseGrade> courseGrades;
 
     public GradingSystem() {
         this.courses = new ArrayList<>();
-        this.templates = new ArrayList<>();
-        this.groups = new ArrayList<>();
-        this.categories = new ArrayList<>();
+        this.criteriaTemplates = new ArrayList<>();
         this.students = new ArrayList<>();
         this.categoryGrades = new ArrayList<>();
         this.courseGrades = new ArrayList<>();
@@ -27,16 +23,8 @@ public class GradingSystem {
         return courses;
     }
 
-    public ArrayList<Template> getTemplates() {
-        return templates;
-    }
-
-    public ArrayList<CategoryGroup> getGroups() {
-        return groups;
-    }
-
-    public ArrayList<Category> getCategories() {
-        return categories;
+    public ArrayList<Criteria> getCriteriaTemplates() {
+        return criteriaTemplates;
     }
 
     public ArrayList<Student> getStudents() {
@@ -52,15 +40,14 @@ public class GradingSystem {
     }
 
     //create functions
-    public void createTemplate(String name) {
-        templates.add(new Template(name));
+    public void createCriteriaTemplate(String name) {
+        criteriaTemplates.add(new Criteria(name));
     }
 
-    public void createCourseByTemplate(String templateId, String name, Semester semester) {
-        if(getTemplateById(templateId)!=null) {
-            Course course = new Course(name, semester, templateId);
+    public void createCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
+            Criteria criteria = (Criteria) criteriaTemplate.clone(); // get a copy of template
+            Course course = new Course(name, semester, criteria);
             courses.add(course);
-        }
     }
 
     public void createStudent(String firstName, String lastName, String BUID, StudentType type) {
@@ -72,39 +59,29 @@ public class GradingSystem {
     }
 
     //add functions
-    public void addGroupInTemplate(String templateId, String name, double weight) {
-        Template template = getTemplateById(templateId);
-        if(template != null) {
-            CategoryGroup group = new CategoryGroup(name, weight);
-            groups.add(group);
-            template.addGroupByGroupId(group.getId());
-        }
+    public void addGroupInCriteria(Criteria criteria, String name, double weight) {
+        CategoryGroup group = new CategoryGroup(name, weight);
+        criteria.addGroup(group);
     }
 
-    public void addCategoryInGroup(String groupId, String name, double totalScore, double weight,
+    public void addCategoryInGroup(CategoryGroup group, String name, double totalScore, double weight, ScoreType type,
                                    int assignDay, int assignMonth, int assignYear,
                                    int dueDay, int dueMonth, int dueYear) {
-        CategoryGroup group = getGroupById(groupId);
-        if(group != null) {
-            Category category = new Category(name, totalScore, weight, assignDay, assignMonth, assignYear, dueDay, dueMonth, dueYear);
-            categories.add(category);
-            group.addCategoryByCategoryId(category.getId());
-        }
+        Category category = new Category(name, totalScore, weight, type, assignDay, assignMonth, assignYear, dueDay, dueMonth, dueYear);
+        group.addCategory(category);
     }
 
-    public void addStudentInCourse(String courseId, String studentId) {
-        courseGrades.add(new CourseGrade(courseId,studentId));
-        Course course = getCourseById(courseId);
-        String templateId = course.getTemplateId();
-        Template template = getTemplateById(templateId);
-        String[] groupIdList = template.getCategoryGroupIdList();
-        for(int i = 0; i < groupIdList.length; i++) {
-            CategoryGroup group = getGroupById(groupIdList[i]);
-            String[] categoryIdList = group.getCategoryIdList();
-            for (int j = 0; j < categoryIdList.length; j++) {
-                categoryGrades.add(new CategoryGrade(courseId, categoryIdList[i], studentId));
+    public void addStudentInCourse(Course course, Student student) {
+        courseGrades.add(new CourseGrade(course.getId(),student.getId()));
+        Criteria criteria = course.getCriteria();
+        ArrayList<CategoryGroup> groups = criteria.getCategoryGroups();
+        for (CategoryGroup group : groups) {
+            ArrayList<Category> categories = group.getCategories();
+            for (Category category : categories) {
+                categoryGrades.add(new CategoryGrade(course.getId(), category.getId(), student.getId()));
             }
         }
+
     }
 
     //helper accessor
@@ -115,23 +92,9 @@ public class GradingSystem {
         return null;
     }
 
-    private Template getTemplateById (String id) {
-        for(Template template : templates) {
-            if(template.getId().equals(id)) return template;
-        }
-        return null;
-    }
-
-    private CategoryGroup getGroupById(String id) {
-        for(CategoryGroup group : groups) {
-            if(group.getId().equals(id)) return group;
-        }
-        return null;
-    }
-
-    private Category getCategoryById(String id) {
-        for(Category category : categories) {
-            if(category.getId().equals(id)) return category;
+    private Criteria getCriteriaTemplateById (String id) {
+        for(Criteria criteria : this.criteriaTemplates) {
+            if(criteria.getId().equals(id)) return criteria;
         }
         return null;
     }
@@ -150,13 +113,13 @@ public class GradingSystem {
         return courseList;
     }
 
-    public String[][] getTemplateList() {
-        int n = templates.size();
+    public String[][] getCriteriaTemplateList() {
+        int n = criteriaTemplates.size();
         if(n == 0) return null;
         String[][] templateList = new String[n][2];
         for(int i = 0; i < n; i++) {
-            templateList[i][0] = templates.get(i).getId();
-            templateList[i][1] = templates.get(i).getName();
+            templateList[i][0] = criteriaTemplates.get(i).getId();
+            templateList[i][1] = criteriaTemplates.get(i).getName();
         }
         return templateList;
     }
@@ -172,32 +135,29 @@ public class GradingSystem {
         return studentList;
     }
 
-    public String[][] getGroupListByTemplateId(String templateId) {
-        Template template = getTemplateById(templateId);
-        String[] groupIdList = template.getCategoryGroupIdList();
-        int n = groupIdList.length;
+    public String[][] getGroupListByCriteria(Criteria criteria) {
+        ArrayList<CategoryGroup> groups = criteria.getCategoryGroups();
+        int n = groups.size();
         if(n == 0) return null;
         String[][] groupList = new String[n][2];
         for(int i = 0; i < n; i++) {
-            CategoryGroup group = getGroupById(groupIdList[i]);
+            CategoryGroup group = groups.get(i);
             groupList[i][0] = group.getId();
             groupList[i][1] = group.getName();
         }
         return groupList;
     }
 
-    public String[][] getCategoryListByGroupId(String groupId) {
-        CategoryGroup group = getGroupById(groupId);
-        String[] categoryIdList = group.getCategoryIdList();
-        int n = categoryIdList.length;
+    public String[][] getCategoryListByGroup(CategoryGroup group) {
+        ArrayList<Category> categories = group.getCategories();
+        int n = categories.size();
         if(n == 0) return null;
         String[][] categoryList = new String[n][2];
         for(int i = 0; i < n; i++) {
-            Category category = getCategoryById(categoryIdList[i]);
+            Category category = categories.get(i);
             categoryList[i][0] = category.getId();
             categoryList[i][1] = category.getName();
         }
         return categoryList;
-
     }
 }

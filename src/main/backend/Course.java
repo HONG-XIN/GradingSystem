@@ -5,22 +5,22 @@ public class Course {
     private IdNumberCourse idNumber;
     private String name;
     private Semester semester;
-    private IdNumberTemplate templateId;
+    private Criteria criteria;
 
     //constructor
     public Course() {
         this.idNumber = new IdNumberCourse();
         this.name = "";
         this.semester = new Semester();
-        this.templateId = new IdNumberTemplate();
+        this.criteria = new Criteria();
 
     }
 
-    public Course(String name, Semester semester, String templateId) {
+    public Course(String name, Semester semester, Criteria criteria) {
         this();
         this.name = name;
         this.semester = semester;
-        setTemplateId(templateId);
+        this.criteria = criteria;
     }
 
     //accessor
@@ -29,15 +29,15 @@ public class Course {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public Semester getSemester() {
-        return semester;
+        return this.semester;
     }
 
-    public String getTemplateId() {
-        return templateId.getId();
+    public Criteria getCriteria() {
+        return this.criteria;
     }
 
     //mutator
@@ -53,7 +53,7 @@ public class Course {
         this.semester = semester;
     }
 
-    public void setTemplateId(String templateId) {
-        this.templateId.setId(templateId);
+    public void setCriteria(Criteria criteria) {
+        this.criteria = criteria;
     }
 }
