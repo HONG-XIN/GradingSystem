@@ -62,10 +62,14 @@ public class Example {
         Debug.printList(studentList);
         Course cs591p1 = testGradSys.getCourses().get(0);
         Student dezhou = testGradSys.getStudents().get(0), kaiyuan = testGradSys.getStudents().get(1);
+
+
+        Debug.println("Adding student dezhou and kaiyuan to cs591p1");
         testGradSys.addStudentInCourse(cs591p1,dezhou);
         testGradSys.addStudentInCourse(cs591p1,kaiyuan);
-
-
+        Debug.println("Display hw1 grades: ");
+        String[][] gradeList = testGradSys.getGradeListInCourseByCategory(cs591p1, cs591p1.getCriteria().getCategoryGroups().get(0).getCategories().get(0)); // cs591p1 -> criteria -> assignments -> hw1
+        Debug.printList(gradeList);
     }
 
 }
