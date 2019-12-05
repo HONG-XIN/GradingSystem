@@ -3,14 +3,14 @@ package main.backend;
 public class Score {
 
     private double value;
-    private int type;       //0 is percent score  1 is deduction score
+    private ScoreType type;
 
     public Score() {
         this.value = 0;
-        this.type = 0;
+        this.type = ScoreType.PERCENTAGE;
     }
 
-    public Score(double value, int type){
+    public Score(double value, ScoreType type){
         this.value = value;
         this.type = type;
     }
@@ -19,16 +19,27 @@ public class Score {
         return value;
     }
 
-    public int getType(){
-        return this.type;
+    public ScoreType getType() {
+        return type;
     }
 
     //mutator
-    public void setValue(double value){
-        this.value = value;
+    public boolean setValue(double value){
+        if(type == ScoreType.PERCENTAGE) {
+            if(value < 0)
+                return false;
+            else
+                this.value = value;
+        } else if(type == ScoreType.DEDUCTION) {
+            if(value > 0)
+                return false;
+            else
+                this.value = value;
+        }
+        return true;
     }
 
-    public void setType(int type){
+    public void setType(ScoreType type){
         this.type = type;
     }
 }

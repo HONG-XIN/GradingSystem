@@ -17,9 +17,8 @@ public class CategoryGroup {
         idNumberCategories = new ArrayList<>();
     }
 
-    public CategoryGroup(String id, String name, double weight) {
+    public CategoryGroup(String name, double weight) {
         this();
-        setId(id);
         setName(name);
         setWeight(weight);
     }
@@ -51,6 +50,14 @@ public class CategoryGroup {
         return this.idNumberCategories;
     }
 
+    public String[] getCategoryIdList() {
+        int n = idNumberCategories.size();
+        String[] categoryIdList = new String[n];
+        for(int i = 0; i < n; i++) {
+            categoryIdList[i] = idNumberCategories.get(i).getId();
+        }
+        return categoryIdList;
+    }
     //mutator
     public void setId(String id) {
         this.idNumber.setId(id);

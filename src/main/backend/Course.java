@@ -12,15 +12,15 @@ public class Course {
         this.idNumber = new IdNumberCourse();
         this.name = "";
         this.semester = new Semester();
+        this.templateId = new IdNumberTemplate();
 
     }
 
-    public Course(String id, String name, Semester semester, String templateId) {
+    public Course(String name, Semester semester, String templateId) {
         this();
-        this.idNumber.setId(id);
         this.name = name;
         this.semester = semester;
-        this.templateId.setId(templateId);
+        setTemplateId(templateId);
     }
 
     //accessor

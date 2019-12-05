@@ -13,11 +13,10 @@ public class Semester {
         endDate = new Date();
     }
 
-    public Semester(String id, String name,
+    public Semester(String name,
                     int startDay, int startMonth, int startYear,
                     int endDay, int endMonth, int endYear) {
         this();
-        this.idNumber.setId(id);
         this.name = name;
         this.startDate.setDate(startDay, startMonth, startYear);
         this.endDate.setDate(endDay, endMonth, endYear);

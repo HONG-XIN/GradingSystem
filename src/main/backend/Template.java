@@ -14,9 +14,8 @@ public class Template {
         groupIdNumbers = new ArrayList<>();
     }
 
-    public Template (String id, String name) {
+    public Template (String name) {
         this();
-        setId(id);
         setName(name);
     }
 
@@ -34,6 +33,15 @@ public class Template {
 
     public String getName() {
         return this.name;
+    }
+
+    public String[] getCategoryGroupIds() {
+        int n = groupIdNumbers.size();
+        String[] groupIdList = new String[n];
+        for(int i = 0; i < n; i++) {
+            groupIdList[i] = groupIdNumbers.get(i).getId();
+        }
+        return groupIdList;
     }
 
     public ArrayList<IdNumberCategoryGroup> getCategoryGroups() {

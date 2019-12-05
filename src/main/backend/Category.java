@@ -3,6 +3,7 @@ package main.backend;
 public class Category {
     private IdNumberCategory idNumber;
     private String name;
+    private Score totalScore;
     private Weight weight;
     private Date assignDate;
     private Date dueDate;
@@ -11,22 +12,24 @@ public class Category {
     public Category() {
         idNumber = new IdNumberCategory();
         name = "";
+        totalScore = new Score();
         weight = new Weight();
         assignDate = new Date();
         dueDate = new Date();
     }
 
-    public Category(String id, String name, double weight) {
+    public Category(String name, double totalScore, double weight) {
         this();
-        setId(id);
+        //setId(id);
         setName(name);
+        setTotalScore(totalScore);
         setWeight(weight);
     }
 
-    public Category(String id, String name, double weight,
+    public Category(String name, double totalScore, double weight,
                     int day, int month, int year,
                     int dueDay, int dueMonth, int dueYear) {
-        this(id, name, weight);
+        this(name, totalScore, weight);
         setAssignDate(day, month, year);
         setDueDate(dueDay, dueMonth, dueYear);
     }
@@ -41,6 +44,10 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public double getTotalScore() {
+        return totalScore.getValue();
     }
 
     public double getWeight() {
@@ -62,6 +69,10 @@ public class Category {
 
     public void setName (String name) {
         this.name = name;
+    }
+
+    private void setTotalScore(double value) {
+        this.totalScore.setValue(value);
     }
 
     public void setWeight (double value) {

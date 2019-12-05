@@ -25,7 +25,7 @@ public class CourseGrade {
         return this.studentId.getId();
     }
 
-    public double getfinalScore(){
+    public double getFinalScore(){
         return this.finalScore.getValue();
     }
 
