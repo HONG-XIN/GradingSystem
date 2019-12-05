@@ -1,11 +1,14 @@
 package main.backend;
 
+import java.util.ArrayList;
+
 public class Course {
 
     private IdNumberCourse idNumber;
     private String name;
     private Semester semester;
     private Criteria criteria;
+    private ArrayList<Student> students;
 
     //constructor
     public Course() {
@@ -13,6 +16,7 @@ public class Course {
         this.name = "";
         this.semester = new Semester();
         this.criteria = new Criteria();
+        this.students = new ArrayList<>();
 
     }
 
@@ -40,6 +44,9 @@ public class Course {
         return this.criteria;
     }
 
+    public ArrayList<Student> getStudents() {
+        return this.students;
+    }
     //mutator
     public void setId(String id) {
         this.idNumber.setId(id);
@@ -55,5 +62,18 @@ public class Course {
 
     public void setCriteria(Criteria criteria) {
         this.criteria = criteria;
+    }
+
+    public void setStudent(ArrayList<Student> students) {
+        this.students = students;
+    }
+
+    //functions
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
     }
 }
