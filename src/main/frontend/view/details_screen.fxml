@@ -9,16 +9,15 @@
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
             <Button mnemonicParsing="false" prefWidth="100.0" text="OK" />
-          <Button mnemonicParsing="false" onAction="#btCancelarAction" prefWidth="100.0" text="Cancelar" />
-            <Button mnemonicParsing="false" onAction="#btCancelarAction" prefWidth="100.0" text="ddd " />
+          <Button mnemonicParsing="false" onAction="#btCancelAction" prefWidth="100.0" text="Cancelar" />
         </items>
       </ToolBar>
    </bottom>
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="115.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="485.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="150.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="450.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

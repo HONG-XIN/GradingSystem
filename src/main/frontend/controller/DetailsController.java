@@ -8,17 +8,16 @@ public class DetailsController {
     @FXML
     protected void initialize() {
         Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
-
-            @Override
             public void onScreenChanged(String newScreen, Object userData) {
-                if (newScreen.equals("details"))
-                    System.out.println("noa tela:"+newScreen+", "+userData);
+                if (newScreen.equals("details")) {
+                    System.out.println(newScreen+", "+userData);
+                }
             }
         });
     }
 
     @FXML
-    protected void btCancelarAction(ActionEvent e) {
+    protected void btCancelAction(ActionEvent e) {
         Main.changeScreen("main");
     }
 }

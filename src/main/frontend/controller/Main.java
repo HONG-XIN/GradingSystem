@@ -2,9 +2,9 @@ package main.frontend.controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 import java.util.ArrayList;
 
@@ -19,14 +19,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
-        primaryStage.setTitle("ExampleLOO");
+        primaryStage.setTitle("Example000");
 
         Parent fxmlMain = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
         mainScene = new Scene(fxmlMain, 640, 400);
 
         Parent fxmlDetails = FXMLLoader.load(getClass().getResource("../view/details_screen.fxml"));
         detailsScene = new Scene(fxmlDetails, 640, 400);
-
 
         primaryStage.setScene(mainScene);
         primaryStage.show();
@@ -41,6 +40,7 @@ public class Main extends Application {
             case "details":
                 stage.setScene(detailsScene);
                 notifyAllListeners("details", userData);
+                break;
         }
     }
 
@@ -52,7 +52,9 @@ public class Main extends Application {
         launch(args);
     }
 
-    //-----------------------------
+
+    //--------------------
+
     private static ArrayList<OnChangeScreen> listeners = new ArrayList<>();
 
     public static interface OnChangeScreen {
@@ -68,5 +70,4 @@ public class Main extends Application {
             l.onScreenChanged(newScreen, userData);
         }
     }
-
 }

@@ -7,6 +7,6 @@ public class MainController {
 
     @FXML
     protected void btNovoAction(ActionEvent e) {
-        Main.changeScreen("details", "dedos para a tela detalhes");
+        Main.changeScreen("details", "dados para a tela dsss");
     }
 }
