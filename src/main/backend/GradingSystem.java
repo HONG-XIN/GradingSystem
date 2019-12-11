@@ -198,4 +198,19 @@ public class GradingSystem {
         }
         return false;
     }
+
+    public boolean deleteStudentByStudentID(String courseId, String studentId){
+        Student student = this.getStudentById(studentId);
+        Course course = this.getCourseById(courseId);
+        if(student == null || course == null)
+            return false;
+        this.courses.get(courses.indexOf(course)).removeStudent(student);
+        for(CategoryGrade grade : categoryGrades){
+            if(grade.checkGradeByCourseIDAndStudentID(courseId,studentId)){
+                grade.freezeGrade();
+                break;
+            }
+        }
+        return true;
+    }
 }

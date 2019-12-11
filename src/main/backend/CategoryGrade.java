@@ -1,11 +1,15 @@
 package main.backend;
 
 public class CategoryGrade {
+    public static final int GRADE_INI = 0;
+    public static final int GRADE_FREEZE = 1;
+    public static final int GRADE_DROP = 2;
     private IdNumberCourseGrade courseGradeId;
     private IdNumberCourse courseId;
     private IdNumberCategory categoryId;
     private IdNumberStudent studentId;
     private Score score;
+    private int step;
 
     //constructor
     public CategoryGrade() {
@@ -14,6 +18,7 @@ public class CategoryGrade {
         this.categoryId = new IdNumberCategory();
         this.studentId = new IdNumberStudent();
         this.score = new Score();
+        this.step = GRADE_INI;
     }
     CategoryGrade(String courseId, String categoryId, String studentId){
         this();
@@ -66,5 +71,15 @@ public class CategoryGrade {
 
     public void setScore(double value){
         this.score.setValue(value);
+    }
+
+    //function
+    public void freezeGrade(){ this.step = GRADE_FREEZE;}
+
+    public boolean checkGradeByCourseIDAndStudentID(String courseId, String studentId){
+        if(this.courseId.getId() == courseId && this.studentId.getId() == studentId){
+            return true;
+        }
+        return false;
     }
 }
