@@ -1,5 +1,7 @@
 package main.backend;
 
+import org.dizitart.no2.Document;
+
 import java.text.DecimalFormat;
 
 public class Weight {
@@ -29,5 +31,20 @@ public class Weight {
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.##");
         return df.format(value) + "%";
+    }
+
+    //Database Function
+    //from RAM TO DB
+    public Document write(){
+        Document weightDoc = new Document();
+        weightDoc.put("value", getValue());
+        return weightDoc;
+    }
+
+    //from DB to RAM
+    public void read(Document doc){
+        if (doc != null){
+            setValue((double) doc.get("value"));
+        }
     }
 }

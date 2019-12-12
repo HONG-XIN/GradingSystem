@@ -1,5 +1,7 @@
 package main.backend;
 
+import org.dizitart.no2.Document;
+
 public class Semester {
     private String name;
     private Date startDate;
@@ -33,6 +35,10 @@ public class Semester {
         return endDate.toString();
     }
 
+    public Date getStartDateObject() {return this.startDate;}
+
+    public Date getEndDateObject() {return this.endDate;}
+
     //mutator
     public void setName(String name) {
         this.name = name;
@@ -57,5 +63,36 @@ public class Semester {
     //check function
     public boolean checkDateInRange(Date date) {
         return startDate.compareTo(date) >= 0 && endDate.compareTo(date) <= 0;
+    }
+
+    //DB function
+    //from RAM to DB
+    public Document write(){
+        Document SemesterDoc = new Document();
+        SemesterDoc.put("name", getName());
+        if(this.getStartDateObject() != null){
+            SemesterDoc.put("startDate", getStartDateObject().write());
+            SemesterDoc.put("endDate", getEndDateObject().write());
+        }
+        return SemesterDoc;
+    }
+
+    //from DB to RAM
+    public void read(Document doc){
+        if (doc != null) {
+            setName((String) doc.get("name"));
+            Document startDateDoc = (Document) doc.get("startDate");
+            if(startDateDoc != null){
+                Date startDate = new Date();
+                startDate.read(startDateDoc);
+                this.startDate = startDate;
+            }
+            Document endDateDoc = (Document) doc.get("endDate");
+            if(endDateDoc != null){
+                Date endDate = new Date();
+                endDate.read(endDateDoc);
+                this.endDate = endDate;
+            }
+        }
     }
 }

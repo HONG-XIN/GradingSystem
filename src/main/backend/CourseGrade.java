@@ -1,5 +1,7 @@
 package main.backend;
 
+import org.dizitart.no2.Document;
+
 public class CourseGrade {
     private IdNumberCourse courseId;
     private IdNumberStudent studentId;
@@ -25,13 +27,19 @@ public class CourseGrade {
         return this.courseId.getId();
     }
 
+    public IdNumberCourse getCourseIdObject() {return this.courseId;}
+
     public String getStudentId(){
         return this.studentId.getId();
     }
 
+    public IdNumberStudent getStudentIdObject(){return this.studentId;}
+
     public double getFinalScore(){
         return this.finalScore.getValue();
     }
+
+    public Score getFinalScoreObject(){return this.finalScore;}
 
     public char getLetterGrade(){
         return this.letterGrade;
@@ -68,5 +76,49 @@ public class CourseGrade {
 
     public void setComment (String comment) {
         this.comment = comment;
+    }
+
+    //Database Function
+    //from RAM TO DB
+    public Document write(){
+        Document courseGradeDoc = new Document();
+        courseGradeDoc.put("comment", getComment());
+        courseGradeDoc.put("letterGrade", getLetterGrade());
+        if (getFinalScoreObject() != null){
+            courseGradeDoc.put("finalScore", getFinalScoreObject().write());
+        }
+        if (getCourseIdObject() != null){
+            courseGradeDoc.put("courseId", getCourseIdObject().write());
+        }
+        if (getStudentIdObject() != null){
+            courseGradeDoc.put("studentId", getStudentIdObject().write());
+        }
+        return courseGradeDoc;
+    }
+
+    //from DB to RAM
+    public void read(Document doc){
+        if (doc != null) {
+            setComment((String) doc.get("comment"));
+            setLetterGrade((char) doc.get("letterGrade"));
+            Document finalScoreDoc = (Document) doc.get("finalScore");
+            if(finalScoreDoc != null){
+                Score finalScore = new Score();
+                finalScore.read(finalScoreDoc);
+                this.finalScore = finalScore;
+            }
+            Document courseIdDoc = (Document) doc.get("courseId");
+            if(courseIdDoc != null){
+                IdNumberCourse courseId = new IdNumberCourse();
+                courseId.read(courseIdDoc);
+                this.courseId = courseId;
+            }
+            Document studentIdDoc = (Document) doc.get("studentId");
+            if (studentIdDoc != null){
+                IdNumberStudent studentId = new IdNumberStudent();
+                studentId.read(studentIdDoc);
+                this.studentId = studentId;
+            }
+        }
     }
 }

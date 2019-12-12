@@ -1,4 +1,8 @@
 package main.backend;
+import org.dizitart.no2.Document;
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.NitriteCollection;
+
 import java.util.ArrayList;
 
 public class Criteria implements Cloneable{
@@ -22,6 +26,8 @@ public class Criteria implements Cloneable{
     public String getId() {
         return this.idNumber.getId();
     }
+
+    public IdNumberCriteria getIdNumberObject()  { return this.idNumber; }
 
     public String getName() {
         return this.name;
@@ -56,5 +62,44 @@ public class Criteria implements Cloneable{
             CloneNotSupportedException
     {
         return super.clone();
+    }
+
+    //DB function
+    //from RAM to DB
+    public Document write(){
+        Document CriteriaDoc = new Document();
+        CriteriaDoc.put("name", getName());
+        if(this.getIdNumberObject() != null){
+            CriteriaDoc.put("idNumber", getIdNumberObject().write());
+        }
+        ArrayList<Document> groupsList = new ArrayList<Document>();
+        for(int i = 0; i < groups.size(); i++){
+            groupsList.add(groups.get(i).write());
+        }
+        CriteriaDoc.put("groups", groupsList);
+        return CriteriaDoc;
+    }
+
+    //FROM DB TO RAM
+    public void read(Document doc){
+        if(doc != null){
+            setName((String) doc.get("name"));
+            Document idNumberDoc = (Document) doc.get("idNumber");
+            if (idNumberDoc != null){
+                IdNumberCriteria idNumber = new IdNumberCriteria();
+                idNumber.read(idNumberDoc);
+                this.idNumber = idNumber;
+            }
+            ArrayList<Document> groupsList = (ArrayList<Document>) doc.get("groups");
+            if (groupsList.size() > 0){
+                for(Document group: groupsList){
+                    if (group != null){
+                        CategoryGroup categoryGroup = new CategoryGroup();
+                        categoryGroup.read(group);
+                        groups.add(categoryGroup);
+                    }
+                }
+            }
+        }
     }
 }

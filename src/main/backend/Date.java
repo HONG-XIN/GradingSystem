@@ -1,5 +1,12 @@
 package main.backend;
 
+import main.backend.Course;
+import main.backend.GradingSystem;
+import org.dizitart.no2.Document;
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.NitriteCollection;
+import org.dizitart.no2.RecordIterable;
+
 public class Date implements Comparable<Date> {
     private int day;
     private int month;
@@ -70,4 +77,22 @@ public class Date implements Comparable<Date> {
         return String.format(dateFormat, day, month, year);
     }
 
+    //Database Function
+    //from RAM TO DB
+    public Document write(){
+        Document DateDoc = new Document();
+        DateDoc.put("day", getDay());
+        DateDoc.put("month", getMonth());
+        DateDoc.put("year", getYear());
+        return DateDoc;
+    }
+
+    //from DB to RAM
+    public void read(Document doc){
+        if (doc != null) {
+            setDay((int) doc.get("day"));
+            setMonth((int) doc.get("month"));
+            setYear((int) doc.get("year"));
+        }
+    }
 }

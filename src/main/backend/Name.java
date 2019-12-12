@@ -1,5 +1,7 @@
 package main.backend;
 
+import org.dizitart.no2.Document;
+
 public class Name {
     private String firstName;
     private String middleName;
@@ -61,5 +63,24 @@ public class Name {
         return lastName + "," +
                 middleName + " " +
                 firstName;
+    }
+
+    //DB function
+    //from RAM to DB
+    public Document write(){
+        Document NameDoc = new Document();
+        NameDoc.put("firstName", getFirstName());
+        NameDoc.put("middleName", getMiddleName());
+        NameDoc.put("lastName", getLastName());
+        return NameDoc;
+    }
+
+    //from DB to RAM
+    public void read(Document doc){
+        if (doc != null) {
+            setFirstName((String) doc.get("firstName"));
+            setMiddleName((String) doc.get("middleName"));
+            setLastName((String) doc.get("lastName"));
+        }
     }
 }

@@ -1,8 +1,11 @@
 package main.backend;
 
+import main.database.GradingSystemDatabase;
+import org.dizitart.no2.Document;
+
 import java.util.ArrayList;
 
-public class GradingSystem {
+public class GradingSystem implements GradingSystemDatabase {
 
     private ArrayList<Course> courses;
     private ArrayList<Criteria> criteriaTemplates;
