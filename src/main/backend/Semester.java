@@ -1,11 +1,13 @@
 package main.backend;
 
 public class Semester {
+    private IdNumberSemester idNumber;
     private String name;
     private Date startDate;
     private Date endDate;
 
     public Semester() {
+        this.idNumber = new IdNumberSemester();
         this.name = "";
         startDate = new Date();
         endDate = new Date();
@@ -21,6 +23,10 @@ public class Semester {
     }
 
     //accessor
+    public String getId() {
+        return idNumber.getId();
+    }
+
     public String getName() {
         return name;
     }
@@ -34,6 +40,10 @@ public class Semester {
     }
 
     //mutator
+    public void setId(String id) {
+        this.idNumber.setId(id);
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -59,5 +69,7 @@ public class Semester {
         return startDate.compareTo(date) >= 0 && endDate.compareTo(date) <= 0;
     }
 
-    public boolean checkSemsterSame(Semester filter){ return this.name == filter.name; }
+    public boolean checkSemesterSame(Semester filter){
+        return this.name.equals(filter.getName());
+    }
 }

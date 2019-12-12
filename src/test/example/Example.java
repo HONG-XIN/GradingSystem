@@ -50,25 +50,21 @@ public class Example {
 
         Debug.println("Creating course CS591P1 by template1");
         Semester semester = new Semester("2019Fall",1,1,2019,2,2,2019);
-        testGradSys.createCourseByTemplate(template1,"CS591P1", semester);
+        Course cs591 = testGradSys.createCourseByTemplate(template1,"CS591P1", semester);
         String[][] curCourseList = testGradSys.getCourseList();
         Debug.printList(curCourseList);
 
-        Debug.println("Adding student dezhou wang, U00000000, Graduate");
-        Debug.println("Adding student kaiyuan fan, U12345678, UnderGraduate");
-        testGradSys.createStudent("dezhou", "wang", "U00000000", StudentType.GRAD);
-        testGradSys.createStudent("kaiyuan", "fan", "U12345678", StudentType.UNDERGRAD);
-        String[][] studentList = testGradSys.getStudentList();
-        Debug.printList(studentList);
-        Course cs591p1 = testGradSys.getCourses().get(0);
-        Student dezhou = testGradSys.getStudents().get(0), kaiyuan = testGradSys.getStudents().get(1);
 
-
+        Student dezhou = testGradSys.createStudent("dezhou", "wang", "U00000000", "dezhou",StudentType.GRAD);
+        Student kaiyuan = testGradSys.createStudent("kaiyuan", "fan", "U12345678", "fankai", StudentType.UNDERGRAD);
         Debug.println("Adding student dezhou and kaiyuan to cs591p1");
-        testGradSys.addStudentInCourse(cs591p1,dezhou);
-        testGradSys.addStudentInCourse(cs591p1,kaiyuan);
+        testGradSys.addStudentInCourse(cs591, dezhou);
+        testGradSys.addStudentInCourse(cs591, kaiyuan);
+        String[][] studentList = testGradSys.getStudentListByCourse(cs591);
+        Debug.printList(studentList);
+
         Debug.println("Display hw1 grades: ");
-        String[][] gradeList = testGradSys.getGradeListInCourseByCategory(cs591p1, cs591p1.getCriteria().getCategoryGroups().get(0).getCategories().get(0)); // cs591p1 -> criteria -> assignments -> hw1
+        String[][] gradeList = testGradSys.getGradeListInCourseByCategory(cs591, cs591.getCriteria().getCategoryGroups().get(0).getCategories().get(0)); // cs591p1 -> criteria -> assignments -> hw1
         Debug.printList(gradeList);
     }
 

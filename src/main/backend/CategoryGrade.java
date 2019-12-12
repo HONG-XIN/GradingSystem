@@ -52,6 +52,10 @@ public class CategoryGrade {
         return this.score.getValue();
     }
 
+    public int getStep() {
+        return this.step;
+    }
+
     // mutator
     public void setId(String id) {
         this.courseGradeId.setId(id);
@@ -73,13 +77,16 @@ public class CategoryGrade {
         this.score.setValue(value);
     }
 
-    //function
-    public void freezeGrade(){ this.step = GRADE_FREEZE;}
+    public void setStep(int step) {
+        this.step = step;
+    }
 
-    public boolean checkGradeByCourseIDAndStudentID(String courseId, String studentId){
-        if(this.courseId.getId() == courseId && this.studentId.getId() == studentId){
-            return true;
-        }
-        return false;
+    //function
+    public void freezeGrade(){
+        setStep(GRADE_FREEZE);
+    }
+
+    public boolean checkGradeByCourseIdAndStudentId(String courseId, String studentId){
+        return this.courseId.getId().equals(courseId) && this.studentId.getId().equals(studentId);
     }
 }

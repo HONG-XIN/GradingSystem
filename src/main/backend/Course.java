@@ -47,6 +47,15 @@ public class Course {
     public ArrayList<Student> getStudents() {
         return this.students;
     }
+
+    public Student getStudentById(String studentId) {
+        for(Student student : students) {
+            if(student.getId().equals(studentId)) {
+                return student;
+            }
+        }
+        return null;
+    }
     //mutator
     public void setId(String id) {
         this.idNumber.setId(id);
@@ -77,11 +86,7 @@ public class Course {
         students.remove(student);
     }
 
-    //function
-    public boolean checkCourseByID(IdNumberCourse id){
-        if(this.idNumber == id){
-            return true;
-        }
-        return false;
+    public boolean checkCourseById(String id){
+        return getId().equals(id);
     }
 }

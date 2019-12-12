@@ -6,14 +6,14 @@ public class GradingSystem {
 
     private ArrayList<Course> courses;
     private ArrayList<Criteria> criteriaTemplates;
-    private ArrayList<Student> students;
+    private ArrayList<Semester> semesters;
     private ArrayList<CategoryGrade> categoryGrades;
     private ArrayList<CourseGrade> courseGrades;
 
     public GradingSystem() {
         this.courses = new ArrayList<>();
         this.criteriaTemplates = new ArrayList<>();
-        this.students = new ArrayList<>();
+        this.semesters = new ArrayList<>();
         this.categoryGrades = new ArrayList<>();
         this.courseGrades = new ArrayList<>();
     }
@@ -27,8 +27,8 @@ public class GradingSystem {
         return criteriaTemplates;
     }
 
-    public ArrayList<Student> getStudents() {
-        return students;
+    public ArrayList<Semester> getSemesters() {
+        return semesters;
     }
 
     public ArrayList<CategoryGrade> getCategoryGrades() {
@@ -40,22 +40,25 @@ public class GradingSystem {
     }
 
     //create functions
-    public void createCriteriaTemplate(String name) {
-        criteriaTemplates.add(new Criteria(name));
+    public Criteria createCriteriaTemplate(String name) {
+        Criteria criteria = new Criteria(name);
+        criteriaTemplates.add(criteria);
+        return criteria;
     }
 
-    public void createCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
+    public Course createCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
             Criteria criteria = (Criteria) criteriaTemplate.clone(); // get a copy of template
             Course course = new Course(name, semester, criteria);
             courses.add(course);
+            return course;
     }
 
-    public void createStudent(String firstName, String lastName, String BUID, StudentType type) {
-        students.add(new Student(firstName, lastName, BUID, type));
+    public Student createStudent(String firstName, String lastName, String BUID, String email, StudentType type) {
+        return new Student(firstName, lastName, BUID, email, type);
     }
 
-    public void createStudent(String firstName, String middleName, String lastName, String BUID, StudentType type) {
-        students.add(new Student(firstName, middleName, lastName, BUID, type));
+    public Student createStudent(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
+        return new Student(firstName, middleName, lastName, BUID, email, type);
     }
 
     //add functions
@@ -100,9 +103,9 @@ public class GradingSystem {
         return null;
     }
 
-    private Student getStudentById (String id) {
-        for(Student student : this.students) {
-            if(student.getId().equals(id)) return student;
+    private Semester getSemesterById (String id) {
+        for(Semester semester : this.semesters) {
+            if(semester.getId().equals(id)) return semester;
         }
         return null;
     }
@@ -132,7 +135,8 @@ public class GradingSystem {
         return templateList;
     }
 
-    public String[][] getStudentList() {
+    public String[][] getStudentListByCourse(Course course) {
+        ArrayList<Student> students = course.getStudents();
         int n = students.size();
         if(n == 0) return null;
         String[][] studentList = new String[n][2];
@@ -177,7 +181,7 @@ public class GradingSystem {
         for(CategoryGrade categoryGrade : categoryGrades) {
             if(categoryGrade.getCourseId().equals(course.getId())  && categoryGrade.getCategoryId().equals(category.getId())){
                 gradeList[i][0] = categoryGrade.getId();
-                gradeList[i][1] = getStudentById(categoryGrade.getStudentId()).getName();
+                gradeList[i][1] = course.getStudentById(categoryGrade.getStudentId()).getName();
                 gradeList[i][2] = Double.toString(categoryGrade.getScore());
                 i++;
             }
@@ -186,29 +190,67 @@ public class GradingSystem {
     }
 
 
+    //delete functions
+    public void deleteCourseByCourse(Course course){
+        ArrayList<Student> students = course.getStudents();
+        for(Student student : students) {
+            deleteStudentInCourse(course, student);
+        }
+        courses.remove(course);
+    }
 
-    public void deleteCourseByCourse(Course course){ courses.remove(course); }
-
-    public boolean deleteCourseByCourseID(IdNumberCourse id){
+    public boolean deleteCourseByCourseId(String courseId){
         for(Course course : this.courses){
-            if(course.checkCourseByID(id)){
-                courses.remove(course);
+            if(course.checkCourseById(courseId)){
+                deleteCourseByCourse(course);
                 return true;
             }
         }
         return false;
     }
 
-    public boolean deleteStudentByStudentID(String courseId, String studentId){
-        Student student = this.getStudentById(studentId);
-        Course course = this.getCourseById(courseId);
-        if(student == null || course == null)
+    public boolean deleteStudentByStudentId(Course course, String studentId) {
+        return deleteStudentInCourse(course, course.getStudentById(studentId));
+    }
+
+    public boolean deleteStudentInCourse(Course course, Student student) {
+        if(course == null || student == null) {
             return false;
-        this.courses.get(courses.indexOf(course)).removeStudent(student);
-        for(CategoryGrade grade : categoryGrades){
-            if(grade.checkGradeByCourseIDAndStudentID(courseId,studentId)){
-                grade.freezeGrade();
+        }
+        course.removeStudent(student);
+        for (CourseGrade courseGrade : courseGrades) {
+            if(courseGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
+                courseGrades.remove(courseGrade);
                 break;
+            }
+        }
+        ArrayList<CategoryGrade> removeList = new ArrayList<>();
+        for(CategoryGrade categoryGrade : categoryGrades){
+            if(categoryGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
+                removeList.add(categoryGrade);
+            }
+        }
+        categoryGrades.removeAll(removeList);
+        return true;
+    }
+
+    public boolean freeStudentByStudentId(Course course, String studentId) {
+        return freezeStudentInCourse(course, course.getStudentById(studentId));
+    }
+
+    public boolean freezeStudentInCourse(Course course, Student student){
+        if(course == null || student == null) {
+            return false;
+        }
+        for (CourseGrade courseGrade : courseGrades) {
+            if(courseGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
+                courseGrade.setLetterGrade('W');
+                break;
+            }
+        }
+        for(CategoryGrade categoryGrade : categoryGrades){
+            if(categoryGrade.checkGradeByCourseIdAndStudentId(course.getId(), student.getId())){
+                categoryGrade.freezeGrade();
             }
         }
         return true;

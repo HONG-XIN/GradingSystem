@@ -12,7 +12,7 @@ public class DB {
         // Create an Object Repository
         ObjectRepository<Score> ScoreRepository = db.getRepository(Score.class);
         ObjectRepository<Student> StudentRepository = db.getRepository(Student.class);
-        Student stu = new Student("aaa", "bbbb", "U12345678", StudentType.GRAD);
+        Student stu = new Student("aaa", "bbbb", "U12345678", "abc", StudentType.GRAD);
         StudentRepository.insert(stu);
         Cursor<Student> cursor = StudentRepository.find();
         /*List<Student> subEmployeeList

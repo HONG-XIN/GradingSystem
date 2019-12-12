@@ -51,6 +51,7 @@ public class CourseGrade {
     }
 
     public int getBonus(){ return this.bonus;}
+
     //mutator
     public void setCourseGradeId(String id) {
         this.courseGradeId.setId(id);
@@ -85,4 +86,9 @@ public class CourseGrade {
     }
 
     public void setBonus(int bonus){ this.bonus = bonus;}
+
+    //function
+    public boolean checkGradeByCourseIdAndStudentId(String courseId, String studentId){
+        return this.courseId.getId().equals(courseId) && this.studentId.getId().equals(studentId);
+    }
 }

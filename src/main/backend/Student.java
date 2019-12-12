@@ -4,6 +4,7 @@ public class Student {
     private IdNumberStudent idNumber;
     private Name name;
     private String BUID;
+    private BUemail email;
     private StudentType type;
 
     //constructor
@@ -11,18 +12,20 @@ public class Student {
         this.idNumber = new IdNumberStudent();
         this.name = new Name();
         this.BUID = "";
+        this.email = new BUemail();
         this.type = StudentType.UNDERGRAD;
     }
 
-    public Student(String firstName, String lastName, String BUID, StudentType type) {
+    public Student(String firstName, String lastName, String BUID, String email, StudentType type) {
         this.idNumber = new IdNumberStudent();
         this.name = new Name(firstName, lastName);
+        this.email = new BUemail(email);
         this.BUID = BUID;
         this.type = type;
     }
 
-    public Student(String firstName, String middleName, String lastName, String BUID, StudentType type) {
-        this(firstName, lastName, BUID, type);
+    public Student(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
+        this(firstName, lastName, BUID, email, type);
         this.name.setMiddleName(middleName);
     }
 
@@ -37,6 +40,10 @@ public class Student {
 
     public String getBUID(){
         return this.BUID;
+    }
+
+    public String getEmail() {
+        return email.getEmail();
     }
 
     public String getType(){
@@ -54,6 +61,10 @@ public class Student {
 
     public void setBUID(String BUID){
         this.BUID = BUID;
+    }
+
+    public void setEmail(String email) {
+        this.email.setEmail(email);
     }
 
     public void setStudentType(StudentType type){
