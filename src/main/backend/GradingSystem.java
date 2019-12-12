@@ -61,21 +61,7 @@ public class GradingSystem {
         return new Student(firstName, middleName, lastName, BUID, email, type);
     }
 
-    public Semester createSemester(String name,
-                                   int startDay, int startMonth, int startYear,
-                                   int endDay, int endMonth, int endYear) {
-        return new Semester(name, startDay, startMonth, startYear, endDay, endMonth, endYear);
-    }
-
     //add functions
-    public boolean addSemester(String name,
-                            int startDay, int startMonth, int startYear,
-                            int endDay, int endMonth, int endYear) {
-        Semester semester = createSemester(name, startDay, startMonth, startYear, endDay, endMonth, endYear);
-        semesters.add(semester);
-        return true;
-    }
-
     public void addGroupInCriteria(Criteria criteria, String name, double weight) {
         CategoryGroup group = new CategoryGroup(name, weight);
         criteria.addGroup(group);
