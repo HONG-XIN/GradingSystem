@@ -2,6 +2,7 @@ package main.backend;
 
 import org.dizitart.no2.Document;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 
 public class Course {
@@ -79,6 +80,13 @@ public class Course {
         if(this.getIdNumberObject() != null){
             CourseDoc.put("idNumber", getIdNumberObject().write());
         }
+        if (this.getStudents().size() > 0 ){
+            ArrayList<Document> StudentsListDoc = new ArrayList<Document>();
+            for (Student student: this.getStudents()){
+                StudentsListDoc.add(student.write());
+            }
+            CourseDoc.put("students", StudentsListDoc);
+        }
         return CourseDoc;
     }
 
@@ -97,6 +105,16 @@ public class Course {
                 Semester semester = new Semester();
                 semester.read(semesterDoc);
                 this.semester = semester;
+            }
+            ArrayList<Document> StudentsListDoc = (ArrayList<Document>) doc.get("students");
+            if (StudentsListDoc.size() > 0){
+                for (Document studentDoc:StudentsListDoc){
+                    if (studentDoc != null){
+                        Student student = new Student();
+                        student.read(studentDoc);
+                        students.add(student);
+                    }
+                }
             }
         }
     }
