@@ -121,7 +121,7 @@ public class CategoryGroup {
                 this.weight = weight;
             }
             ArrayList<Document> categoriesDoc = (ArrayList<Document>) doc.get("categories");
-            if (categoriesDoc.size() > 0 ){
+            if (categoriesDoc != null){
                 for (Document categoryDoc: categoriesDoc){
                     if (categoryDoc != null){
                         Category category = new Category();

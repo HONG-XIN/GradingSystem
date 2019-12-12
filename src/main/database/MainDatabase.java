@@ -9,7 +9,7 @@ import org.dizitart.no2.NitriteCollection;
 public class MainDatabase implements GradingSystemDatabase{
 
     public static void main(String[] args) {
-        Nitrite db = Nitrite.builder()
+        /*Nitrite db = Nitrite.builder()
                 .filePath("./GradingSystem.db")
                 .openOrCreate();
         NitriteCollection GradingSystemCollection = db.getCollection("GradingSystem");
@@ -19,9 +19,9 @@ public class MainDatabase implements GradingSystemDatabase{
         gradingSystem.getCourses().add(course);
         Document doc = new Document();
         doc = GradingSystemDatabase.write(gradingSystem, db);
-        GradingSystemCollection.insert(doc);*/
+        GradingSystemCollection.insert(doc);
         GradingSystemDatabase.read(gradingSystem, db);
-        System.out.println(gradingSystem.getCourses().get(0).getName().toString());
+        System.out.println(gradingSystem.getCourses().get(0).getName().toString());*/
         //ArvoreDatabase db = new ArvoreDatabase();
 
 //        Arvore a1 = new Arvore(1, "pinheiro", 10);

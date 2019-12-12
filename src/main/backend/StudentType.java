@@ -1,5 +1,7 @@
 package main.backend;
 
+import org.dizitart.no2.Document;
+
 public enum StudentType {
     UNDERGRAD("undergrad"), GRAD ("grad");
 
@@ -14,6 +16,5 @@ public enum StudentType {
     public String toString(){
         return typeName;
     }
-
 
 }

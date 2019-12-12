@@ -113,6 +113,9 @@ public class Course {
             }
             CourseDoc.put("students", StudentsListDoc);
         }
+        if (this.getCriteria() != null){
+            CourseDoc.put("criteria", getCriteria().write());
+        }
         return CourseDoc;
     }
 
@@ -133,7 +136,7 @@ public class Course {
                 this.semester = semester;
             }
             ArrayList<Document> StudentsListDoc = (ArrayList<Document>) doc.get("students");
-            if (StudentsListDoc.size() > 0){
+            if (StudentsListDoc != null){
                 for (Document studentDoc:StudentsListDoc){
                     if (studentDoc != null){
                         Student student = new Student();
@@ -141,6 +144,12 @@ public class Course {
                         students.add(student);
                     }
                 }
+            }
+            Document criteriaDoc = (Document) doc.get("criteria");
+            if (criteriaDoc != null){
+                Criteria criteria = new Criteria();
+                criteria.read(criteriaDoc);
+                this.criteria = criteria;
             }
         }
     }
