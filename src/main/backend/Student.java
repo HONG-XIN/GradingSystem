@@ -104,9 +104,9 @@ public class Student {
         if(this.getIdNumberObject() != null){
             StudentDoc.put("idNumber", getIdNumberObject().write());
         }
-        /*if(this.getStudentTypeObject() != null){
-            StudentDoc.put("type", getStudentTypeObject());
-        }*/
+        if(this.getStudentTypeObject() != null){
+            StudentDoc.put("type", getType());
+        }
         return StudentDoc;
     }
 
@@ -114,6 +114,13 @@ public class Student {
     public void read(Document doc){
         if (doc != null) {
             setBUID((String) doc.get("BUID"));
+            String studentType = (String) doc.get("type");
+            if (studentType.equals("undergrad")){
+                this.type = StudentType.UNDERGRAD;
+            }
+            else if (studentType.equals("grad")){
+                this.type = StudentType.GRAD;
+            }
             Document NameDoc = (Document) doc.get("name");
             if(NameDoc != null){
                 Name name = new Name();

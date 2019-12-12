@@ -91,7 +91,7 @@ public class Criteria implements Cloneable{
                 this.idNumber = idNumber;
             }
             ArrayList<Document> groupsList = (ArrayList<Document>) doc.get("groups");
-            if (groupsList.size() > 0){
+            if (groupsList != null){
                 for(Document group: groupsList){
                     if (group != null){
                         CategoryGroup categoryGroup = new CategoryGroup();

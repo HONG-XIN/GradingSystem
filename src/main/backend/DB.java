@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DB {
     public static void initialize(){
-        Nitrite db = Nitrite.builder().filePath("C:/Users/ZHUZIYU/IdeaProjects/GradingSystem/GradingSystem.db").openOrCreate();
+        /*Nitrite db = Nitrite.builder().filePath("C:/Users/ZHUZIYU/IdeaProjects/GradingSystem/GradingSystem.db").openOrCreate();
         // Create an Object Repository
         ObjectRepository<Score> ScoreRepository = db.getRepository(Score.class);
         ObjectRepository<Student> StudentRepository = db.getRepository(Student.class);

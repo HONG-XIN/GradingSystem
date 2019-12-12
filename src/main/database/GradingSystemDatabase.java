@@ -52,8 +52,8 @@ public interface GradingSystemDatabase {
     }
 
     //from DB to RAM
-    public static void read(GradingSystem gradingSystem, Nitrite db) {
-        RecordIterable<Document> result = db.getCollection("GradingSystem").find();
+    public static void read(GradingSystem gradingSystem, NitriteCollection GradingSystemCollection) {
+        RecordIterable<Document> result = GradingSystemCollection.find();
         for(Document GradingSystemDoc: result){
             if(GradingSystemDoc != null) {
                 for (Document CourseDoc : (ArrayList<Document>) GradingSystemDoc.get("courses")) {
