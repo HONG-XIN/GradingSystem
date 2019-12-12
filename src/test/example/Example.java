@@ -1,9 +1,12 @@
 package test.example;
 
 import main.backend.*;
+import main.database.GradingSystemDatabase;
 import main.debug.Debug;
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.NitriteCollection;
 
-public class Example {
+public class Example implements GradingSystemDatabase {
     public static void main(String[] args) throws CloneNotSupportedException {
         // example of debug print
         Debug.println("Our project name is %1$s, %1$s and %2$s.", "GS", "Grading System");
@@ -13,9 +16,16 @@ public class Example {
         Below is sample demo of backend
          */
         GradingSystem testGradSys = new GradingSystem();
+        Nitrite db = Nitrite.builder()
+                .filePath("./GradingSystem.db")
+                .openOrCreate();
+        //NitriteCollection GradingSystemCollection = db.getCollection("GradingSystem");
         Debug.println("Grading System is being instantiated");
-        demo1(testGradSys);
-
+        //demo1(testGradSys);
+        GradingSystemDatabase.read(testGradSys, db);
+        System.out.println(testGradSys.getStudents().get(0).getName().toString());
+        System.out.println(testGradSys.getCriteriaTemplates().get(0).getId());
+        //GradingSystemCollection.insert(GradingSystemDatabase.write(testGradSys));
     }
 
     public static void demo1 (GradingSystem testGradSys) throws CloneNotSupportedException {

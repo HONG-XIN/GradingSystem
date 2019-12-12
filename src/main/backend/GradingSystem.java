@@ -1,7 +1,12 @@
 package main.backend;
 
+import main.database.GradingSystemDatabase;
+import org.dizitart.no2.Document;
+
 import java.util.ArrayList;
 import java.util.Objects;
+
+public class GradingSystem implements GradingSystemDatabase {
 
 public class GradingSystem {
     private String password;

@@ -1,5 +1,7 @@
 package main.backend;
 
+import org.dizitart.no2.Document;
+
 import java.util.ArrayList;
 
 public class Course {
@@ -31,6 +33,8 @@ public class Course {
     public String getId() {
         return this.idNumber.getId();
     }
+
+    public IdNumberCourse getIdNumberObject() {return  this.idNumber;}
 
     public String getName() {
         return this.name;
@@ -88,5 +92,38 @@ public class Course {
 
     public boolean checkCourseById(String id){
         return getId().equals(id);
+    }
+
+    //DB function
+    //FROM RAM TO DB
+    public Document write(){
+        Document CourseDoc = new Document();
+        CourseDoc.put("name", getName());
+        if(this.getSemester() != null){
+            CourseDoc.put("semester", getSemester().write());
+        }
+        if(this.getIdNumberObject() != null){
+            CourseDoc.put("idNumber", getIdNumberObject().write());
+        }
+        return CourseDoc;
+    }
+
+    //from DB to RAM
+    public void read(Document doc){
+        if (doc != null) {
+            setName((String) doc.get("name"));
+            Document docId = (Document) doc.get("idNumber");
+            if(docId != null){
+                IdNumberCourse idNumber = new IdNumberCourse();
+                idNumber.read(docId);
+                this.idNumber = idNumber;
+            }
+            Document semesterDoc = (Document) doc.get("semester");
+            if(semesterDoc != null){
+                Semester semester = new Semester();
+                semester.read(semesterDoc);
+                this.semester = semester;
+            }
+        }
     }
 }
