@@ -3,6 +3,7 @@ package main.backend;
 import org.dizitart.no2.Document;
 
 public class CategoryGrade {
+    private IdNumberCourseGrade courseGradeId;
     private IdNumberCourse courseId;
     private IdNumberCategory categoryId;
     private IdNumberStudent studentId;
@@ -10,6 +11,7 @@ public class CategoryGrade {
 
     //constructor
     public CategoryGrade() {
+        this.courseGradeId = new IdNumberCourseGrade();
         this.courseId = new IdNumberCourse();
         this.categoryId = new IdNumberCategory();
         this.studentId = new IdNumberStudent();
@@ -27,6 +29,10 @@ public class CategoryGrade {
    }
 
     //accesser
+    public String getId() {
+        return courseGradeId.getId();
+    }
+
     public String getCourseId() {
         return this.courseId.getId();
     }
@@ -52,6 +58,10 @@ public class CategoryGrade {
     public Score getScoreObject(){return this.score;}
 
     // mutator
+    public void setId(String id) {
+        this.courseGradeId.setId(id);
+    }
+
     public void setCourseId(String id) {
         this.courseId.setId(id);
     }

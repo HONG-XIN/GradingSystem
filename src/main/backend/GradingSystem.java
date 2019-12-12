@@ -75,6 +75,7 @@ public class GradingSystem implements GradingSystemDatabase {
     }
 
     public void addStudentInCourse(Course course, Student student) {
+        course.addStudent(student);
         courseGrades.add(new CourseGrade(course.getId(),student.getId()));
         Criteria criteria = course.getCriteria();
         ArrayList<CategoryGroup> groups = criteria.getCategoryGroups();
@@ -98,6 +99,13 @@ public class GradingSystem implements GradingSystemDatabase {
     private Criteria getCriteriaTemplateById (String id) {
         for(Criteria criteria : this.criteriaTemplates) {
             if(criteria.getId().equals(id)) return criteria;
+        }
+        return null;
+    }
+
+    private Student getStudentById (String id) {
+        for(Student student : this.students) {
+            if(student.getId().equals(id)) return student;
         }
         return null;
     }
@@ -163,4 +171,22 @@ public class GradingSystem implements GradingSystemDatabase {
         }
         return categoryList;
     }
+
+    public String[][] getGradeListInCourseByCategory (Course course, Category category) {
+        int n = course.getStudents().size();
+        if(n == 0) return null;
+        String[][] gradeList = new String[n][3];
+        int i = 0;
+        for(CategoryGrade categoryGrade : categoryGrades) {
+            if(categoryGrade.getCourseId().equals(course.getId())  && categoryGrade.getCategoryId().equals(category.getId())){
+                gradeList[i][0] = categoryGrade.getId();
+                gradeList[i][1] = getStudentById(categoryGrade.getStudentId()).getName();
+                gradeList[i][2] = Double.toString(categoryGrade.getScore());
+                i++;
+            }
+        }
+        return gradeList;
+    }
+
+
 }

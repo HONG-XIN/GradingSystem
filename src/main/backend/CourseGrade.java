@@ -3,6 +3,7 @@ package main.backend;
 import org.dizitart.no2.Document;
 
 public class CourseGrade {
+    private IdNumberCourseGrade courseGradeId;
     private IdNumberCourse courseId;
     private IdNumberStudent studentId;
     private Score finalScore;
@@ -11,18 +12,24 @@ public class CourseGrade {
 
     //constructor
     public CourseGrade() {
+        this.courseGradeId = new IdNumberCourseGrade();
         this.courseId = new IdNumberCourse();
         this.studentId = new IdNumberStudent();
         this.finalScore = new Score();
         this.letterGrade = ' ';
         this.comment = null;
     }
+
     public CourseGrade(String courseId, String studentId) {
         this();
         setCourseId(courseId);
         setStudentId(studentId);
     }
     //accesser
+    public String getId() {
+        return this.courseGradeId.getId();
+    }
+
     public String getCourseId(){
         return this.courseId.getId();
     }
@@ -50,6 +57,10 @@ public class CourseGrade {
     }
 
     //mutator
+    public void setCourseGradeId(String id) {
+        this.courseGradeId.setId(id);
+    }
+
     public void setCourseId(IdNumberCourse courseId) {
         this.courseId = courseId;
     }
