@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -22,11 +22,17 @@
             <Label text="Course Name" />
             <Label text="Semester" GridPane.rowIndex="1" />
             <Label text="Grading Criteria" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </GridPane.margin></TextField>
             <RadioButton mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <ChoiceBox prefWidth="150.0" />
                </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </RadioButton>
             <RadioButton mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <graphic>

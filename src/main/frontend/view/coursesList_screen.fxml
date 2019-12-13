@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <GridPane BorderPane.alignment="CENTER">
@@ -30,12 +29,14 @@
       <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn prefWidth="197.0" text="Course Name" />
-          <TableColumn minWidth="0.0" prefWidth="247.0" text="Semester" />
-            <TableColumn minWidth="0.0" prefWidth="155.0" text="Action" />
+          <TableColumn minWidth="0.0" prefWidth="89.0" text="Semester" />
+            <TableColumn minWidth="0.0" prefWidth="94.0" text="Start Date" />
+            <TableColumn minWidth="0.0" prefWidth="94.0" text="End Date" />
+            <TableColumn minWidth="0.0" prefWidth="92.0" text="Action" />
         </columns>
       </TableView>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" prefWidth="100.0" text="Add" BorderPane.alignment="CENTER_LEFT" />
+      <Button mnemonicParsing="false" prefWidth="100.0" text="NEW COURSE" BorderPane.alignment="CENTER_LEFT" />
    </bottom>
 </BorderPane>

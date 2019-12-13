@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" text="Students" />
+            <Button mnemonicParsing="false" text="Final Score" />
+            <Button mnemonicParsing="false" text="Grading Criteria" />
+        </items>
+      </ToolBar>
+   </top>
+   <bottom>
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" text="EXPORT" />
+        </items>
+      </ToolBar>
+   </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="102.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="234.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Statistics on Final Score" />
+            <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn prefWidth="75.0" text="MIN" />
+                <TableColumn prefWidth="75.0" text="MAX" />
+                  <TableColumn prefWidth="75.0" text="AVG" />
+                  <TableColumn prefWidth="75.0" text="MEDIAN" />
+                  <TableColumn prefWidth="75.0" text="STD" />
+              </columns>
+            </TableView>
+            <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+              <columns>
+                <TableColumn prefWidth="134.0" text="Student Name" />
+                <TableColumn prefWidth="121.0" text="Bonus" />
+                  <TableColumn prefWidth="112.0" text="Final Score" />
+                  <TableColumn prefWidth="93.0" text="Letter Grade" />
+                  <TableColumn prefWidth="88.0" text="ACTION" />
+              </columns>
+            </TableView>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>
