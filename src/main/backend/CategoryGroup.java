@@ -21,6 +21,7 @@ public class CategoryGroup {
         setName(name);
         setWeight(weight);
     }
+
     public CategoryGroup(String id, String name, double weight, ArrayList<Category> categories){
         this();
         setId(id);

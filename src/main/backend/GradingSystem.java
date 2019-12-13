@@ -3,7 +3,7 @@ package main.backend;
 import java.util.ArrayList;
 
 public class GradingSystem {
-
+    private String password;
     private ArrayList<Course> courses;
     private ArrayList<Criteria> criteriaTemplates;
     private ArrayList<Semester> semesters;
@@ -11,6 +11,7 @@ public class GradingSystem {
     private ArrayList<CourseGrade> courseGrades;
 
     public GradingSystem() {
+        this.password = "";
         this.courses = new ArrayList<>();
         this.criteriaTemplates = new ArrayList<>();
         this.semesters = new ArrayList<>();
@@ -39,6 +40,18 @@ public class GradingSystem {
         return courseGrades;
     }
 
+    //mutator
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    //password function
+    public boolean changePassword(String oldPassword, String newPassword) {
+        if(this.password.equals(oldPassword)) {
+            this.password = newPassword;
+            return true;
+        }
+        return false;
+    }
     //create functions
     public Criteria createCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
@@ -205,12 +218,13 @@ public class GradingSystem {
 
 
     //delete functions
-    public void deleteCourseByCourse(Course course){
+    public boolean deleteCourseByCourse(Course course){
         ArrayList<Student> students = course.getStudents();
         for(Student student : students) {
             deleteStudentInCourse(course, student);
         }
         courses.remove(course);
+        return true;
     }
 
     public boolean deleteCourseByCourseId(String courseId){
