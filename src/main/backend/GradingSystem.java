@@ -44,6 +44,7 @@ public class GradingSystem {
     public void setPassword(String password) {
         this.password = password;
     }
+
     //password function
     public boolean changePassword(String oldPassword, String newPassword) {
         if(this.password.equals(oldPassword)) {
@@ -52,6 +53,7 @@ public class GradingSystem {
         }
         return false;
     }
+
     //create functions
     public Criteria createCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
@@ -215,7 +217,6 @@ public class GradingSystem {
         }
         return gradeList;
     }
-
 
     //delete functions
     public boolean deleteCourseByCourse(Course course){
