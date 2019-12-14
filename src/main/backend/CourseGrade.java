@@ -5,7 +5,7 @@ public class CourseGrade {
     private IdNumberCourse courseId;
     private IdNumberStudent studentId;
     private Score finalScore;
-    private char letterGrade;
+    private String letterGrade;
     private int bonus;
     private String comment;
 
@@ -15,7 +15,7 @@ public class CourseGrade {
         this.courseId = new IdNumberCourse();
         this.studentId = new IdNumberStudent();
         this.finalScore = new Score();
-        this.letterGrade = ' ';
+        this.letterGrade = "";
         this.bonus = 0;
         this.comment = null;
     }
@@ -42,7 +42,7 @@ public class CourseGrade {
         return this.finalScore.getValue();
     }
 
-    public char getLetterGrade(){
+    public String getLetterGrade(){
         return this.letterGrade;
     }
 
@@ -77,7 +77,7 @@ public class CourseGrade {
         this.finalScore.setValue(value);
     }
 
-    public void setLetterGrade (char letterGrade) {
+    public void setLetterGrade (String letterGrade) {
         this.letterGrade = letterGrade;
     }
 

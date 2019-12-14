@@ -6,6 +6,7 @@ public class Student {
     private String BUID;
     private BUemail email;
     private StudentType type;
+    private StudentState state;
 
     //constructor
     public Student() {
@@ -14,6 +15,7 @@ public class Student {
         this.BUID = "";
         this.email = new BUemail();
         this.type = StudentType.UNDERGRAD;
+        this.state = StudentState.ACTIVE;
     }
 
     public Student(String firstName, String lastName, String BUID, String email, StudentType type) {
@@ -22,6 +24,7 @@ public class Student {
         this.email = new BUemail(email);
         this.BUID = BUID;
         this.type = type;
+        this.state = StudentState.ACTIVE;
     }
 
     public Student(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
@@ -46,10 +49,17 @@ public class Student {
         return email.getEmail();
     }
 
-    public String getType(){
+    public String getTypeString(){
         return this.type.toString();
     }
 
+    public StudentType getType() {
+        return this.type;
+    }
+
+    public StudentState getState() {
+        return this.state;
+    }
     //mutator
     public void setId(String id){
         this.idNumber.setId(id);
@@ -71,6 +81,9 @@ public class Student {
         this.type = type;
     }
 
+    public void setStudentState(StudentState state) {
+        this.state = state;
+    }
     //check function
     public static boolean isValidBUID(String buID) { // U12345678
         if(buID.length() != 9 && buID.charAt(0) != 'U'){

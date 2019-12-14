@@ -18,18 +18,26 @@ public class Category {
         dueDate = new Date();
     }
 
-    public Category(String name, double totalScore, double weight, ScoreType type) {
+    public Category(String name, double totalScore, double weight) {
         this();
         setName(name);
         setTotalScore(totalScore);
         setWeight(weight);
-        setScoreType(type);
     }
 
-    public Category(String name, double totalScore, double weight, ScoreType type,
+    public Category(String name, double totalScore, double weight, Date assignDate, Date dueDate) {
+        this();
+        setName(name);
+        setTotalScore(totalScore);
+        setWeight(weight);
+        this.assignDate = assignDate;
+        this.dueDate = dueDate;
+    }
+
+    public Category(String name, double totalScore, double weight,
                     int day, int month, int year,
                     int dueDay, int dueMonth, int dueYear) {
-        this(name, totalScore, weight, type);
+        this(name, totalScore, weight);
         setAssignDate(day, month, year);
         setDueDate(dueDay, dueMonth, dueYear);
     }
@@ -52,10 +60,6 @@ public class Category {
 
     public double getWeight() {
         return weight.getValue();
-    }
-
-    public ScoreType getScoreType() {
-        return totalScore.getType();
     }
 
     public String getAssignDate() {
@@ -83,19 +87,11 @@ public class Category {
         this.weight.setValue(value);
     }
 
-    public void setScoreType(ScoreType type) {
-        this.totalScore.setType(type);
-    }
-
     public void setAssignDate (int day, int month, int year) {
         this.assignDate.setDate(day, month, year);
     }
 
     public void setDueDate (int day, int month, int year) {
         this.dueDate.setDate(day, month, year);
-    }
-
-    public double getCategoryValue() {
-        return this.totalScore.getValue() * this.weight.getValue();
     }
 }

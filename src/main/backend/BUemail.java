@@ -7,13 +7,16 @@ public class BUemail {
     public BUemail() {
         email = "";
     }
+
     public BUemail(String email) {
         setEmail(email);
     }
+
     //accessor
     public String getEmail() {
         return email;
     }
+
     //mutator
     public void  setEmail(String email) {
         if(email.indexOf('@') >= 0) {
