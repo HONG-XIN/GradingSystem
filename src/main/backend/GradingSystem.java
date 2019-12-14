@@ -122,6 +122,7 @@ public class GradingSystem {
         String categoryId = category.getId();
         return grade.getCourseId().equals(courseId) && grade.getCategoryId().equals(categoryId);
     }
+
     //creation helper
     private Criteria makeCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
@@ -147,6 +148,7 @@ public class GradingSystem {
     public Student makeStudent(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
         return new Student(firstName, middleName, lastName, BUID, email, type);
     }
+
     //create functions
     public boolean createCriteriaTemplate(String name) {
         for(Criteria criteria : criteriaTemplates) {
@@ -201,6 +203,20 @@ public class GradingSystem {
             return true;
         }
         return false;
+    }
+
+    public boolean addCategoryInCourse(Course course, CategoryGroup group, String name, double totalScore, double weight,
+                                       int assignDay, int assignMonth, int assignYear,
+                                       int dueDay, int dueMonth, int dueYear) {
+        if (addCategoryInGroup(group, name, totalScore, weight, assignDay, assignMonth, assignYear, dueDay, dueMonth, dueYear)) {
+            Category newAdded = group.getCategories().get(group.getCategories().size() - 1);
+            for (Student student : course.getStudents()) {
+                categoryGrades.add(new CategoryGrade(course.getId(), newAdded.getId(), student.getId()));
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean addStudentInCourse(Course course, Student student) {
@@ -283,10 +299,20 @@ public class GradingSystem {
     }
 
     public boolean deleteCourseByCourse(Course course){
-        ArrayList<Student> students = course.getStudents();
-        for(Student student : students) {
-            deleteStudentInCourse(course, student);
+        ArrayList<CourseGrade> courseGradeRemoveList = new ArrayList<>();
+        ArrayList<CategoryGrade> categoryGradeRemoveList = new ArrayList<>();
+        for(CourseGrade grade : courseGrades) {
+            if(grade.getCourseId().equals(course.getId())){
+                courseGradeRemoveList.add(grade);
+            }
         }
+        for(CategoryGrade grade : categoryGrades) {
+            if(grade.getCourseId().equals(course.getId())){
+                categoryGradeRemoveList.add(grade);
+            }
+        }
+        courseGrades.removeAll(courseGradeRemoveList);
+        categoryGrades.removeAll(categoryGradeRemoveList);
         courses.remove(course);
         return true;
     }
@@ -294,9 +320,8 @@ public class GradingSystem {
     public boolean deleteCourseByCourseId(String courseId){
         for(Course course : this.courses){
             if(course.checkCourseById(courseId)){
-                deleteCourseByCourse(course);
-                return true;
-            }
+                return deleteCourseByCourse(course);
+             }
         }
         return false;
     }
@@ -342,6 +367,63 @@ public class GradingSystem {
         }
         student.setStudentState(StudentState.FREEZE);
         return true;
+    }
+
+    //mutator functions
+    public boolean changeCategoryGroupName(CategoryGroup group, String name) {
+        if (name != null && !name.equals("")) {
+            group.setName(name);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean changeCategoryGroupWeight(CategoryGroup group, double value) {
+        if (value >= 0 && value <= 100) {
+            setCategoryGroupWeight(group, value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean changeCategoryName(Category category, String name) {
+        if (name != null && !name.equals("")) {
+            category.setName(name);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean changeCategoryWeight(Category category, double value) {
+        if (value >= 0 && value <= 100) {
+            setCategoryWeight(category, value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean changeCategoryDate(Category category, int assignDay, int assignMonth, int assignYear,
+                                      int dueDay, int dueMonth, int dueYear) {
+        Date assignDate = new Date(assignDay, assignMonth, assignYear);
+        Date dueDate = new Date(dueDay,dueMonth, dueYear);
+        if(assignDate.compareTo(dueDate) >= 0) {
+            category.setAssignDate(assignDate);
+            category.setDueDate(dueDate);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean changeCategoryTotalScore(Category category, double value) {
+        if(value >= 0) {
+            category.setTotalScore(value);
+            return true;
+        }
+        return false;
     }
 
     //statistics functions
@@ -399,11 +481,79 @@ public class GradingSystem {
         return totalFinalScore / studentCount;
     }
 
+    public double getUnderGradAvgFinalScore(Course course) {
+        double totalFinalScore = 0.0;
+        double studentCount = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.UNDERGRAD)) {
+                studentCount += 1;
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        totalFinalScore += grade.getFinalScore();
+                        break;
+                    }
+                }
+            }
+        }
+        return totalFinalScore / studentCount;
+    }
+
+    public double getGradAvgFinalScore(Course course) {
+        double totalFinalScore = 0.0;
+        double studentCount = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.GRAD)) {
+                studentCount += 1;
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        totalFinalScore += grade.getFinalScore();
+                        break;
+                    }
+                }
+            }
+        }
+        return totalFinalScore / studentCount;
+    }
+
     public double getMaxFinalScore(Course course) {
         double maxFinalScore = 0.0;
         ArrayList<Student> activeStudentList = course.getStudents();
         for(Student student : activeStudentList) {
             if(student.getState() == StudentState.ACTIVE) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        maxFinalScore = Math.max(grade.getFinalScore(), maxFinalScore);
+                        break;
+                    }
+                }
+            }
+        }
+        return maxFinalScore;
+    }
+
+    public double getUnderGradMaxFinalScore(Course course) {
+        double maxFinalScore = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.UNDERGRAD)) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        maxFinalScore = Math.max(grade.getFinalScore(), maxFinalScore);
+                        break;
+                    }
+                }
+            }
+        }
+        return maxFinalScore;
+    }
+
+    public double getGradMaxFinalScore(Course course) {
+        double maxFinalScore = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.GRAD)) {
                 for(CourseGrade grade : courseGrades) {
                     if(isStudentCourseGrade(grade, course, student)) {
                         maxFinalScore = Math.max(grade.getFinalScore(), maxFinalScore);
@@ -431,6 +581,38 @@ public class GradingSystem {
         return minFinalScore == 100.0 ? 0.0 : minFinalScore;
     }
 
+    public double getUnderGradMinFinalScore(Course course) {
+        double minFinalScore = 100.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.UNDERGRAD)) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        minFinalScore = Math.min(grade.getFinalScore(), minFinalScore);
+                        break;
+                    }
+                }
+            }
+        }
+        return minFinalScore == 100.0 ? 0.0 : minFinalScore;
+    }
+
+    public double getGradMinFinalScore(Course course) {
+        double minFinalScore = 100.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.GRAD)) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        minFinalScore = Math.min(grade.getFinalScore(), minFinalScore);
+                        break;
+                    }
+                }
+            }
+        }
+        return minFinalScore == 100.0 ? 0.0 : minFinalScore;
+    }
+
     public double getSdFinalScore(Course course) {
         double averageFinalScore = getAvgFinalScore(course);
         double activeStudentCount = getActiveStudentsNumber(course);
@@ -438,6 +620,42 @@ public class GradingSystem {
         ArrayList<Student> activeStudentList = course.getStudents();
         for(Student student : activeStudentList) {
             if(student.getState() == StudentState.ACTIVE) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        sd += Math.pow(grade.getFinalScore() - averageFinalScore, 2) / activeStudentCount;
+                        break;
+                    }
+                }
+            }
+        }
+        return Math.sqrt(sd);
+    }
+
+    public double getUnderGradSdFinalScore(Course course) {
+        double averageFinalScore = getAvgFinalScore(course);
+        double activeStudentCount = getActiveStudentsNumber(course);
+        double sd = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.UNDERGRAD)) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        sd += Math.pow(grade.getFinalScore() - averageFinalScore, 2) / activeStudentCount;
+                        break;
+                    }
+                }
+            }
+        }
+        return Math.sqrt(sd);
+    }
+
+    public double getGradSdFinalScore(Course course) {
+        double averageFinalScore = getAvgFinalScore(course);
+        double activeStudentCount = getActiveStudentsNumber(course);
+        double sd = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE && student.getType().equals(StudentType.GRAD)) {
                 for(CourseGrade grade : courseGrades) {
                     if(isStudentCourseGrade(grade, course, student)) {
                         sd += Math.pow(grade.getFinalScore() - averageFinalScore, 2) / activeStudentCount;
