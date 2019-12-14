@@ -37,12 +37,7 @@
                   </ToolBar>
                </bottom>
                <center>
-                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Label" />
-                      <TableColumn prefWidth="75.0" text="Weight" />
-                    </columns>
-                  </TableView>
+                  <TableView fx:id="tvGroup" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -59,12 +54,7 @@
                   </ToolBar>
                </bottom>
                <center>
-                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Label" />
-                      <TableColumn prefWidth="75.0" text="Weight" />
-                    </columns>
-                  </TableView>
+                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
