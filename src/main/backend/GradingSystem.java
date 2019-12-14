@@ -106,13 +106,16 @@ public class GradingSystem {
     }
 
     //validation helper
-    public boolean isStudentGradeInCourseInCategory(CategoryGrade grade, Course course, Category category, Student student) {
+    private boolean isStudentGradeInCourseInCategory(CategoryGrade grade, Course course, Category category, Student student) {
         String courseId = course.getId();
         String categoryId = category.getId();
         String studentId = student.getId();
         return grade.getCourseId().equals(courseId) && grade.getCategoryId().equals(categoryId) && grade.getStudentId().equals(studentId);
     }
 
+    private boolean isStudentCourseGrade(CourseGrade grade, Course course, Student student){
+        return grade.getCourseId().equals(course.getId()) && grade.getStudentId().equals(student.getId());
+    }
     //creation helper
     private Criteria makeCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
@@ -127,18 +130,17 @@ public class GradingSystem {
             return course;
     }
 
-    public Student makeStudent(String firstName, String lastName, String BUID, String email, StudentType type) {
-        return new Student(firstName, lastName, BUID, email, type);
-    }
-
-    private Student makeStudent(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
-        return new Student(firstName, middleName, lastName, BUID, email, type);
-    }
-
     private Semester makeSemester(String name, Date startDate, Date endDate) {
         return new Semester(name, startDate, endDate);
     }
 
+    public Student makeStudent(String firstName, String lastName, String BUID, String email, StudentType type) {
+        return new Student(firstName, lastName, BUID, email, type);
+    }
+
+    public Student makeStudent(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
+        return new Student(firstName, middleName, lastName, BUID, email, type);
+    }
     //create functions
     public boolean createCriteriaTemplate(String name) {
         for(Criteria criteria : criteriaTemplates) {
@@ -314,6 +316,85 @@ public class GradingSystem {
         return finalScore;
     }
 
+    private double getActiveStudentsNumber(Course course) {
+        double count = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if (student.getState() == StudentState.ACTIVE) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    public double getAvgFinalScore(Course course) {
+        double totalFinalScore = 0.0;
+        double studentCount = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE) {
+                studentCount += 1;
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        totalFinalScore += grade.getFinalScore();
+                        break;
+                    }
+                }
+            }
+        }
+        return totalFinalScore / studentCount;
+    }
+
+    public double getMaxFinalScore(Course course) {
+        double maxFinalScore = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        maxFinalScore = Math.max(grade.getFinalScore(), maxFinalScore);
+                        break;
+                    }
+                }
+            }
+        }
+        return maxFinalScore;
+    }
+
+    public double getMinFinalScore(Course course) {
+        double minFinalScore = 100.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        minFinalScore = Math.min(grade.getFinalScore(), minFinalScore);
+                        break;
+                    }
+                }
+            }
+        }
+        return minFinalScore == 100.0 ? 0.0 : minFinalScore;
+    }
+
+    public double getSdFinalScore(Course course) {
+        double averageFinalScore = getAvgFinalScore(course);
+        double activeStudentCount = getActiveStudentsNumber(course);
+        double sd = 0.0;
+        ArrayList<Student> activeStudentList = course.getStudents();
+        for(Student student : activeStudentList) {
+            if(student.getState() == StudentState.ACTIVE) {
+                for(CourseGrade grade : courseGrades) {
+                    if(isStudentCourseGrade(grade, course, student)) {
+                        sd += Math.pow(grade.getFinalScore() - averageFinalScore, 2) / activeStudentCount;
+                        break;
+                    }
+                }
+            }
+        }
+        return Math.sqrt(sd);
+    }
+
     /*
 For all String[][] first element is Id, Second element is name
  */
@@ -337,6 +418,17 @@ For all String[][] first element is Id, Second element is name
             templateList[i][1] = criteriaTemplates.get(i).getName();
         }
         return templateList;
+    }
+
+    public String[][] getSemesterList() {
+        int n = semesters.size();
+        if(n == 0) return null;
+        String[][] semesterList = new String[n][2];
+        for(int i = 0; i < n; i++) {
+            semesterList[i][0] = semesters.get(i).getId();
+            semesterList[i][1] = semesters.get(i).getName();
+        }
+        return semesterList;
     }
 
     public String[][] getStudentListByCourse(Course course) {
