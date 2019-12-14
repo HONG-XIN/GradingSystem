@@ -30,8 +30,9 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" onAction="#btAddGroup" text="ADD" />
                         <Button mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE" />
+                      <Button fx:id="btAddGroup" mnemonicParsing="false" onAction="#btAddGroup" text="ADD" />
+                        <Button fx:id="btDelGroup" mnemonicParsing="false" onAction="#btdelGroup" text="DELETE" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -51,8 +52,9 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" onAction="#btAddCategory" text="ADD" />
                         <Button mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE" />
+                      <Button fx:id="btAddCategory" mnemonicParsing="false" onAction="#btAddCategory" text="ADD" />
+                        <Button fx:id="btDelCategory" mnemonicParsing="false" onAction="#btdelCategory" text="DELETE" />
                     </items>
                   </ToolBar>
                </bottom>

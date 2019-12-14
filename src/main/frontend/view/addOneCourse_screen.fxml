@@ -24,31 +24,12 @@
             <Label text="Grading Criteria" GridPane.rowIndex="2" />
             <TextField GridPane.columnIndex="1">
                <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
+                  <Insets right="20.0" />
                </GridPane.margin></TextField>
-            <RadioButton mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <graphic>
-                  <ChoiceBox prefWidth="150.0" />
-               </graphic>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <graphic>
-                  <ChoiceBox prefWidth="150.0" />
-               </graphic>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <graphic>
-                  <Button mnemonicParsing="false" onAction="#btNewSemester" text="Create New" />
-               </graphic>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <graphic>
-                  <Button mnemonicParsing="false" onAction="#btNewGradingCriteria" text="Create New" />
-               </graphic>
-            </RadioButton>
+            <ChoiceBox fx:id="cbSemester" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#btNewSemester" text="New Semester" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#btNewGradingCriteria" text="New Grading Criteria" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
