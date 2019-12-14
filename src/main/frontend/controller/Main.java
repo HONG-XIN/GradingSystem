@@ -38,7 +38,7 @@ public class Main extends Application {
         stage = primaryStage;
         popup = new Stage();
 
-        primaryStage.setTitle("Example000");
+        primaryStage.setTitle("Grading System");
 
         Parent fxmlMain = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
         mainScene = new Scene(fxmlMain, 640, 400);
@@ -83,7 +83,7 @@ public class Main extends Application {
         curveScene = new Scene(fxmlCurve, 320, 200);
 
         primaryStage.setScene(loginScene);
-        primaryStage.setScene(tabFinalScoreScene);
+//        primaryStage.setScene(tabFinalScoreScene);
         primaryStage.show();
     }
 

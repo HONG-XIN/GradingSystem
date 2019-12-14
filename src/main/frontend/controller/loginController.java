@@ -2,8 +2,12 @@ package main.frontend.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 public class loginController {
+
+    @FXML
+    TextField tfPassword;
 
     @FXML
     protected void btChangePassword(ActionEvent e) {
@@ -12,11 +16,11 @@ public class loginController {
 
     @FXML
     protected void btLogin(ActionEvent e) {
-        // check password
-        // if true
-//        Main.changeScreen();
-        //
-        Main.changeScreen("coursesList");
+        if (Main.gs.isPasswordValid(tfPassword.getText())) {
+            Main.changeScreen("coursesList");
+        } else {
+            tfPassword.setText("Password Incorrect");
+        }
     }
 
     @FXML
