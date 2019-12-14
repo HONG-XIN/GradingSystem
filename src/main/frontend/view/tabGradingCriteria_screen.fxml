@@ -4,13 +4,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.tabGradingCriteriaController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Students" />
-            <Button mnemonicParsing="false" text="Final Score" />
-            <Button mnemonicParsing="false" text="Grading Criteria" />
+            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;" />
+          <Button mnemonicParsing="false" onAction="#btStudents" text="Students" />
+            <Button mnemonicParsing="false" onAction="#btFinalScore" text="Final Score" />
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" text="Grading Criteria" />
         </items>
       </ToolBar>
    </top>
@@ -29,8 +30,8 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" text="ADD" />
-                        <Button mnemonicParsing="false" text="SAVE" />
+                      <Button mnemonicParsing="false" onAction="#btAddGroup" text="ADD" />
+                        <Button mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -41,7 +42,7 @@
                   <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
                       <TableColumn prefWidth="101.0" text="Label" />
-                      <TableColumn prefWidth="88.0" text="Percentage" />
+                      <TableColumn prefWidth="88.0" text="Weight" />
                     </columns>
                   </TableView>
                </center>
@@ -50,8 +51,8 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" text="ADD" />
-                        <Button mnemonicParsing="false" text="SAVE" />
+                      <Button mnemonicParsing="false" onAction="#btAddCategory" text="ADD" />
+                        <Button mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -62,7 +63,7 @@
                   <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
                       <TableColumn prefWidth="113.0" text="Label" />
-                      <TableColumn prefWidth="75.0" text="Percentage" />
+                      <TableColumn prefWidth="75.0" text="Weight" />
                     </columns>
                   </TableView>
                </center>
@@ -71,7 +72,7 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" text="SAVE" />
+                      <Button mnemonicParsing="false" onAction="#btSaveDetail" text="SAVE" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -81,27 +82,24 @@
                <center>
                   <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="67.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="133.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="89.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="111.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Label" />
                         <Label text="Issue Date" GridPane.rowIndex="1" />
                         <Label text="Due Date" GridPane.rowIndex="2" />
-                        <Label text="Score Type" GridPane.rowIndex="3" />
-                        <Label text="Total Score" GridPane.rowIndex="4" />
+                        <Label text="Total Score" GridPane.rowIndex="3" />
                         <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </center>

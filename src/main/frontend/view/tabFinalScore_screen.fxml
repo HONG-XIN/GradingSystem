@@ -4,23 +4,24 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.tabFinalScoreController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Students" />
-            <Button mnemonicParsing="false" text="Final Score" />
-            <Button mnemonicParsing="false" text="Grading Criteria" />
+            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;" />
+          <Button mnemonicParsing="false" onAction="#btStudents" text="Students" />
+            <Button mnemonicParsing="false" onAction="#btFinalScore" text="Final Score" />
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" text="Grading Criteria" />
         </items>
       </ToolBar>
    </top>
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="EXPORT" />
-            <Button mnemonicParsing="false" text="CURVE" />
-            <Button mnemonicParsing="false" text="Final Score" />
-            <Button mnemonicParsing="false" text="Letter Grade" />
+          <Button mnemonicParsing="false" onAction="#btExport" text="EXPORT" />
+            <Button mnemonicParsing="false" onAction="#btCurve" text="CURVE" />
+            <Button mnemonicParsing="false" onAction="#btCalFinal" text="Final Score" />
+            <Button mnemonicParsing="false" onAction="#btCalLetter" text="Letter Grade" />
         </items>
       </ToolBar>
    </bottom>

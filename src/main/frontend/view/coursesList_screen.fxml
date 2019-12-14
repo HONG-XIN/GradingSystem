@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.coursesListController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -35,6 +35,6 @@
       </TableView>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="NEW COURSE" BorderPane.alignment="CENTER_LEFT" />
+      <Button mnemonicParsing="false" onAction="#btNewCourse" prefWidth="150.0" text="NEW COURSE" BorderPane.alignment="CENTER_LEFT" />
    </bottom>
 </BorderPane>

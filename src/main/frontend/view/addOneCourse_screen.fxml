@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.addOneCourseController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -41,12 +41,12 @@
             </RadioButton>
             <RadioButton mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
-                  <Button mnemonicParsing="false" text="Create New" />
+                  <Button mnemonicParsing="false" onAction="#btNewSemester" text="Create New" />
                </graphic>
             </RadioButton>
             <RadioButton mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <graphic>
-                  <Button mnemonicParsing="false" text="Create New" />
+                  <Button mnemonicParsing="false" onAction="#btNewGradingCriteria" text="Create New" />
                </graphic>
             </RadioButton>
          </children>
@@ -55,8 +55,8 @@
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Cancel" />
-            <Button mnemonicParsing="false" text="Create" />
+          <Button mnemonicParsing="false" onAction="#btCancel" prefWidth="100.0" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#btCreate" prefWidth="100.0" text="Create" />
         </items>
       </ToolBar>
    </bottom>
