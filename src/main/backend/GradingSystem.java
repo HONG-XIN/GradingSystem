@@ -116,6 +116,12 @@ public class GradingSystem {
     private boolean isStudentCourseGrade(CourseGrade grade, Course course, Student student){
         return grade.getCourseId().equals(course.getId()) && grade.getStudentId().equals(student.getId());
     }
+
+    private boolean isCategoryGradeInCourse(CategoryGrade grade, Course course, Category category) {
+        String courseId = course.getId();
+        String categoryId = category.getId();
+        return grade.getCourseId().equals(courseId) && grade.getCategoryId().equals(categoryId);
+    }
     //creation helper
     private Criteria makeCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
@@ -167,7 +173,8 @@ public class GradingSystem {
             for(Semester semester : semesters) {
                 if(semester.getName().equals(name)) return false;
             }
-            makeSemester(name, startDate, endDate);
+            Semester semester = makeSemester(name, startDate, endDate);
+            semesters.add(semester);
             return true;
         }
         return false;
@@ -228,6 +235,53 @@ public class GradingSystem {
     }
 
     //delete functions
+    public boolean deleteCategoryInGroup(CategoryGroup group, Category category) {
+        for(Category categoryInGroup : group.getCategories()) {
+            if(categoryInGroup.getId().equals(category.getId())){
+                group.removeCategory(category);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteCategoryInCourse(Course course, CategoryGroup group, Category category) {
+        ArrayList<CategoryGrade> removeList = new ArrayList<>();
+        for(CategoryGrade grade : categoryGrades) {
+            if(isCategoryGradeInCourse(grade, course, category)) {
+                removeList.add(grade);
+            }
+        }
+        categoryGrades.removeAll(removeList);
+        return deleteCategoryInGroup(group, category);
+    }
+
+    public boolean deleteCategoryGroupInCriteria(Criteria criteria, CategoryGroup group) {
+        for(CategoryGroup groupInCriteria : criteria.getCategoryGroups()) {
+            if(groupInCriteria.getId().equals(group.getId())){
+                criteria.removeGroup(group);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteCategoryGroupInCourse(Course course, Criteria criteria, CategoryGroup group) {
+        ArrayList<CategoryGrade> removeGradeList = new ArrayList<>();
+        ArrayList<Category> removeCategoryList = new ArrayList<>();
+        for(Category category : group.getCategories()) {
+            for(CategoryGrade grade : categoryGrades) {
+                if(isCategoryGradeInCourse(grade, course, category)) {
+                    removeGradeList.add(grade);
+                }
+            }
+            removeCategoryList.add(category);
+        }
+        categoryGrades.removeAll(removeGradeList);
+        group.getCategories().removeAll(removeCategoryList);
+        return deleteCategoryGroupInCriteria(criteria, group);
+    }
+
     public boolean deleteCourseByCourse(Course course){
         ArrayList<Student> students = course.getStudents();
         for(Student student : students) {
