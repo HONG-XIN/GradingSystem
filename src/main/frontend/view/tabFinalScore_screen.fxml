@@ -18,6 +18,9 @@
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button mnemonicParsing="false" text="EXPORT" />
+            <Button mnemonicParsing="false" text="CURVE" />
+            <Button mnemonicParsing="false" text="Final Score" />
+            <Button mnemonicParsing="false" text="Letter Grade" />
         </items>
       </ToolBar>
    </bottom>

@@ -5,10 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
+import main.backend.GradingSystem;
 
 import java.util.ArrayList;
 
 public class Main extends Application {
+
+    protected static GradingSystem gs;
 
     private static Stage stage;
 
@@ -49,6 +52,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        gs = new GradingSystem();
         launch(args);
     }
 

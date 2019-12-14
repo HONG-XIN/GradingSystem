@@ -20,8 +20,6 @@
          <children>
             <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
             <Label text="Filter Semester" />
-            <Label text="Filter ON / OFF" GridPane.columnIndex="2" />
-            <ToggleButton mnemonicParsing="false" prefWidth="100.0" text="ON" GridPane.columnIndex="3" />
          </children>
       </GridPane>
    </top>
@@ -37,6 +35,6 @@
       </TableView>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" prefWidth="100.0" text="NEW COURSE" BorderPane.alignment="CENTER_LEFT" />
+      <Button mnemonicParsing="false" prefWidth="150.0" text="NEW COURSE" BorderPane.alignment="CENTER_LEFT" />
    </bottom>
 </BorderPane>
