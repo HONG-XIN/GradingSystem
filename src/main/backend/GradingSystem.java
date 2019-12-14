@@ -40,15 +40,75 @@ public class GradingSystem {
         return courseGrades;
     }
 
-    //mutator
+    //helper accessor
+    private Course getCourseById(String id) {
+        for(Course course : courses) {
+            if(course.getId().equals(id)) return course;
+        }
+        return null;
+    }
+
+    private Criteria getCriteriaTemplateById (String id) {
+        for(Criteria criteria : this.criteriaTemplates) {
+            if(criteria.getId().equals(id)) return criteria;
+        }
+        return null;
+    }
+
+    private Semester getSemesterById (String id) {
+        for(Semester semester : this.semesters) {
+            if(semester.getId().equals(id)) return semester;
+        }
+        return null;
+    }
+
+    private CourseGrade getCourseGradeById(String id) {
+        for(CourseGrade grade : this.courseGrades) {
+            if(grade.getId().equals(id)){
+                return grade;
+            }
+        }
+        return null;
+    }
+
+    private CategoryGrade getCategoryGradeById(String id) {
+        for(CategoryGrade grade : this.categoryGrades) {
+            if(grade.getId().equals(id)) {
+                return grade;
+            }
+        }
+        return null;
+    }
+
+    //mutator helper
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setCategoryGroupWeight(CategoryGroup group, double value) {
+        group.setWeight(value);
+    }
+
+    public void setCategoryWeight(Category category, double value) {
+        category.setWeight(value);
+    }
+
+    public void setCategoryGradeScore(CategoryGrade grade, double value) {
+        grade.setScore(value);
+    }
+
+    public void setCourseGradeScore(CourseGrade grade, double value) {
+        grade.setFinalScore(value);
+    }
+
+    public void setCourseGradeLetterGrade(CourseGrade grade, String letterGrade) {
+        grade.setLetterGrade(letterGrade);
     }
 
     //password function
     public boolean changePassword(String oldPassword, String newPassword) {
         if(this.password.equals(oldPassword)) {
-            this.password = newPassword;
+            setPassword(newPassword);
             return true;
         }
         return false;
@@ -115,28 +175,6 @@ public class GradingSystem {
             }
         }
 
-    }
-
-    //helper accessor
-    private Course getCourseById(String id) {
-        for(Course course : courses) {
-            if(course.getId().equals(id)) return course;
-        }
-        return null;
-    }
-
-    private Criteria getCriteriaTemplateById (String id) {
-        for(Criteria criteria : this.criteriaTemplates) {
-            if(criteria.getId().equals(id)) return criteria;
-        }
-        return null;
-    }
-
-    private Semester getSemesterById (String id) {
-        for(Semester semester : this.semesters) {
-            if(semester.getId().equals(id)) return semester;
-        }
-        return null;
     }
 
     /*
@@ -273,7 +311,7 @@ public class GradingSystem {
         }
         for (CourseGrade courseGrade : courseGrades) {
             if(courseGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
-                courseGrade.setLetterGrade('W');
+                courseGrade.setLetterGrade("W");
                 break;
             }
         }
