@@ -43,6 +43,7 @@ public class Criteria implements Cloneable{
     public void setCategoryGroups(ArrayList<CategoryGroup> groups) {
         this.groups = groups;
     }
+
     //functions
     public void addGroup(CategoryGroup group) {
         this.groups.add(group);
@@ -56,13 +57,5 @@ public class Criteria implements Cloneable{
             CloneNotSupportedException
     {
         return super.clone();
-    }
-
-    public double getCriteriaValue(){
-        double total = 0;
-        for(CategoryGroup group : groups){
-            total = total + group.getGroupValue();
-        }
-        return total;
     }
 }

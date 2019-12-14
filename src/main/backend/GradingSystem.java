@@ -81,89 +81,124 @@ public class GradingSystem {
     }
 
     //mutator helper
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 
-    public void setCategoryGroupWeight(CategoryGroup group, double value) {
+    private void setCategoryGroupWeight(CategoryGroup group, double value) {
         group.setWeight(value);
     }
 
-    public void setCategoryWeight(Category category, double value) {
+    private void setCategoryWeight(Category category, double value) {
         category.setWeight(value);
     }
 
-    public void setCategoryGradeScore(CategoryGrade grade, double value) {
+    private void setCategoryGradeScore(CategoryGrade grade, double value) {
         grade.setScore(value);
     }
 
-    public void setCourseGradeScore(CourseGrade grade, double value) {
+    private void setCourseGradeScore(CourseGrade grade, double value) {
         grade.setFinalScore(value);
     }
 
-    public void setCourseGradeLetterGrade(CourseGrade grade, String letterGrade) {
+    private void setCourseGradeLetterGrade(CourseGrade grade, String letterGrade) {
         grade.setLetterGrade(letterGrade);
     }
 
-    //password function
-    public boolean changePassword(String oldPassword, String newPassword) {
-        if(this.password.equals(oldPassword)) {
-            setPassword(newPassword);
-            return true;
-        }
-        return false;
+    //validation helper
+    public boolean isStudentGradeInCourseInCategory(CategoryGrade grade, Course course, Category category, Student student) {
+        String courseId = course.getId();
+        String categoryId = category.getId();
+        String studentId = student.getId();
+        return grade.getCourseId().equals(courseId) && grade.getCategoryId().equals(categoryId) && grade.getStudentId().equals(studentId);
     }
 
-    //create functions
-    public Criteria createCriteriaTemplate(String name) {
+    //creation helper
+    private Criteria makeCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
         criteriaTemplates.add(criteria);
         return criteria;
     }
 
-    public Course createCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
+    private Course makeCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
             Criteria criteria = (Criteria) criteriaTemplate.clone(); // get a copy of template
             Course course = new Course(name, semester, criteria);
             courses.add(course);
             return course;
     }
 
-    public Student createStudent(String firstName, String lastName, String BUID, String email, StudentType type) {
+    public Student makeStudent(String firstName, String lastName, String BUID, String email, StudentType type) {
         return new Student(firstName, lastName, BUID, email, type);
     }
 
-    public Student createStudent(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
+    private Student makeStudent(String firstName, String middleName, String lastName, String BUID, String email, StudentType type) {
         return new Student(firstName, middleName, lastName, BUID, email, type);
     }
 
-    public Semester createSemester(String name,
-                                   int startDay, int startMonth, int startYear,
-                                   int endDay, int endMonth, int endYear) {
-        return new Semester(name, startDay, startMonth, startYear, endDay, endMonth, endYear);
+    private Semester makeSemester(String name, Date startDate, Date endDate) {
+        return new Semester(name, startDate, endDate);
     }
 
-    //add functions
-    public boolean addSemester(String name,
-                            int startDay, int startMonth, int startYear,
-                            int endDay, int endMonth, int endYear) {
-        Semester semester = createSemester(name, startDay, startMonth, startYear, endDay, endMonth, endYear);
-        semesters.add(semester);
+    //create functions
+    public boolean createCriteriaTemplate(String name) {
+        for(Criteria criteria : criteriaTemplates) {
+            if(criteria.getName().equals(name)) return false;
+        }
+        makeCriteriaTemplate(name);
         return true;
     }
 
-    public void addGroupInCriteria(Criteria criteria, String name, double weight) {
-        CategoryGroup group = new CategoryGroup(name, weight);
-        criteria.addGroup(group);
+    public boolean createCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
+        for(Course course : courses) {
+            if(course.getName().equals(name) && course.getSemester().equals(semester)) return false;
+        }
+        makeCourseByTemplate(criteriaTemplate, name, semester);
+        return true;
     }
 
-    public void addCategoryInGroup(CategoryGroup group, String name, double totalScore, double weight, ScoreType type,
+    public boolean createSemester(String name,
+                                  int startDay, int startMonth, int startYear,
+                                  int endDay, int endMonth, int endYear) {
+        Date startDate = new Date(startDay, startMonth, startYear);
+        Date endDate = new Date(endDay, endMonth, endYear);
+        if(startDate.compareTo(endDate) > 0) {
+            for(Semester semester : semesters) {
+                if(semester.getName().equals(name)) return false;
+            }
+            makeSemester(name, startDate, endDate);
+            return true;
+        }
+        return false;
+    }
+    //add functions
+    public boolean addGroupInCriteria(Criteria criteria, String name, double weight) {
+        if(weight >= 0) {
+            CategoryGroup group = new CategoryGroup(name, weight);
+            criteria.addGroup(group);
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public boolean addCategoryInGroup(CategoryGroup group, String name, double totalScore, double weight,
                                    int assignDay, int assignMonth, int assignYear,
                                    int dueDay, int dueMonth, int dueYear) {
-        Category category = new Category(name, totalScore, weight, type, assignDay, assignMonth, assignYear, dueDay, dueMonth, dueYear);
-        group.addCategory(category);
+        Date assignDate = new Date(assignDay, assignMonth, assignYear);
+        Date dueDate = new Date(dueDay,dueMonth, dueYear);
+        if(assignDate.compareTo(dueDate) >= 0  && totalScore > 0) {
+            Category category = new Category(name, totalScore, weight, assignDate, dueDate);
+            group.addCategory(category);
+            return true;
+        }
+        return false;
     }
 
-    public void addStudentInCourse(Course course, Student student) {
+    public boolean addStudentInCourse(Course course, Student student) {
+        ArrayList<Student> curStudentList = course.getStudents();
+        for(Student curStudent : curStudentList) {
+            if(curStudent.getId().equals(student.getId())) return false;
+        }
         course.addStudent(student);
         courseGrades.add(new CourseGrade(course.getId(),student.getId()));
         Criteria criteria = course.getCriteria();
@@ -174,12 +209,114 @@ public class GradingSystem {
                 categoryGrades.add(new CategoryGrade(course.getId(), category.getId(), student.getId()));
             }
         }
+        return true;
+    }
 
+    //password function
+    public boolean isPasswordValid(String password) {
+        return this.password.equals(password);
+    }
+
+    public boolean changePassword(String oldPassword, String newPassword) {
+        if(this.password.equals(oldPassword)) {
+            setPassword(newPassword);
+            return true;
+        }
+        return false;
+    }
+
+    //delete functions
+    public boolean deleteCourseByCourse(Course course){
+        ArrayList<Student> students = course.getStudents();
+        for(Student student : students) {
+            deleteStudentInCourse(course, student);
+        }
+        courses.remove(course);
+        return true;
+    }
+
+    public boolean deleteCourseByCourseId(String courseId){
+        for(Course course : this.courses){
+            if(course.checkCourseById(courseId)){
+                deleteCourseByCourse(course);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteStudentByStudentId(Course course, String studentId) {
+        return deleteStudentInCourse(course, course.getStudentById(studentId));
+    }
+
+    public boolean deleteStudentInCourse(Course course, Student student) {
+        if(course == null || student == null) {
+            return false;
+        }
+        course.removeStudent(student);
+        for (CourseGrade courseGrade : courseGrades) {
+            if(courseGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
+                courseGrades.remove(courseGrade);
+                break;
+            }
+        }
+        ArrayList<CategoryGrade> removeList = new ArrayList<>();
+        for(CategoryGrade categoryGrade : categoryGrades){
+            if(categoryGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
+                removeList.add(categoryGrade);
+            }
+        }
+        categoryGrades.removeAll(removeList);
+        return true;
+    }
+
+    public boolean freeStudentByStudentId(Course course, String studentId) {
+        return freezeStudentInCourse(course, course.getStudentById(studentId));
+    }
+
+    public boolean freezeStudentInCourse(Course course, Student student){
+        if(course == null || student == null) {
+            return false;
+        }
+        for (CourseGrade courseGrade : courseGrades) {
+            if(courseGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
+                courseGrade.setLetterGrade("W");
+                break;
+            }
+        }
+        student.setStudentState(StudentState.FREEZE);
+        return true;
+    }
+
+    //statistics functions
+    private double calFinalScoreByStudent(Course course, Student student) {
+        double finalScore = 0.0;
+        double groupScore = 0.0;
+        double categoryScore = 0.0;
+        Criteria criteria = course.getCriteria();
+        ArrayList<CategoryGroup> groups = criteria.getCategoryGroups();
+        for(CategoryGroup group : groups) {
+            ArrayList<Category> categories = group.getCategories();
+            for(Category category : categories) {
+                for(CategoryGrade grade : this.categoryGrades) {
+                    if(isStudentGradeInCourseInCategory(grade, course, category, student)) {
+                        double score = grade.getScore();
+                        categoryScore = score < 0 ? grade.gradeConvert(category.getTotalScore(), score) : score;
+                        break;
+                    }
+                }
+                groupScore += categoryScore * category.getWeight();
+                categoryScore = 0.0;
+            }
+            finalScore += groupScore * group.getWeight();
+            groupScore = 0.0;
+        }
+        return finalScore;
     }
 
     /*
-    For all String[][] first element is Id, Second element is name
-     */
+For all String[][] first element is Id, Second element is name
+ */
     public String[][] getCourseList() {
         int n = courses.size();
         if(n == 0) return null;
@@ -256,70 +393,4 @@ public class GradingSystem {
         return gradeList;
     }
 
-    //delete functions
-    public boolean deleteCourseByCourse(Course course){
-        ArrayList<Student> students = course.getStudents();
-        for(Student student : students) {
-            deleteStudentInCourse(course, student);
-        }
-        courses.remove(course);
-        return true;
-    }
-
-    public boolean deleteCourseByCourseId(String courseId){
-        for(Course course : this.courses){
-            if(course.checkCourseById(courseId)){
-                deleteCourseByCourse(course);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean deleteStudentByStudentId(Course course, String studentId) {
-        return deleteStudentInCourse(course, course.getStudentById(studentId));
-    }
-
-    public boolean deleteStudentInCourse(Course course, Student student) {
-        if(course == null || student == null) {
-            return false;
-        }
-        course.removeStudent(student);
-        for (CourseGrade courseGrade : courseGrades) {
-            if(courseGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
-                courseGrades.remove(courseGrade);
-                break;
-            }
-        }
-        ArrayList<CategoryGrade> removeList = new ArrayList<>();
-        for(CategoryGrade categoryGrade : categoryGrades){
-            if(categoryGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
-                removeList.add(categoryGrade);
-            }
-        }
-        categoryGrades.removeAll(removeList);
-        return true;
-    }
-
-    public boolean freeStudentByStudentId(Course course, String studentId) {
-        return freezeStudentInCourse(course, course.getStudentById(studentId));
-    }
-
-    public boolean freezeStudentInCourse(Course course, Student student){
-        if(course == null || student == null) {
-            return false;
-        }
-        for (CourseGrade courseGrade : courseGrades) {
-            if(courseGrade.checkGradeByCourseIdAndStudentId(course.getId(),student.getId())){
-                courseGrade.setLetterGrade("W");
-                break;
-            }
-        }
-        for(CategoryGrade categoryGrade : categoryGrades){
-            if(categoryGrade.checkGradeByCourseIdAndStudentId(course.getId(), student.getId())){
-                categoryGrade.freezeGrade();
-            }
-        }
-        return true;
-    }
 }

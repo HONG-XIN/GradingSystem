@@ -35,28 +35,29 @@ public class Example {
         Debug.println("Adding Category hw1, weight 30 under Assignments");
         Debug.println("Adding Category hw2, weight 70 under Assignments");
         CategoryGroup assignmentGroup = template1.getCategoryGroups().get(0);
-        testGradSys.addCategoryInGroup(assignmentGroup, "hw1",100, 30, ScoreType.PERCENTAGE ,1,1,2019,2,2,2019);
-        testGradSys.addCategoryInGroup(assignmentGroup, "hw2",50, 70, ScoreType.DEDUCTION, 1,1,2019,2,2,2019);
+        testGradSys.addCategoryInGroup(assignmentGroup, "hw1",100, 30, 1,1,2019,2,2,2019);
+        testGradSys.addCategoryInGroup(assignmentGroup, "hw2",50, 70,  1,1,2019,1,1,2019);
         String[][] categoryList = testGradSys.getCategoryListByGroup(assignmentGroup);
         Debug.printList(categoryList);
 
         Debug.println("Adding Category Midterm, weight 40 under Exams");
         Debug.println("Adding Category Final, weight 60 under Exams");
         CategoryGroup examGroup = template1.getCategoryGroups().get(1);
-        testGradSys.addCategoryInGroup(examGroup, "Midterm",60, 40, ScoreType.PERCENTAGE,1,1,2019,2,2,2019);
-        testGradSys.addCategoryInGroup(examGroup, "Final",80, 60, ScoreType.PERCENTAGE,1,1,2019,2,2,2019);
+        testGradSys.addCategoryInGroup(examGroup, "Midterm",60, 40,1,1,2019,2,2,2019);
+        testGradSys.addCategoryInGroup(examGroup, "Final",80, 60, 1,1,2019,2,2,2019);
         categoryList = testGradSys.getCategoryListByGroup(examGroup);
         Debug.printList(categoryList);
 
         Debug.println("Creating course CS591P1 by template1");
         Semester semester = new Semester("2019Fall",1,1,2019,2,2,2019);
-        Course cs591 = testGradSys.createCourseByTemplate(template1,"CS591P1", semester);
+        testGradSys.createCourseByTemplate(template1,"CS591P1", semester);
+        Course cs591 = testGradSys.getCourses().get(0);
         String[][] curCourseList = testGradSys.getCourseList();
         Debug.printList(curCourseList);
 
 
-        Student dezhou = testGradSys.createStudent("dezhou", "wang", "U00000000", "dezhou",StudentType.GRAD);
-        Student kaiyuan = testGradSys.createStudent("kaiyuan", "fan", "U12345678", "fankai", StudentType.UNDERGRAD);
+        Student dezhou = testGradSys.makeStudent("dezhou", "wang", "U00000000", "dezhou",StudentType.GRAD);
+        Student kaiyuan = testGradSys.makeStudent("kaiyuan", "fan", "U12345678", "fankai", StudentType.UNDERGRAD);
         Debug.println("Adding student dezhou and kaiyuan to cs591p1");
         testGradSys.addStudentInCourse(cs591, dezhou);
         testGradSys.addStudentInCourse(cs591, kaiyuan);
