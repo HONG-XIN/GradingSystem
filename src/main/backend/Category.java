@@ -79,7 +79,7 @@ public class Category {
         this.name = name;
     }
 
-    private void setTotalScore(double value) {
+    public void setTotalScore(double value) {
         this.totalScore.setValue(value);
     }
 
@@ -93,5 +93,13 @@ public class Category {
 
     public void setDueDate (int day, int month, int year) {
         this.dueDate.setDate(day, month, year);
+    }
+
+    public void setAssignDate (Date date) {
+        this.assignDate = date;
+    }
+
+    public void setDueDate (Date date) {
+        this.dueDate = date;
     }
 }
