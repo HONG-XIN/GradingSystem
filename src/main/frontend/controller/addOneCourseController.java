@@ -32,21 +32,19 @@ public class addOneCourseController {
         }
         String[] semesterIDs = new String[semesterList.length];
         String[] semesterNames = new String[semesterList.length];
-        for (int i = 0; i < semesterNames.length; i++) {
-            System.out.println(semesterNames[i]);
-        }
         for (int i=0; i<semesterList.length; i++) {
             semesterIDs[i] = semesterList[i][0];
             semesterNames[i] = semesterList[i][1];
         }
         cbSemester.setItems(FXCollections.observableArrayList(semesterNames));
-        cbSemester.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                String semesterId = semesterIDs[t1.intValue()];
-                System.out.println(semesterId);
-            }
-        });
+//        cbSemester.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+//                System.out.println("number : "+number.intValue());
+//                String semesterId = semesterIDs[t1.intValue()];
+//                System.out.println(semesterId);
+//            }
+//        });
     }
 
     @FXML
