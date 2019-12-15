@@ -62,11 +62,19 @@ public class Category {
         return weight.getValue();
     }
 
-    public String getAssignDate() {
+    public Date getAssignDate() {
+        return this.assignDate;
+    }
+
+    public Date getDueDate() {
+        return this.dueDate;
+    }
+
+    public String getAssignDateString() {
         return assignDate.toString();
     }
 
-    public String getDueDate() {
+    public String getDueDateString() {
         return dueDate.toString();
     }
 
