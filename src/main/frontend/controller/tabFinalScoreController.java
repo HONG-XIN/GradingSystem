@@ -3,12 +3,11 @@ package main.frontend.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import main.backend.CategoryGrade;
 import main.backend.Course;
 import main.frontend.model.LabelWeight;
 import main.frontend.model.UIFinalStatistics;
@@ -36,6 +35,9 @@ public class tabFinalScoreController {
 
     @FXML
     TextField tfCurve;
+
+    @FXML
+    Label info;
 
     @FXML
     protected void initialize() {
@@ -109,8 +111,30 @@ public class tabFinalScoreController {
             String finalScore = data[i][5];
             String letter = data[i][6];
             Button comment = new Button("-");
+            comment.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+
+                }
+            });
+
             Button freeze = new Button("#");
+            freeze.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+
+                }
+            });
+
             Button delete = new Button("x");
+            delete.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    CategoryGrade cg = Main.gs.getCategoryGradeById(gradeId);
+                    String sid = cg.getStudentId();
+                    Main.gs.deleteStudentByStudentId(course, sid);
+                }
+            });
             table_data.add(new UIStudentFinal(gradeId, name, bonus, finalScore, letter, comment, freeze, delete));
         }
 
@@ -156,6 +180,6 @@ public class tabFinalScoreController {
 
     @FXML
     protected void btExport(ActionEvent e) {
-        Main.changeScreen("exportFinalScore");
+        Main.changeScreen("exportFinalScore", courseId);
     }
 }
