@@ -3,14 +3,23 @@ package main.frontend.model;
 import javafx.scene.control.Button;
 
 public class LabelWeight {
-    String label, weight;
+    String label, weight, id;
 
     Button delete;
 
-    public LabelWeight(String label, String weight, Button delete) {
+    public LabelWeight(String id, String label, String weight, Button delete) {
+        this.id = id;
         this.label = label;
         this.weight = weight;
         this.delete = delete;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getLabel() {

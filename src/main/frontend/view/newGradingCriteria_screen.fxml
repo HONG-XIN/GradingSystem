@@ -9,6 +9,7 @@
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button mnemonicParsing="false" onAction="#btBack" prefWidth="100.0" text="BACK" />
+            <Label fx:id="info" />
         </items>
       </ToolBar>
    </bottom>
@@ -30,7 +31,7 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                        <Button mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE" />
+                        <Button fx:id="btSaveGroup" mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE" />
                       <Button fx:id="btAddGroup" mnemonicParsing="false" onAction="#btAddGroup" text="ADD" />
                     </items>
                   </ToolBar>
@@ -51,7 +52,7 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                        <Button mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE" />
+                        <Button fx:id="btSaveCategory" mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE" />
                       <Button fx:id="btAddCategory" mnemonicParsing="false" onAction="#btAddCategory" text="ADD" />
                     </items>
                   </ToolBar>
@@ -72,7 +73,7 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" onAction="#btSaveDetail" text="SAVE" />
+                      <Button fx:id="btSave3" mnemonicParsing="false" onAction="#btSaveDetail" text="SAVE" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -85,18 +86,15 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Label" />
-                        <Label text="Issue Date" GridPane.rowIndex="1" />
-                        <Label text="Due Date" GridPane.rowIndex="2" />
-                        <Label text="Total Score" GridPane.rowIndex="3" />
-                        <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Issue Date" />
+                        <Label text="Due Date" GridPane.rowIndex="1" />
+                        <Label text="Total Score" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfScore" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <DatePicker fx:id="dpIssue" GridPane.columnIndex="1" />
+                        <DatePicker fx:id="dpDue" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </center>

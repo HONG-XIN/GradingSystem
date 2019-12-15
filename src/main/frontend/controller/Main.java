@@ -82,8 +82,8 @@ public class Main extends Application {
         Parent fxmlCurve = FXMLLoader.load(getClass().getResource("../view/curve_screen.fxml"));
         curveScene = new Scene(fxmlCurve, 320, 200);
 
-        primaryStage.setScene(loginScene);
-        primaryStage.setScene(newGradingCriteriaScene);
+//        primaryStage.setScene(loginScene);
+        primaryStage.setScene(addOneCourseScene);
         primaryStage.show();
     }
 
