@@ -48,6 +48,7 @@ public class tabStudentsController {
                     course = Main.gs.getCourseById(courseId);
                     loadGroupData();
                     initTable();
+                    loadDate();
                 }
             }
         });
@@ -141,6 +142,7 @@ public class tabStudentsController {
                 info.setText("Success");
             } catch (Exception ex) {
                 info.setText("Fail");
+                loadDate();
             }
         });
         table.setEditable(true);
@@ -189,17 +191,17 @@ public class tabStudentsController {
 
     @FXML
     protected void btStudents(ActionEvent e) {
-        Main.changeScreen("tabStudents");
+        Main.changeScreen("tabStudents", courseId);
     }
 
     @FXML
     protected void btFinalScore(ActionEvent e) {
-        Main.changeScreen("tabFinalScore");
+        Main.changeScreen("tabFinalScore", courseId);
     }
 
     @FXML
     protected void btGradingCriteria(ActionEvent e) {
-        Main.changeScreen("tabGradingCriteria");
+        Main.changeScreen("tabGradingCriteria", courseId);
     }
 
     @FXML

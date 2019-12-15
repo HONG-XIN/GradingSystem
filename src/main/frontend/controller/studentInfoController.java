@@ -36,6 +36,7 @@ public class studentInfoController {
                     courseId = ((UIStudentInfo)userData).getCourseId();
                     student = ((UIStudentInfo)userData).getStudent();
                     course = Main.gs.getCourseById(courseId);
+                    cbType.getItems().clear();
                     cbType.getItems().addAll("graduate", "undergraduate");
                     cbType.setValue("graduate");
                     if (student == null) {
@@ -45,9 +46,9 @@ public class studentInfoController {
                         tfID.setText("");
                         tfEmail.setText("");
                     } else {
-                        tfFirst.setText(student.getName());
-                        tfMiddle.setText(student.getName());
-                        tfLast.setText(student.getName());
+                        tfFirst.setText(student.getName().getFirstName());
+                        tfMiddle.setText(student.getName().getMiddleName());
+                        tfLast.setText(student.getName().getLastName());
                         tfID.setText(student.getBUID());
                         tfEmail.setText(student.getEmail());
                         cbType.setValue(student.getType().toString()+"uate");
@@ -59,17 +60,17 @@ public class studentInfoController {
 
     @FXML
     protected void btStudents(ActionEvent e) {
-        Main.changeScreen("tabStudents");
+        Main.changeScreen("tabStudents", courseId);
     }
 
     @FXML
     protected void btFinalScore(ActionEvent e) {
-        Main.changeScreen("tabFinalScore");
+        Main.changeScreen("tabFinalScore", courseId);
     }
 
     @FXML
     protected void btGradingCriteria(ActionEvent e) {
-        Main.changeScreen("tabGradingCriteria");
+        Main.changeScreen("tabGradingCriteria", courseId);
     }
 
     @FXML
@@ -98,7 +99,7 @@ public class studentInfoController {
             student.setBUID(id);
             student.setEmail(email);
             student.setStudentType(t);
-            info.setText("Fail");
+            info.setText("Success");
         }
 
     }
