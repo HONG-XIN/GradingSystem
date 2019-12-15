@@ -14,12 +14,27 @@ public class addOneCourseController {
 
     @FXML
     protected void initialize() {
+
+        Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
+            public void onScreenChanged(String newScreen, Object userData) {
+                if (newScreen.equals("addOneCourse")) {
+//                    System.out.println(newScreen+", "+userData);
+                    loadSemesterData();
+                }
+            }
+        });
+    }
+
+    private void loadSemesterData() {
         String[][] semesterList = Main.gs.getSemesterList();
         if (semesterList == null) {
             return;
         }
         String[] semesterIDs = new String[semesterList.length];
         String[] semesterNames = new String[semesterList.length];
+        for (int i = 0; i < semesterNames.length; i++) {
+            System.out.println(semesterNames[i]);
+        }
         for (int i=0; i<semesterList.length; i++) {
             semesterIDs[i] = semesterList[i][0];
             semesterNames[i] = semesterList[i][1];
