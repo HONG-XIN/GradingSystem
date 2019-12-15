@@ -38,13 +38,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox mnemonicParsing="false" text="Students' Names" />
-            <CheckBox mnemonicParsing="false" text="Final Scores" GridPane.rowIndex="1" />
-            <CheckBox mnemonicParsing="false" text="Bonus Scores" GridPane.rowIndex="2" />
-            <CheckBox mnemonicParsing="false" text="Letter Grades" GridPane.rowIndex="3" />
-            <CheckBox mnemonicParsing="false" text="Comments" GridPane.rowIndex="4" />
-            <CheckBox mnemonicParsing="false" text="BU IDs" GridPane.rowIndex="5" />
-            <CheckBox mnemonicParsing="false" text="BU Emails" GridPane.rowIndex="6" />
+            <CheckBox fx:id="cbStudentName" mnemonicParsing="false" text="Students' Names" />
+            <CheckBox fx:id="cbFinalScore" mnemonicParsing="false" text="Final Scores" GridPane.rowIndex="1" />
+            <CheckBox fx:id="cbBonus" mnemonicParsing="false" text="Bonus Scores" GridPane.rowIndex="2" />
+            <CheckBox fx:id="cbLetter" mnemonicParsing="false" text="Letter Grades" GridPane.rowIndex="3" />
+            <CheckBox fx:id="cbComment" mnemonicParsing="false" text="Comments" GridPane.rowIndex="4" />
+            <CheckBox fx:id="cbBUID" mnemonicParsing="false" text="BU IDs" GridPane.rowIndex="5" />
+            <CheckBox fx:id="cbEmail" mnemonicParsing="false" text="BU Emails" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </center>

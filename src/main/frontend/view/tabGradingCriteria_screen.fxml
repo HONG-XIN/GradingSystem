@@ -12,6 +12,7 @@
           <Button mnemonicParsing="false" onAction="#btStudents" text="Students" />
             <Button mnemonicParsing="false" onAction="#btFinalScore" text="Final Score" />
             <Button mnemonicParsing="false" onAction="#btGradingCriteria" text="Grading Criteria" />
+            <Label fx:id="info" />
         </items>
       </ToolBar>
    </top>
@@ -30,8 +31,8 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" onAction="#btAddGroup" text="ADD" />
-                        <Button mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE" />
+                        <Button fx:id="btSaveGroup" mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE" />
+                      <Button fx:id="btAddGroup" mnemonicParsing="false" onAction="#btAddGroup" text="ADD" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -39,10 +40,11 @@
                   <Label text="Category Group" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <TableView fx:id="tvGroup" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn prefWidth="101.0" text="Label" />
-                      <TableColumn prefWidth="88.0" text="Weight" />
+                      <TableColumn fx:id="tcLabel1" prefWidth="81.0" text="Label" />
+                      <TableColumn fx:id="tcWeight1" prefWidth="56.0" text="Weight" />
+                        <TableColumn fx:id="tcDel1" prefWidth="47.0" text="del" />
                     </columns>
                   </TableView>
                </center>
@@ -51,8 +53,8 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" onAction="#btAddCategory" text="ADD" />
-                        <Button mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE" />
+                        <Button fx:id="btSaveCategory" mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE" />
+                      <Button fx:id="btAddCategory" mnemonicParsing="false" onAction="#btAddCategory" text="ADD" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -60,10 +62,11 @@
                   <Label text="Category" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <TableView fx:id="tvCategory" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn prefWidth="113.0" text="Label" />
-                      <TableColumn prefWidth="75.0" text="Weight" />
+                      <TableColumn fx:id="tcLabel2" prefWidth="90.0" text="Label" />
+                      <TableColumn fx:id="tcWeight2" prefWidth="54.0" text="Weight" />
+                        <TableColumn fx:id="tcDel2" prefWidth="41.0" text="del" />
                     </columns>
                   </TableView>
                </center>
@@ -72,7 +75,7 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button mnemonicParsing="false" onAction="#btSaveDetail" text="SAVE" />
+                      <Button fx:id="btSave3" mnemonicParsing="false" onAction="#btSaveDetail" text="SAVE" />
                     </items>
                   </ToolBar>
                </bottom>
@@ -82,24 +85,21 @@
                <center>
                   <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="89.0" />
+                      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="89.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="111.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Label" />
-                        <Label text="Issue Date" GridPane.rowIndex="1" />
-                        <Label text="Due Date" GridPane.rowIndex="2" />
-                        <Label text="Total Score" GridPane.rowIndex="3" />
-                        <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Issue Date" />
+                        <Label text="Due Date" GridPane.rowIndex="1" />
+                        <Label text="Total Score" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfScore" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <DatePicker fx:id="dpIssue" GridPane.columnIndex="1" />
+                        <DatePicker fx:id="dpDue" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </center>

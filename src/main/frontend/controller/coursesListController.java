@@ -42,6 +42,7 @@ public class coursesListController {
                 if (newScreen.equals("coursesList")) {
                     loadSemesterData();
                     initTable();
+                    loadCoursesData(-1);
                 }
             }
         });
@@ -97,13 +98,17 @@ public class coursesListController {
     private void loadCoursesData(int i) {
         ObservableList<Course> table_data = FXCollections.observableArrayList();
 
+        String[][] data = null;
+
         if (i < 0) {
-            table.setItems(table_data);
-            return;
+            data = Main.gs.getCourseList();
+        } else if (i >= 0) {
+//            table.setItems(table_data);
+//            return;
+            String sID = sList[i];
+            Semester s = Main.gs.getSemesterById(sID);
+            data = Main.gs.getCourseListBySemester(s);
         }
-        String sID = sList[i];
-        Semester s = Main.gs.getSemesterById(sID);
-        String[][] data = Main.gs.getCourseListBySemester(s);
 
         if (data == null) {
             table.setItems(table_data);
