@@ -1,6 +1,7 @@
 package main.backend;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GradingSystem {
     private String password;
@@ -283,5 +284,9 @@ public class GradingSystem {
             }
         }
         return true;
+    }
+
+    public void exportTable(String path, String sheetname, List<String> headtable, List<List<String>> value){
+        ExcelUtils.exportExcel(path,sheetname,headtable,value);
     }
 }

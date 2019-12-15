@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelUtils {
-    private void exportExcel(String path, String sheetname, List<String> headtable, List<List<String>> value) {
+    public static void exportExcel(String path, String sheetname, List<String> headtable, List<List<String>> value) {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet(sheetname);
         HSSFRow hssfRow = sheet.createRow(0);
@@ -42,7 +42,7 @@ public class ExcelUtils {
         }
     }
 
-    public List<List<String>> importExcel(String path) {
+    public static List<List<String>> importExcel(String path) {
         List<List<String>> list=null;
         try
         {
