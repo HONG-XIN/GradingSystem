@@ -38,7 +38,11 @@ public class Name {
 
     //mutator
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if(firstName.equals("")){
+            this.firstName ="firstName";
+        } else {
+            this.firstName = firstName;
+        }
     }
 
     public void setMiddleName(String middleName) {
@@ -46,7 +50,11 @@ public class Name {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if(lastName.equals("")){
+            this.lastName = "lastName";
+        } else {
+            this.lastName = lastName;
+        }
     }
 
     public void setName(String firstName, String middleName, String lastName) {

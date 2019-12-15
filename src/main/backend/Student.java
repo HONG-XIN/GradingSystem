@@ -74,7 +74,11 @@ public class Student {
     }
 
     public void setBUID(String BUID){
-        this.BUID = BUID;
+        if(!isValidBUID(BUID)){
+            setBUID("default");
+        } else {
+            this.BUID = BUID;
+        }
     }
 
     public void setEmail(String email) {
