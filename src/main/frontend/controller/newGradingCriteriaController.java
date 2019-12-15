@@ -80,9 +80,8 @@ public class newGradingCriteriaController {
     @FXML
     protected void btAddGroup(ActionEvent e) {
         System.out.println("add group");
-        tvGroup.getItems().add(new LabelWeight("cs591", "100", new Button("x")));
-//        tvGroup.getItems().add(new Item("123", "100"));
-//        btAddGroup.setDisable(true);
+        tvGroup.getItems().add(new LabelWeight("Default", "100", new Button("x")));
+        btAddGroup.setDisable(true);
     }
 
     @FXML
@@ -108,31 +107,5 @@ public class newGradingCriteriaController {
     @FXML
     protected void btSaveDetail(ActionEvent e) {
 
-    }
-
-    public static class Item {
-        private String label;
-        private String weight;
-
-        public Item(String label, String weight) {
-            this.label = label;
-            this.weight = weight;
-        }
-
-        public String getLabel() {
-            return label;
-        }
-
-        public void setLabel(String label) {
-            this.label = label;
-        }
-
-        public String getWeight() {
-            return weight;
-        }
-
-        public void setWeight(String weight) {
-            this.weight = weight;
-        }
     }
 }
