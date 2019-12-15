@@ -2,8 +2,39 @@ package main.frontend.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import main.backend.Course;
 
 public class tabFinalScoreController {
+
+    private String courseId;
+    private Course course;
+
+    @FXML
+    protected void initialize() {
+        Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
+            public void onScreenChanged(String newScreen, Object userData) {
+                if (newScreen.equals("tabFinalScore")) {
+                    courseId = userData.toString();
+                    course = Main.gs.getCourseById(courseId);
+//                    loadGroupData();
+                    initTable();
+//                    loadDate();
+                }
+            }
+        });
+    }
+
+    private void initTable() {
+        initCols();
+    }
+
+    private void initCols() {
+        editableCols();
+    }
+
+    private void editableCols() {
+
+    }
 
     @FXML
     protected void btLeave(ActionEvent e) {
@@ -12,17 +43,17 @@ public class tabFinalScoreController {
 
     @FXML
     protected void btStudents(ActionEvent e) {
-        Main.changeScreen("tabStudents");
+        Main.changeScreen("tabStudents", courseId);
     }
 
     @FXML
     protected void btFinalScore(ActionEvent e) {
-        Main.changeScreen("tabFinalScore");
+        Main.changeScreen("tabFinalScore", courseId);
     }
 
     @FXML
     protected void btGradingCriteria(ActionEvent e) {
-        Main.changeScreen("tabGradingCriteria");
+        Main.changeScreen("tabGradingCriteria", courseId);
     }
 
     @FXML

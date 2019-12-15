@@ -1,52 +1,52 @@
-package main.frontend.controller;
+package main.frontend.controller
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.event.ActionEvent
+import javafx.fxml.FXML
 
-public class tabGradingCriteriaController {
+class tabGradingCriteriaController {
 
     @FXML
-    protected void btLeave(ActionEvent e) {
-        Main.changeScreen("coursesList");
+    protected fun btLeave(e: ActionEvent) {
+        Main.changeScreen("coursesList")
     }
 
     @FXML
-    protected void btStudents(ActionEvent e) {
-        Main.changeScreen("tabStudents");
+    protected fun btStudents(e: ActionEvent) {
+        Main.changeScreen("tabStudents")
     }
 
     @FXML
-    protected void btFinalScore(ActionEvent e) {
-        Main.changeScreen("tabFinalScore");
+    protected fun btFinalScore(e: ActionEvent) {
+        Main.changeScreen("tabFinalScore")
     }
 
     @FXML
-    protected void btGradingCriteria(ActionEvent e) {
-        Main.changeScreen("tabGradingCriteria");
+    protected fun btGradingCriteria(e: ActionEvent) {
+        Main.changeScreen("tabGradingCriteria")
     }
 
     @FXML
-    protected void btSaveGroup(ActionEvent e) {
-
-    }
-
-    @FXML
-    protected void btAddGroup(ActionEvent e) {
+    protected fun btSaveGroup(e: ActionEvent) {
 
     }
 
     @FXML
-    protected void btSaveCategory(ActionEvent e) {
+    protected fun btAddGroup(e: ActionEvent) {
 
     }
 
     @FXML
-    protected void btAddCategory(ActionEvent e) {
+    protected fun btSaveCategory(e: ActionEvent) {
 
     }
 
     @FXML
-    protected void btSaveDetail(ActionEvent e) {
+    protected fun btAddCategory(e: ActionEvent) {
+
+    }
+
+    @FXML
+    protected fun btSaveDetail(e: ActionEvent) {
 
     }
 }
