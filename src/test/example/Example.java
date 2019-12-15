@@ -48,8 +48,12 @@ public class Example {
         categoryList = testGradSys.getCategoryListByGroup(examGroup);
         Debug.printList(categoryList);
 
+        Debug.println("Creating new Semester");
+        testGradSys.createSemester("2019Fall",1,1,2019,2,2,2019);
+        Semester semester = testGradSys.getSemesters().get(0);
+        Debug.printList(testGradSys.getSemesterList());
+
         Debug.println("Creating course CS591P1 by template1");
-        Semester semester = new Semester("2019Fall",1,1,2019,2,2,2019);
         testGradSys.createCourseByTemplate(template1,"CS591P1", semester);
         Course cs591 = testGradSys.getCourses().get(0);
         String[][] curCourseList = testGradSys.getCourseList();

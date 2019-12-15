@@ -15,6 +15,7 @@ public class Semester {
 
     public Semester(String name, Date startDate, Date endDate) {
         this();
+        this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
     }

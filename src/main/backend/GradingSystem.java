@@ -810,7 +810,7 @@ For all String[][] first element is Id, Second element is name
     public String[][] getGradeListInCourseByCategory (Course course, Category category) {
         int n = course.getStudents().size();
         if(n == 0) return null;
-        String[][] gradeList = new String[n][3];
+        String[][] gradeList = new String[n][5];
         int i = 0;
         for(CategoryGrade categoryGrade : categoryGrades) {
             if(categoryGrade.getCourseId().equals(course.getId()) && categoryGrade.getCategoryId().equals(category.getId())){
