@@ -100,9 +100,18 @@ public class addOneCourseController {
         String sID = sList[a];
         Semester s = Main.gs.getSemesterById(sID);
         String cID = cList[b];
-        Criteria c = Main.gs.getCriteriaById(cID);
+        Criteria c = Main.gs.getCriteriaTemplateById(cID);
         String name = tfName.getText();
-        Main.gs.createCourseByTemplate(c, name, s);
+        try  {
+            if (Main.gs.createCourseByTemplate(c, name, s)) {
+                Main.changeScreen("coursesList");
+            } else {
+                info.setText("Fail to Create");
+            }
+        } catch (Exception ex) {
+            info.setText("Fail to Create");
+        }
+
 //        Main.changeScreen("coursesList");
     }
 
