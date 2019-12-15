@@ -1,5 +1,8 @@
 package main.frontend.controller;
 
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import main.frontend.model.LabelWeight;
 
 public class newGradingCriteriaController {
 
@@ -14,18 +18,53 @@ public class newGradingCriteriaController {
     Button btAddGroup, btDelGroup, btAddCategory, btDelCategory;
 
     @FXML
-    TableView tvGroup;
+    TableView<LabelWeight> tvGroup, tvCategory;
+
+    @FXML
+    TableColumn<LabelWeight, String> tcLabel1, tcWeight1, tcLabel2, tcWeight2;
+
+    @FXML
+    TableColumn<LabelWeight, Button> tcDel1, tcDel2;
 
     @FXML
     protected void initialize() {
-//        btAddGroup.setDisable(true);
-        TableColumn<Item, String> group1 = new TableColumn<>("Label");
-        group1.setCellValueFactory(new PropertyValueFactory("label"));
-        group1.setCellFactory(TextFieldTableCell.forTableColumn());
-        TableColumn<Item, String> group2 = new TableColumn<>("Weight");
-        group2.setCellValueFactory(new PropertyValueFactory("weight"));
-        group2.setCellFactory(TextFieldTableCell.forTableColumn());
-        tvGroup.getColumns().addAll(group1, group2);
+        initTable();
+    }
+
+    private void initTable() {
+        initCols();
+        loadData();
+    }
+
+    private void initCols() {
+        tcLabel1.setCellValueFactory(new PropertyValueFactory<>("label"));
+        tcWeight1.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        tcDel1.setCellValueFactory(new PropertyValueFactory<>("delete"));
+        editableCols();
+    }
+
+    private void editableCols() {
+        tcLabel1.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcLabel1.setOnEditCommit(e->{
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setLabel(e.getNewValue());
+        });
+
+        tcWeight1.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcWeight1.setOnEditCommit(e->{
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setWeight(e.getNewValue());
+        });
+
+        tvGroup.setEditable(true);
+    }
+
+    private void loadData() {
+        ObservableList<LabelWeight> table_data1 = FXCollections.observableArrayList();
+
+        for (int i = 0; i < 3; i++) {
+            table_data1.add(new LabelWeight(String.valueOf(i), "weight "+i, new Button("x")));
+        }
+
+        tvGroup.setItems(table_data1);
     }
 
     @FXML
@@ -41,8 +80,9 @@ public class newGradingCriteriaController {
     @FXML
     protected void btAddGroup(ActionEvent e) {
         System.out.println("add group");
-        tvGroup.getItems().add(new Item("123", "100"));
-        btAddGroup.setDisable(true);
+        tvGroup.getItems().add(new LabelWeight("cs591", "100", new Button("x")));
+//        tvGroup.getItems().add(new Item("123", "100"));
+//        btAddGroup.setDisable(true);
     }
 
     @FXML
