@@ -315,6 +315,15 @@ public class GradingSystem {
     }
 
     //delete functions
+    public void deleteNewCriteriaTemplate() {
+        for(Criteria criteria : criteriaTemplates) {
+            if(criteria.getName().equals("New")){
+                criteriaTemplates.remove(criteria);
+                break;
+            }
+        }
+    }
+
     public boolean deleteCategoryInGroup(CategoryGroup group, Category category) {
         for(Category categoryInGroup : group.getCategories()) {
             if(categoryInGroup.getId().equals(category.getId())){
