@@ -47,6 +47,9 @@ public class CourseGrade {
     }
 
     public String getComment(){
+        if(comment == null) {
+            return "no comments";
+        }
         return this.comment;
     }
 
@@ -88,6 +91,10 @@ public class CourseGrade {
     public void setBonus(int bonus){ this.bonus = bonus;}
 
     //function
+    public boolean hasComment() {
+        return comment != null;
+    }
+
     public boolean checkGradeByCourseIdAndStudentId(String courseId, String studentId){
         return this.courseId.getId().equals(courseId) && this.studentId.getId().equals(studentId);
     }
