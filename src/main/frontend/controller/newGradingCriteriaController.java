@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -52,6 +53,9 @@ public class newGradingCriteriaController {
         tcLabel1.setCellValueFactory(new PropertyValueFactory<>("label"));
         tcWeight1.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcDel1.setCellValueFactory(new PropertyValueFactory<>("delete"));
+        tcLabel2.setCellValueFactory(new PropertyValueFactory<>("label"));
+        tcWeight2.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        tcDel2.setCellValueFactory(new PropertyValueFactory<>("delete"));
         editableCols();
     }
 
@@ -67,6 +71,18 @@ public class newGradingCriteriaController {
         });
 
         tvGroup.setEditable(true);
+
+        tcLabel2.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcLabel2.setOnEditCommit(e->{
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setLabel(e.getNewValue());
+        });
+
+        tcWeight2.setCellFactory(TextFieldTableCell.forTableColumn());
+        tcWeight2.setOnEditCommit(e->{
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setWeight(e.getNewValue());
+        });
+
+        tvCategory.setEditable(true);
     }
 
     private void loadData() {
@@ -92,7 +108,7 @@ public class newGradingCriteriaController {
     @FXML
     protected void btAddGroup(ActionEvent e) {
         System.out.println("add group");
-        tvGroup.getItems().add(new LabelWeight("Default", "100", new Button("x")));
+        tvGroup.getItems().add(new LabelWeight("Default", "0", new Button("x")));
         btAddGroup.setDisable(true);
     }
 
@@ -108,7 +124,8 @@ public class newGradingCriteriaController {
 
     @FXML
     protected void btAddCategory(ActionEvent e) {
-
+        tvCategory.getItems().add(new LabelWeight("Default", "0", new Button("x")));
+        btAddCategory.setDisable(true);
     }
 
     @FXML
