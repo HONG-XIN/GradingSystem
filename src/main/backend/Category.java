@@ -133,7 +133,7 @@ public class Category implements Cloneable{
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Category cloned = new Category();
+        Category cloned = (Category) super.clone();
 
         cloned.setIdNumber((IdNumberCategory) cloned.getIdNumber().clone());
         cloned.setTotalScoreObject((Score) cloned.getTotalScoreObject().clone());

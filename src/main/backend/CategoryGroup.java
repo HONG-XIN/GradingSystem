@@ -91,7 +91,7 @@ public class CategoryGroup implements Cloneable{
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        CategoryGroup cloned = new CategoryGroup();
+        CategoryGroup cloned = (CategoryGroup) super.clone();
 
         cloned.setIdNumber((IdNumberCategoryGroup) cloned.getIdNumber().clone());
         cloned.setWeightObject((Weight) cloned.getWeightObject().clone());

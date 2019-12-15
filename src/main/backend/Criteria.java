@@ -65,7 +65,7 @@ public class Criteria implements Cloneable{
     public Object clone() throws
             CloneNotSupportedException
     {
-         Criteria cloned = new Criteria();
+         Criteria cloned = (Criteria) super.clone();
 
         cloned.setIdNumber((IdNumberCriteria) cloned.getIdNumber().clone());
 
