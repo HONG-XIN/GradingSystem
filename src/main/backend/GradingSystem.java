@@ -1,6 +1,7 @@
 package main.backend;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GradingSystem {
     private String password;
@@ -102,6 +103,11 @@ public class GradingSystem {
         }
         return null;
     }
+
+    public String getCommentById(String id) {
+        return Objects.requireNonNull(getCourseGradeById(id)).getComment();
+    }
+
     //mutator helper
     private void setPassword(String password) {
         this.password = password;
@@ -127,6 +133,20 @@ public class GradingSystem {
         grade.setLetterGrade(letterGrade);
     }
 
+    private void updateCriteriaTemplate() {
+        ArrayList<Criteria> removeList = new ArrayList<>();
+        ArrayList<Criteria> addList = new ArrayList<>();
+        for(Course course : courses) {
+            String criteriaId = course.getCriteria().getId();
+            if(isCriteriaInCriteriaTemplates(criteriaId)) {
+                //need update
+                removeList.add(getCriteriaTemplateById(criteriaId));
+            }
+            addList.add(course.getCriteria());
+        }
+        criteriaTemplates.removeAll(removeList);
+        criteriaTemplates.addAll(addList);
+    }
     //validation helper
     private boolean isStudentGradeInCourseInCategory(CategoryGrade grade, Course course, Category category, Student student) {
         String courseId = course.getId();
@@ -154,6 +174,17 @@ public class GradingSystem {
         if(student == null) return false;
         return student.getState() != StudentState.FREEZE;
     }
+
+    public boolean hasComment(CourseGrade grade) {
+        return grade.hasComment();
+    }
+
+    public boolean isCriteriaInCriteriaTemplates(String id) {
+        for(Criteria criteria : criteriaTemplates) {
+            if(criteria.getId().equals(id)) return true;
+        }
+        return false;
+    }
     //creation helper
     private Criteria makeCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
@@ -163,6 +194,8 @@ public class GradingSystem {
 
     private Course makeCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
             Criteria criteria = (Criteria) criteriaTemplate.clone(); // get a copy of template
+            criteria.setName(semester.getName() + "-" + name);
+            criteria.setId(IdNumber.generateRandomNumber());
             Course course = new Course(name, semester, criteria);
             courses.add(course);
             return course;
@@ -467,6 +500,19 @@ public class GradingSystem {
 
     }
 
+    public boolean changeCourseGradeComment(CourseGrade grade, String comment) {
+        grade.setComment(comment);
+        return hasComment(grade);
+    }
+
+    public boolean changeCourseGradeBonus(CourseGrade grade, int value) {
+        if(value >= 0) {
+            grade.setBonus(value);
+            return true;
+        } else {
+            return false;
+        }
+    }
     //statistics functions
     private double calFinalScoreByStudent(Course course, Student student) {
         double finalScore = 0.0;
@@ -748,6 +794,7 @@ For all String[][] first element is Id, Second element is name
     }
 
     public String[][] getCriteriaTemplateList() {
+        updateCriteriaTemplate();
         int n = criteriaTemplates.size();
         if(n == 0) return null;
         String[][] templateList = new String[n][2];
@@ -824,6 +871,54 @@ For all String[][] first element is Id, Second element is name
             }
         }
         return gradeList;
+    }
+
+    public String[][] getFinalGradeListByCourse(Course course) {
+        int n = course.getStudents().size();
+        if(n == 0) return null;
+        String[][] gradeList = new String[n][7];
+        int i = 0;
+        for(CourseGrade courseGrade : courseGrades) {
+            if(courseGrade.getCourseId().equals(course.getId())) {
+                Student student = course.getStudentById(courseGrade.getStudentId());
+                gradeList[i][0] = courseGrade.getId();
+                gradeList[i][1] = student.getName();
+                gradeList[i][2] = student.getBUID();
+                gradeList[i][3] = student.getEmail();
+                gradeList[i][4] = Integer.toString(courseGrade.getBonus());
+                gradeList[i][5] = Double.toString(courseGrade.getFinalScore());
+                gradeList[i][6] = courseGrade.getLetterGrade();
+                i++;
+            }
+        }
+        return gradeList;
+    }
+
+    public String[][] getStatisticListInCourse(Course course) {
+        String[][] statisticList = new String[1][4];
+        statisticList[0][0] = Double.toString(getAvgFinalScore(course));
+        statisticList[0][1] = Double.toString(getMinFinalScore(course));
+        statisticList[0][2] = Double.toString(getMaxFinalScore(course));
+        statisticList[0][3] = Double.toString(getSdFinalScore(course));
+        return  statisticList;
+    }
+
+    public String[][] getGradStatisticListInCourse(Course course) {
+        String[][] statisticList = new String[1][4];
+        statisticList[0][0] = Double.toString(getGradAvgFinalScore(course));
+        statisticList[0][1] = Double.toString(getGradMinFinalScore(course));
+        statisticList[0][2] = Double.toString(getGradMaxFinalScore(course));
+        statisticList[0][3] = Double.toString(getGradSdFinalScore(course));
+        return  statisticList;
+    }
+
+    public String[][] getUnderGradStatisticListInCourse(Course course) {
+        String[][] statisticList = new String[1][4];
+        statisticList[0][0] = Double.toString(getUnderGradAvgFinalScore(course));
+        statisticList[0][1] = Double.toString(getUnderGradMinFinalScore(course));
+        statisticList[0][2] = Double.toString(getUnderGradMaxFinalScore(course));
+        statisticList[0][3] = Double.toString(getUnderGradSdFinalScore(course));
+        return  statisticList;
     }
 
 }
