@@ -1,6 +1,7 @@
 package main.backend;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CategoryGroup implements Cloneable{
     private IdNumberCategoryGroup idNumber;
@@ -94,8 +95,10 @@ public class CategoryGroup implements Cloneable{
 
         cloned.setIdNumber((IdNumberCategoryGroup) cloned.getIdNumber().clone());
         cloned.setWeightObject((Weight) cloned.getWeightObject().clone());
-        ArrayList<Category> newCategories;
-        newCategories = (ArrayList<Category>) cloned.getCategories().clone();
+        ArrayList<Category> newCategories = new ArrayList<>();
+        for (Category category : cloned.getCategories()) {
+            newCategories.add((Category) category.clone());
+        }
         cloned.setCategories(newCategories);
         return cloned;
     }

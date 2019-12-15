@@ -1,5 +1,6 @@
 package main.backend;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Criteria implements Cloneable{
     private IdNumberCriteria idNumber;
@@ -67,9 +68,12 @@ public class Criteria implements Cloneable{
          Criteria cloned = new Criteria();
 
         cloned.setIdNumber((IdNumberCriteria) cloned.getIdNumber().clone());
-        ArrayList<CategoryGroup> newGroup;
-        newGroup = (ArrayList<CategoryGroup>)cloned.getCategoryGroups().clone();
-        cloned.setCategoryGroups(newGroup);
+
+        ArrayList<CategoryGroup> newCategoryGroups = new ArrayList<>();
+        for (CategoryGroup group : cloned.getCategoryGroups()) {
+            newCategoryGroups.add((CategoryGroup) group.clone());
+        }
+        cloned.setCategoryGroups(newCategoryGroups);
         return cloned;
     }
 }
