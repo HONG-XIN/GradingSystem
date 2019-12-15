@@ -42,25 +42,25 @@ public class GradingSystem {
     }
 
     //helper accessor
-    private Course getCourseById(String id) {
+    public Course getCourseById(String id) {
         for(Course course : courses) {
             if(course.getId().equals(id)) return course;
         }
         return null;
     }
 
-    private Criteria getCriteriaTemplateById (String id) {
+    public Criteria getCriteriaTemplateById (String id) {
         for(Criteria criteria : this.criteriaTemplates) {
             if(criteria.getId().equals(id)) return criteria;
         }
         return null;
     }
 
-    private Criteria getCriteriaInCourse(Course course) {
+    public Criteria getCriteriaInCourse(Course course) {
         return course.getCriteria();
     }
 
-    private CourseGrade getCourseGradeById(String id) {
+    public CourseGrade getCourseGradeById(String id) {
         for(CourseGrade grade : this.courseGrades) {
             if(grade.getId().equals(id)){
                 return grade;
@@ -69,7 +69,7 @@ public class GradingSystem {
         return null;
     }
 
-    private CategoryGrade getCategoryGradeById(String id) {
+    public CategoryGrade getCategoryGradeById(String id) {
         for(CategoryGrade grade : this.categoryGrades) {
             if(grade.getId().equals(id)) {
                 return grade;
