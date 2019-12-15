@@ -179,7 +179,7 @@ public class tabFinalScoreController {
                 public void handle(ActionEvent actionEvent) {
 
                     if (comment.getText().equals("?")) {
-                        String c = taComment.getText().strip();
+                        String c = taComment.getText().trim();
                         cg.setComment(c);
                         if (c.length() == 0) {
                             comment.setText("-");
