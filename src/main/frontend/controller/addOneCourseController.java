@@ -98,9 +98,9 @@ public class addOneCourseController {
             return;
         }
         String sID = sList[a];
-        Semester s;
+        Semester s = Main.gs.getSemesterById(sID);
         String cID = cList[b];
-        Criteria c;
+        Criteria c = Main.gs.getCriteriaById(cID);
         String name = tfName.getText();
         Main.gs.createCourseByTemplate(c, name, s);
 //        Main.changeScreen("coursesList");
