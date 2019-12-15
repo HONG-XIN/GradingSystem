@@ -18,11 +18,11 @@
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" onAction="#btExport" text="EXPORT" />
-            <Button mnemonicParsing="false" onAction="#btCurve" text="CURVE" />
-            <TextField prefHeight="27.0" prefWidth="32.0" />
-            <Button mnemonicParsing="false" onAction="#btCalFinal" text="Final Score" />
-            <Button mnemonicParsing="false" onAction="#btCalLetter" text="Letter Grade" />
+          <Button fx:id="btExport" mnemonicParsing="false" onAction="#btExport" text="EXPORT" />
+            <Button fx:id="btCurve" mnemonicParsing="false" onAction="#btCurve" text="CURVE" />
+            <TextField fx:id="tfCurve" prefHeight="27.0" prefWidth="32.0" />
+            <Button fx:id="btFinal" mnemonicParsing="false" onAction="#btCalFinal" text="Final Score" />
+            <Button fx:id="btLetter" mnemonicParsing="false" onAction="#btCalLetter" text="Letter Grade" />
         </items>
       </ToolBar>
    </bottom>
@@ -49,23 +49,14 @@
             </TableView>
             <TableView fx:id="tableFinal" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
               <columns>
-                <TableColumn prefWidth="134.0" text="Student Name" />
-                <TableColumn prefWidth="88.0" text="Bonus" />
-                  <TableColumn prefWidth="84.0" text="Final Score" />
-                  <TableColumn prefWidth="118.0" text="Letter Grade" />
-                  <TableColumn prefWidth="51.0" text="ACTION" />
-                  <TableColumn prefWidth="51.0" text="ACTION" />
+                <TableColumn fx:id="colSName" prefWidth="134.0" text="Student Name" />
+                <TableColumn fx:id="colBonus" prefWidth="88.0" text="Bonus" />
+                  <TableColumn fx:id="colFinalScore" prefWidth="84.0" text="Final Score" />
+                  <TableColumn fx:id="colLetter" prefWidth="92.0" text="Letter Grade" />
+                  <TableColumn fx:id="colComment" prefWidth="71.0" text="Comment" />
+                  <TableColumn fx:id="colFreeze" prefWidth="57.0" text="Freeze" />
+                  <TableColumn fx:id="colDelete" prefWidth="57.0" text="Delete" />
               </columns>
-            </TableView>
-            <TableView fx:id="tableFinal1" prefHeight="200.0" prefWidth="200.0">
-               <columns>
-                  <TableColumn prefWidth="134.0" text="Student Name" />
-                  <TableColumn prefWidth="88.0" text="Bonus" />
-                  <TableColumn prefWidth="84.0" text="Final Score" />
-                  <TableColumn prefWidth="118.0" text="Letter Grade" />
-                  <TableColumn prefWidth="51.0" text="ACTION" />
-                  <TableColumn prefWidth="51.0" text="ACTION" />
-               </columns>
             </TableView>
          </children>
       </GridPane>
