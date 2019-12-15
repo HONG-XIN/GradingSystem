@@ -383,6 +383,7 @@ public class GradingSystem {
     }
 
     public boolean deleteCourseByCourse(Course course){
+        updateCriteriaTemplate();
         ArrayList<CourseGrade> courseGradeRemoveList = new ArrayList<>();
         ArrayList<CategoryGrade> categoryGradeRemoveList = new ArrayList<>();
         for(CourseGrade grade : courseGrades) {
@@ -845,7 +846,7 @@ For all String[][] first element is Id, Second element is name
         String[][] studentList = new String[n][2];
         for(int i = 0; i < n; i++) {
             studentList[i][0] = students.get(i).getId();
-            studentList[i][1] = students.get(i).getName();
+            studentList[i][1] = students.get(i).getNameString();
         }
         return studentList;
     }
@@ -887,7 +888,7 @@ For all String[][] first element is Id, Second element is name
             if(categoryGrade.getCourseId().equals(course.getId()) && categoryGrade.getCategoryId().equals(category.getId())){
                 Student curStudent = course.getStudentById(categoryGrade.getStudentId());
                 gradeList[i][0] = categoryGrade.getId();
-                gradeList[i][1] = curStudent.getName();
+                gradeList[i][1] = curStudent.getNameString();
                 gradeList[i][2] = curStudent.getBUID();
                 gradeList[i][3] = curStudent.getEmail();
                 gradeList[i][4] = Double.toString(categoryGrade.getScore());
@@ -906,7 +907,7 @@ For all String[][] first element is Id, Second element is name
             if(courseGrade.getCourseId().equals(course.getId())) {
                 Student student = course.getStudentById(courseGrade.getStudentId());
                 gradeList[i][0] = courseGrade.getId();
-                gradeList[i][1] = student.getName();
+                gradeList[i][1] = student.getNameString();
                 gradeList[i][2] = student.getBUID();
                 gradeList[i][3] = student.getEmail();
                 gradeList[i][4] = Integer.toString(courseGrade.getBonus());

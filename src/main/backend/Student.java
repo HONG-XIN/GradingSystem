@@ -37,7 +37,11 @@ public class Student {
         return this.idNumber.getId();
     }
 
-    public String getName(){
+    public Name getName() {
+        return this.name;
+    }
+
+    public String getNameString(){
         return this.name.toString();
     }
 
