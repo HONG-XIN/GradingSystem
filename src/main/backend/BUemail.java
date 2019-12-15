@@ -5,7 +5,7 @@ public class BUemail {
 
     //constructor
     public BUemail() {
-        email = "";
+        email = " ";
     }
 
     public BUemail(String email) {
