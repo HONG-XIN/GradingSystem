@@ -60,13 +60,6 @@ public class GradingSystem {
         return course.getCriteria();
     }
 
-    private Semester getSemesterById (String id) {
-        for(Semester semester : this.semesters) {
-            if(semester.getId().equals(id)) return semester;
-        }
-        return null;
-    }
-
     private CourseGrade getCourseGradeById(String id) {
         for(CourseGrade grade : this.courseGrades) {
             if(grade.getId().equals(id)){
@@ -81,6 +74,13 @@ public class GradingSystem {
             if(grade.getId().equals(id)) {
                 return grade;
             }
+        }
+        return null;
+    }
+
+    public Semester getSemesterById (String id) {
+        for(Semester semester : this.semesters) {
+            if(semester.getId().equals(id)) return semester;
         }
         return null;
     }
@@ -156,6 +156,7 @@ public class GradingSystem {
         criteriaTemplates.removeAll(removeList);
         criteriaTemplates.addAll(addList);
     }
+
     //validation helper
     private boolean isStudentGradeInCourseInCategory(CategoryGrade grade, Course course, Category category, Student student) {
         String courseId = course.getId();
@@ -194,6 +195,7 @@ public class GradingSystem {
         }
         return false;
     }
+
     //creation helper
     private Criteria makeCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
