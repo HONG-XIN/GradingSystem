@@ -1,6 +1,6 @@
 package main.backend;
 
-public class Category {
+public class Category implements Cloneable{
     private IdNumberCategory idNumber;
     private String name;
     private Score totalScore;
@@ -54,12 +54,20 @@ public class Category {
         return name;
     }
 
+    public Score getTotalScoreObject() {
+        return this.totalScore;
+    }
+
     public double getTotalScore() {
         return totalScore.getValue();
     }
 
     public double getWeight() {
         return weight.getValue();
+    }
+
+    public Weight getWeightObject() {
+        return this.weight;
     }
 
     public Date getAssignDate() {
@@ -83,12 +91,24 @@ public class Category {
         this.idNumber.setId(id);
     }
 
+    public void setIdNumber(IdNumberCategory idNumber) {
+        this.idNumber = idNumber;
+    }
+
     public void setName (String name) {
         this.name = name;
     }
 
+    public void setTotalScoreObject (Score totalScore) {
+        this.totalScore = totalScore;
+    }
+
     public void setTotalScore(double value) {
         this.totalScore.setValue(value);
+    }
+
+    public void setWeightObject(Weight weight) {
+        this.weight = weight;
     }
 
     public void setWeight (double value) {
@@ -109,5 +129,17 @@ public class Category {
 
     public void setDueDate (Date date) {
         this.dueDate = date;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Category cloned = new Category();
+
+        cloned.setIdNumber((IdNumberCategory) cloned.getIdNumber().clone());
+        cloned.setTotalScoreObject((Score) cloned.getTotalScoreObject().clone());
+        cloned.setWeightObject((Weight) cloned.getWeightObject().clone());
+        cloned.setAssignDate((Date) cloned.getAssignDate().clone());
+        cloned.setDueDate((Date) cloned.getDueDate().clone());
+        return super.clone();
     }
 }

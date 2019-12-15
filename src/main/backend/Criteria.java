@@ -23,6 +23,10 @@ public class Criteria implements Cloneable{
         return this.idNumber.getId();
     }
 
+    public IdNumberCriteria getIdNumber() {
+        return this.idNumber;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -34,6 +38,10 @@ public class Criteria implements Cloneable{
     //mutator
     public void setId(String id) {
         this.idNumber.setId(id);
+    }
+
+    public void setIdNumber(IdNumberCriteria idNumber) {
+        this.idNumber = idNumber;
     }
 
     public void setName(String name) {
@@ -56,6 +64,12 @@ public class Criteria implements Cloneable{
     public Object clone() throws
             CloneNotSupportedException
     {
-        return super.clone();
+         Criteria cloned = new Criteria();
+
+        cloned.setIdNumber((IdNumberCriteria) cloned.getIdNumber().clone());
+        ArrayList<CategoryGroup> newGroup;
+        newGroup = (ArrayList<CategoryGroup>)cloned.getCategoryGroups().clone();
+        cloned.setCategoryGroups(newGroup);
+        return cloned;
     }
 }

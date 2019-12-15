@@ -2,7 +2,7 @@ package main.backend;
 
 import java.util.ArrayList;
 
-public class CategoryGroup {
+public class CategoryGroup implements Cloneable{
     private IdNumberCategoryGroup idNumber;
     private String name;
     private Weight weight;
@@ -46,6 +46,10 @@ public class CategoryGroup {
         return this.weight.getValue();
     }
 
+    public Weight getWeightObject() {
+        return this.weight;
+    }
+
     public ArrayList<Category> getCategories() {
         return this.categories;
     }
@@ -55,12 +59,20 @@ public class CategoryGroup {
         this.idNumber.setId(id);
     }
 
+    public void setIdNumber(IdNumberCategoryGroup idNumber) {
+        this.idNumber = idNumber;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setWeight(double value) {
         this.weight.setValue(value);
+    }
+
+    public void setWeightObject(Weight weight) {
+        this.weight = weight;
     }
 
     public void setCategories(ArrayList<Category> categories) {
@@ -74,5 +86,17 @@ public class CategoryGroup {
 
     public void removeCategory(Category category) {
         categories.remove(category);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        CategoryGroup cloned = new CategoryGroup();
+
+        cloned.setIdNumber((IdNumberCategoryGroup) cloned.getIdNumber().clone());
+        cloned.setWeightObject((Weight) cloned.getWeightObject().clone());
+        ArrayList<Category> newCategories;
+        newCategories = (ArrayList<Category>) cloned.getCategories().clone();
+        cloned.setCategories(newCategories);
+        return cloned;
     }
 }

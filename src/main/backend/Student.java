@@ -75,7 +75,7 @@ public class Student {
 
     public void setBUID(String BUID){
         if(!isValidBUID(BUID)){
-            setBUID("default");
+            this.BUID = "default";
         } else {
             this.BUID = BUID;
         }
