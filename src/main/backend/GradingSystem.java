@@ -820,8 +820,8 @@ For all String[][] first element is Id, Second element is name
                 courseList[i][2] = course.getSemester().getName();
                 courseList[i][3] = course.getSemester().getStartDate();
                 courseList[i][4] = course.getSemester().getEndDate();
+                i++;
             }
-            i++;
         }
         return courseList;
     }
