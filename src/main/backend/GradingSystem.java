@@ -185,6 +185,16 @@ public class GradingSystem {
         return student.getState() != StudentState.FREEZE;
     }
 
+    public boolean isCourseGradeEdible(CourseGrade grade) {
+        String courseId = grade.getCourseId();
+        String studentId = grade.getStudentId();
+        Course course = getCourseById(courseId);
+        if(course == null) return false;
+        Student student = course.getStudentById(studentId);
+        if(student == null) return false;
+        return student.getState() != StudentState.FREEZE;
+    }
+
     public boolean hasComment(CourseGrade grade) {
         return grade.hasComment();
     }
