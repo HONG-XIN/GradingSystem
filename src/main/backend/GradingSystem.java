@@ -56,15 +56,6 @@ public class GradingSystem {
         return null;
     }
 
-    private Criteria getNewCriteriaTemplate() {
-        for(Criteria criteria : criteriaTemplates) {
-            if(criteria.getName().equals("New")){
-                return criteria;
-            }
-        }
-        return null;
-    }
-
     private Criteria getCriteriaInCourse(Course course) {
         return course.getCriteria();
     }
@@ -89,6 +80,15 @@ public class GradingSystem {
         for(CategoryGrade grade : this.categoryGrades) {
             if(grade.getId().equals(id)) {
                 return grade;
+            }
+        }
+        return null;
+    }
+
+    public Criteria getNewCriteriaTemplate() {
+        for(Criteria criteria : criteriaTemplates) {
+            if(criteria.getName().equals("New")){
+                return criteria;
             }
         }
         return null;
