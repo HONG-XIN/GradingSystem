@@ -906,6 +906,7 @@ For all String[][] first element is Id, Second element is name
         for(CourseGrade courseGrade : courseGrades) {
             if(courseGrade.getCourseId().equals(course.getId())) {
                 Student student = course.getStudentById(courseGrade.getStudentId());
+                calFinalScoreByStudent(course, student);
                 gradeList[i][0] = courseGrade.getId();
                 gradeList[i][1] = student.getNameString();
                 gradeList[i][2] = student.getBUID();
