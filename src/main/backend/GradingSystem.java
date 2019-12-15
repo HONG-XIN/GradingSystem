@@ -850,11 +850,12 @@ For all String[][] first element is Id, Second element is name
         ArrayList<CategoryGroup> groups = criteria.getCategoryGroups();
         int n = groups.size();
         if(n == 0) return null;
-        String[][] groupList = new String[n][2];
+        String[][] groupList = new String[n][3];
         for(int i = 0; i < n; i++) {
             CategoryGroup group = groups.get(i);
             groupList[i][0] = group.getId();
             groupList[i][1] = group.getName();
+            groupList[i][2] = Double.toString(group.getWeight());
         }
         return groupList;
     }
@@ -863,11 +864,12 @@ For all String[][] first element is Id, Second element is name
         ArrayList<Category> categories = group.getCategories();
         int n = categories.size();
         if(n == 0) return null;
-        String[][] categoryList = new String[n][2];
+        String[][] categoryList = new String[n][3];
         for(int i = 0; i < n; i++) {
             Category category = categories.get(i);
             categoryList[i][0] = category.getId();
             categoryList[i][1] = category.getName();
+            categoryList[i][2] = Double.toString(category.getWeight());
         }
         return categoryList;
     }
