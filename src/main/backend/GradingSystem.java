@@ -383,6 +383,7 @@ public class GradingSystem {
     }
 
     public boolean deleteCourseByCourse(Course course){
+        updateCriteriaTemplate();
         ArrayList<CourseGrade> courseGradeRemoveList = new ArrayList<>();
         ArrayList<CategoryGrade> categoryGradeRemoveList = new ArrayList<>();
         for(CourseGrade grade : courseGrades) {
