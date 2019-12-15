@@ -24,17 +24,22 @@
       </GridPane>
    </top>
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="197.0" text="Course Name" />
-          <TableColumn minWidth="0.0" prefWidth="89.0" text="Semester" />
-            <TableColumn minWidth="0.0" prefWidth="94.0" text="Start Date" />
-            <TableColumn minWidth="0.0" prefWidth="94.0" text="End Date" />
-            <TableColumn minWidth="0.0" prefWidth="92.0" text="Action" />
+          <TableColumn fx:id="colCourseName" prefWidth="197.0" text="Course Name" />
+          <TableColumn fx:id="colSemester" minWidth="0.0" prefWidth="89.0" text="Semester" />
+            <TableColumn fx:id="colStart" minWidth="0.0" prefWidth="94.0" text="Start Date" />
+            <TableColumn fx:id="colEnd" minWidth="0.0" prefWidth="94.0" text="End Date" />
+            <TableColumn fx:id="colAction" minWidth="0.0" prefWidth="92.0" text="Action" />
         </columns>
       </TableView>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#btNewCourse" prefWidth="150.0" text="NEW COURSE" BorderPane.alignment="CENTER_LEFT" />
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" onAction="#btNewCourse" text="Add Course" />
+            <Label fx:id="info" />
+        </items>
+      </ToolBar>
    </bottom>
 </BorderPane>

@@ -83,7 +83,7 @@ public class Main extends Application {
         curveScene = new Scene(fxmlCurve, 320, 200);
 
 //        primaryStage.setScene(loginScene);
-        primaryStage.setScene(addOneCourseScene);
+        primaryStage.setScene(coursesListScene);
         primaryStage.show();
     }
 

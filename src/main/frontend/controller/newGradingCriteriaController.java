@@ -52,6 +52,7 @@ public class newGradingCriteriaController {
                     newC = Main.gs.getNewCriteriaTemplate();
 //                    System.out.println(newScreen+", "+userData);
                     initTable();
+                    btAddGroup.setDisable(false);
                     btSaveCategory.setDisable(true);
                     btAddCategory.setDisable(true);
                 }
@@ -172,6 +173,7 @@ public class newGradingCriteriaController {
                         Cat = null;
                         loadData3();
                         info.setText("Delete Success");
+                        btAddGroup.setDisable(false);
                     } else {
                         info.setText("Delete Fail");
                     }
@@ -216,6 +218,7 @@ public class newGradingCriteriaController {
                         Cat = null;
                         loadData3();
                         info.setText("Delete Category Success");
+                        btAddCategory.setDisable(false);
                     } else {
                         info.setText("Delete Category Fail");
                     }
