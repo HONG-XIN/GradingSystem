@@ -1,6 +1,6 @@
 package main.backend;
 
-public class Score {
+public class Score implements Cloneable{
 
     private double value;
 
@@ -20,5 +20,8 @@ public class Score {
     public void setValue(double value){
         this.value = value;
     }
-
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

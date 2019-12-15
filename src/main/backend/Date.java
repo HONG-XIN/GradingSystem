@@ -1,6 +1,6 @@
 package main.backend;
 
-public class Date implements Comparable<Date> {
+public class Date implements Comparable<Date> , Cloneable{
     private int day;
     private int month;
     private int year;
@@ -70,4 +70,8 @@ public class Date implements Comparable<Date> {
         return String.format(dateFormat, day, month, year);
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

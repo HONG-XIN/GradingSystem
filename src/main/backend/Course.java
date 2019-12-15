@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Course {
 
+    private int curveValue;
     private IdNumberCourse idNumber;
     private String name;
     private Semester semester;
@@ -12,6 +13,7 @@ public class Course {
 
     //constructor
     public Course() {
+        this.curveValue = 0;
         this.idNumber = new IdNumberCourse();
         this.name = "";
         this.semester = new Semester();
@@ -28,6 +30,10 @@ public class Course {
     }
 
     //accessor
+    public int getCurveValue() {
+        return this.curveValue;
+    }
+
     public String getId() {
         return this.idNumber.getId();
     }
@@ -57,6 +63,10 @@ public class Course {
         return null;
     }
     //mutator
+    public void setCurveValue(int value) {
+        this.curveValue = value;
+    }
+
     public void setId(String id) {
         this.idNumber.setId(id);
     }

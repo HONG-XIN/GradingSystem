@@ -215,9 +215,9 @@ public class GradingSystem {
 
     private Course makeCourseByTemplate(Criteria criteriaTemplate, String name, Semester semester) throws CloneNotSupportedException {
             Criteria criteria = (Criteria) criteriaTemplate.clone(); // get a copy of template
-            criteria.setName(semester.getName() + "-" + name);
-            //criteria.setId(IdNumber.generateRandomNumber());
             Course course = new Course(name, semester, criteria);
+            course.getCriteria().setName(semester.getName() + "-" + name);
+            course.getCriteria().setId(IdNumber.generateRandomNumber());
             courses.add(course);
             return course;
     }
