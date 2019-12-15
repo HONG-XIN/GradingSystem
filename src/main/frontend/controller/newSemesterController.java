@@ -23,10 +23,14 @@ public class newSemesterController {
 
     @FXML
     protected void btSave(ActionEvent e) {
-        List<String> startItems = Arrays.asList(dpStart.getEditor().getText().split("/"));
-
-        List<String> endItems = Arrays.asList(dpEnd.getEditor().getText().split("/"));
-        if (startItems.size() < 3 || endItems.size() < 3) {
+//        List<String> startItems = Arrays.asList(dpStart.getEditor().getText().split("/"));
+//
+//        List<String> endItems = Arrays.asList(dpEnd.getEditor().getText().split("/"));
+//        if (startItems.size() < 3 || endItems.size() < 3) {
+//            info.setText("Fail");
+//            return;
+//        }
+        if (dpStart.getEditor().getText().length() < 1) {
             info.setText("Fail");
             return;
         }
