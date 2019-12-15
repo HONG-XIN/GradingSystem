@@ -20,6 +20,7 @@
         <items>
           <Button mnemonicParsing="false" onAction="#btExport" text="EXPORT" />
             <Button mnemonicParsing="false" onAction="#btCurve" text="CURVE" />
+            <TextField prefHeight="27.0" prefWidth="32.0" />
             <Button mnemonicParsing="false" onAction="#btCalFinal" text="Final Score" />
             <Button mnemonicParsing="false" onAction="#btCalLetter" text="Letter Grade" />
         </items>
