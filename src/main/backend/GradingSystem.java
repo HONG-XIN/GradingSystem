@@ -780,13 +780,14 @@ For all String[][] first element is Id, Second element is name
     public String[][] getCourseList() {
         int n = courses.size();
         if(n == 0) return null;
-        String[][] courseList = new String[n][4];
+        String[][] courseList = new String[n][5];
         for(int i = 0; i < n; i++) {
             Course course = courses.get(i);
             courseList[i][0] = course.getId();
             courseList[i][1] = course.getName();
-            courseList[i][2] = course.getSemester().getStartDate();
-            courseList[i][3] = course.getSemester().getEndDate();
+            courseList[i][2] = course.getSemester().getName();
+            courseList[i][3] = course.getSemester().getStartDate();
+            courseList[i][4] = course.getSemester().getEndDate();
         }
         return courseList;
     }
@@ -799,14 +800,15 @@ For all String[][] first element is Id, Second element is name
             }
         }
         if(count == 0) return null;
-        String[][] courseList = new String[count][4];
+        String[][] courseList = new String[count][5];
         int i = 0;
         for(Course course : courses) {
             if(course.getSemester().getId().equals(semester.getId())){
                 courseList[i][0] = course.getId();
                 courseList[i][1] = course.getName();
-                courseList[i][2] = course.getSemester().getStartDate();
-                courseList[i][3] = course.getSemester().getEndDate();
+                courseList[i][2] = course.getSemester().getName();
+                courseList[i][3] = course.getSemester().getStartDate();
+                courseList[i][4] = course.getSemester().getEndDate();
             }
             i++;
         }
