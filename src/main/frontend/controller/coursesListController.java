@@ -102,10 +102,11 @@ public class coursesListController {
 
         if (i < 0) {
             data = Main.gs.getCourseList();
-        } else if (i >= 0) {
+        } else {
 //            table.setItems(table_data);
 //            return;
             String sID = sList[i];
+            System.out.println("sID :"+sID);
             Semester s = Main.gs.getSemesterById(sID);
             data = Main.gs.getCourseListBySemester(s);
         }

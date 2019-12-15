@@ -55,10 +55,18 @@ public class tabGradingCriteriaController {
                     course = Main.gs.getCourseById(courseId);
 
                     newC = course.getCriteria();
+//                    newC = Main.gs.getCriteriaInCourse(course);
+
+
                     initTable();
                     btAddGroup.setDisable(false);
                     btSaveCategory.setDisable(true);
                     btAddCategory.setDisable(true);
+
+                    cGroup = null;
+                    loadData2();
+                    Cat = null;
+                    loadData3();
                 }
             }
         });

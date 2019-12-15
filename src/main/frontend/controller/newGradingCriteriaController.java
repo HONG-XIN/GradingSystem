@@ -55,6 +55,10 @@ public class newGradingCriteriaController {
                     btAddGroup.setDisable(false);
                     btSaveCategory.setDisable(true);
                     btAddCategory.setDisable(true);
+                    cGroup = null;
+                    loadData2();
+                    Cat = null;
+                    loadData3();
                 }
             }
         });
