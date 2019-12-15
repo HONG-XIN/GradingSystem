@@ -55,6 +55,10 @@ public class GradingSystem {
         return null;
     }
 
+    private Criteria getCriteriaInCourse(Course course) {
+        return course.getCriteria();
+    }
+
     private Semester getSemesterById (String id) {
         for(Semester semester : this.semesters) {
             if(semester.getId().equals(id)) return semester;
@@ -80,6 +84,24 @@ public class GradingSystem {
         return null;
     }
 
+    public CategoryGroup getCategoryGroupByIdInCriteria(Criteria criteria, String id) {
+        ArrayList<CategoryGroup> groups = criteria.getCategoryGroups();
+        for(CategoryGroup group : groups) {
+            if(group.getId().equals(id))
+                return group;
+        }
+        return null;
+    }
+
+    public Category getCategoryByIdInCategoryGroup(CategoryGroup group, String id) {
+        ArrayList<Category> categories = group.getCategories();
+        for(Category category : categories) {
+            if(category.getId().equals(id)) {
+                return category;
+            }
+        }
+        return null;
+    }
     //mutator helper
     private void setPassword(String password) {
         this.password = password;
@@ -123,6 +145,15 @@ public class GradingSystem {
         return grade.getCourseId().equals(courseId) && grade.getCategoryId().equals(categoryId);
     }
 
+    public boolean isCategoryGradeEdible(CategoryGrade grade) {
+        String courseId = grade.getCourseId();
+        String studentId = grade.getStudentId();
+        Course course = getCourseById(courseId);
+        if(course == null) return false;
+        Student student = course.getStudentById(studentId);
+        if(student == null) return false;
+        return student.getState() != StudentState.FREEZE;
+    }
     //creation helper
     private Criteria makeCriteriaTemplate(String name) {
         Criteria criteria = new Criteria(name);
@@ -426,6 +457,16 @@ public class GradingSystem {
         return false;
     }
 
+    public boolean changeCategoryGrade(CategoryGrade grade, double value) {
+        if(value <= 100 && isCategoryGradeEdible(grade)) {
+            grade.setScore(value);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     //statistics functions
     private double calFinalScoreByStudent(Course course, Student student) {
         double finalScore = 0.0;
@@ -673,10 +714,35 @@ For all String[][] first element is Id, Second element is name
     public String[][] getCourseList() {
         int n = courses.size();
         if(n == 0) return null;
-        String[][] courseList = new String[n][2];
+        String[][] courseList = new String[n][4];
         for(int i = 0; i < n; i++) {
-            courseList[i][0] = courses.get(i).getId();
-            courseList[i][1] = courses.get(i).getName();
+            Course course = courses.get(i);
+            courseList[i][0] = course.getId();
+            courseList[i][1] = course.getName();
+            courseList[i][2] = course.getSemester().getStartDate();
+            courseList[i][3] = course.getSemester().getEndDate();
+        }
+        return courseList;
+    }
+
+    public String[][] getCourseListBySemester(Semester semester) {
+        int count = 0;
+        for(Course course : courses) {
+            if(course.getSemester().getId().equals(semester.getId())){
+                count ++;
+            }
+        }
+        if(count == 0) return null;
+        String[][] courseList = new String[count][4];
+        int i = 0;
+        for(Course course : courses) {
+            if(course.getSemester().getId().equals(semester.getId())){
+                courseList[i][0] = course.getId();
+                courseList[i][1] = course.getName();
+                courseList[i][2] = course.getSemester().getStartDate();
+                courseList[i][3] = course.getSemester().getEndDate();
+            }
+            i++;
         }
         return courseList;
     }
@@ -747,10 +813,13 @@ For all String[][] first element is Id, Second element is name
         String[][] gradeList = new String[n][3];
         int i = 0;
         for(CategoryGrade categoryGrade : categoryGrades) {
-            if(categoryGrade.getCourseId().equals(course.getId())  && categoryGrade.getCategoryId().equals(category.getId())){
+            if(categoryGrade.getCourseId().equals(course.getId()) && categoryGrade.getCategoryId().equals(category.getId())){
+                Student curStudent = course.getStudentById(categoryGrade.getStudentId());
                 gradeList[i][0] = categoryGrade.getId();
-                gradeList[i][1] = course.getStudentById(categoryGrade.getStudentId()).getName();
-                gradeList[i][2] = Double.toString(categoryGrade.getScore());
+                gradeList[i][1] = curStudent.getName();
+                gradeList[i][2] = curStudent.getBUID();
+                gradeList[i][3] = curStudent.getEmail();
+                gradeList[i][4] = Double.toString(categoryGrade.getScore());
                 i++;
             }
         }
