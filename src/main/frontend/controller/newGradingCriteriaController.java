@@ -13,6 +13,7 @@ import main.backend.Category;
 import main.backend.CategoryGroup;
 import main.backend.Criteria;
 import main.frontend.model.LabelWeight;
+import main.backend.Date;
 
 import java.time.LocalDate;
 
@@ -76,10 +77,17 @@ public class newGradingCriteriaController {
     private void editableCols() {
         tcLabel1.setCellFactory(TextFieldTableCell.forTableColumn());
         tcLabel1.setOnEditStart(e->{
-            String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
-            cGroup = Main.gs.getCategoryGroupByIdInCriteria(newC, id);
-            loadData2();
-            btAddCategory.setDisable(false);
+            try {
+                String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
+                cGroup = Main.gs.getCategoryGroupByIdInCriteria(newC, id);
+                loadData2();
+                Cat = null;
+                loadData3();
+                btAddCategory.setDisable(false);
+            } catch (Exception ex) {
+                cGroup = null;
+                loadData2();
+            }
         });
         tcLabel1.setOnEditCommit(e->{
             e.getTableView().getItems().get(e.getTablePosition().getRow()).setLabel(e.getNewValue());
@@ -87,10 +95,17 @@ public class newGradingCriteriaController {
 
         tcWeight1.setCellFactory(TextFieldTableCell.forTableColumn());
         tcWeight1.setOnEditStart(e->{
-            String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
-            cGroup = Main.gs.getCategoryGroupByIdInCriteria(newC, id);
-            loadData2();
-            btAddCategory.setDisable(false);
+            try {
+                String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
+                cGroup = Main.gs.getCategoryGroupByIdInCriteria(newC, id);
+                loadData2();
+                Cat = null;
+                loadData3();
+                btAddCategory.setDisable(false);
+            } catch (Exception ex) {
+                cGroup = null;
+                loadData2();
+            }
         });
         tcWeight1.setOnEditCommit(e->{
             e.getTableView().getItems().get(e.getTablePosition().getRow()).setWeight(e.getNewValue());
@@ -100,19 +115,29 @@ public class newGradingCriteriaController {
 
         tcLabel2.setCellFactory(TextFieldTableCell.forTableColumn());
         tcLabel2.setOnEditStart(e->{
-            String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
-            Cat = Main.gs.getCategoryByIdInCategoryGroup(cGroup, id);
-            loadData3();
+            try {
+                String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
+                Cat = Main.gs.getCategoryByIdInCategoryGroup(cGroup, id);
+                loadData3();
+            } catch (Exception ex) {
+                Cat = null;
+                loadData3();
+            }
         });
         tcLabel2.setOnEditCommit(e->{
             e.getTableView().getItems().get(e.getTablePosition().getRow()).setLabel(e.getNewValue());
         });
 
         tcWeight2.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcLabel2.setOnEditStart(e->{
-            String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
-            Cat = Main.gs.getCategoryByIdInCategoryGroup(cGroup, id);
-            loadData3();
+        tcWeight2.setOnEditStart(e->{
+            try {
+                String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
+                Cat = Main.gs.getCategoryByIdInCategoryGroup(cGroup, id);
+                loadData3();
+            } catch (Exception ex) {
+                Cat = null;
+                loadData3();
+            }
         });
         tcWeight2.setOnEditCommit(e->{
             e.getTableView().getItems().get(e.getTablePosition().getRow()).setWeight(e.getNewValue());
@@ -140,11 +165,12 @@ public class newGradingCriteriaController {
             delete.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    System.out.println("try to delete " + name);
                     if (Main.gs.deleteCategoryGroupInCriteria(newC, cg)) {
                         loadData1();
                         cGroup = null;
                         loadData2();
+                        Cat = null;
+                        loadData3();
                         info.setText("Delete Success");
                     } else {
                         info.setText("Delete Fail");
@@ -187,6 +213,8 @@ public class newGradingCriteriaController {
 
                     if (Main.gs.deleteCategoryInGroup(cGroup, cat)) {
                         loadData2();
+                        Cat = null;
+                        loadData3();
                         info.setText("Delete Category Success");
                     } else {
                         info.setText("Delete Category Fail");
@@ -206,17 +234,56 @@ public class newGradingCriteriaController {
             tfScore.setText("");
             return;
         }
+        Date issueDate = Cat.getAssignDate();
+        int d1 = issueDate.getDay();
+        int m1 = issueDate.getMonth();
+        int y1 = issueDate.getYear();
 
+        Date dueDate = Cat.getDueDate();
+        int d2 = dueDate.getDay();
+        int m2 = dueDate.getMonth();
+        int y2 = dueDate.getYear();
 
         double score = Cat.getTotalScore();
 
-        dpIssue.setValue(LocalDate.of(2000,1,1));
-        dpDue.setValue(null);
+        dpIssue.setValue(LocalDate.of(y1,m1,d1));
+        dpDue.setValue(LocalDate.of(y2,m2,d2));
         tfScore.setText(Double.toString(score));
     }
 
     @FXML
     protected void btBack(ActionEvent e) {
+        String[][] groups = Main.gs.getGroupListByCriteria(newC);
+        if (groups == null) {
+            info.setText("Fail");
+            return;
+        }
+        double asum = 0;
+        for (int i = 0; i < groups.length; i++) {
+            String id = groups[i][0];
+            CategoryGroup cg = Main.gs.getCategoryGroupByIdInCriteria(newC, id);
+            String[][] categories = Main.gs.getCategoryListByGroup(cg);
+            if (categories == null) {
+                info.setText("Fail");
+                return;
+            }
+            double sum = 0;
+            for (int j = 0; j < categories.length; j++) {
+                double weight = Double.parseDouble(categories[j][2]);
+                sum += weight;
+            }
+            if (sum != 100) {
+                info.setText("Fail");
+                return;
+            }
+            asum += Double.parseDouble(groups[i][2]);
+        }
+
+        if (asum != 100) {
+            info.setText("Fail");
+            return;
+        }
+
         Main.changeScreen("addOneCourse");
     }
 
@@ -224,13 +291,20 @@ public class newGradingCriteriaController {
     protected void btSaveGroup(ActionEvent e) {
         double sum = 0;
         for (LabelWeight item: tvGroup.getItems()) {
-            double weight = Double.valueOf(item.getWeight());
-            if (weight < 0) {
+            try {
+                double weight = Double.valueOf(item.getWeight());
+
+                if (weight < 0) {
+                    info.setText("Fail");
+                    loadData1();
+                    return;
+                }
+                sum += weight;
+            } catch (Exception ex) {
                 info.setText("Fail");
                 loadData1();
                 return;
             }
-            sum += weight;
         }
         if (sum == 100) {
             for (LabelWeight item: tvGroup.getItems()) {
@@ -269,13 +343,19 @@ public class newGradingCriteriaController {
     protected void btSaveCategory(ActionEvent e) {
         double sum = 0;
         for (LabelWeight item: tvCategory.getItems()) {
-            double weight = Double.valueOf(item.getWeight());
-            if (weight < 0) {
+            try {
+                double weight = Double.valueOf(item.getWeight());
+                if (weight < 0) {
+                    info.setText("Save Category Fail");
+                    loadData2();
+                    return;
+                }
+                sum += weight;
+            } catch (Exception ex) {
                 info.setText("Save Category Fail");
-                loadData1();
+                loadData2();
                 return;
             }
-            sum += weight;
         }
         if (sum == 100) {
             for (LabelWeight item: tvCategory.getItems()) {
@@ -312,6 +392,31 @@ public class newGradingCriteriaController {
 
     @FXML
     protected void btSaveDetail(ActionEvent e) {
+        if (Cat == null) {
+            info.setText("Save Detail Fail");
+            return;
+        }
 
+        LocalDate assignDate = dpIssue.getValue();
+        int d1 = assignDate.getDayOfMonth();
+        int m1 = assignDate.getMonth().getValue();
+        int y1 = assignDate.getYear();
+
+        LocalDate dueDate = dpDue.getValue();
+        int d2 = dueDate.getDayOfMonth();
+        int m2 = dueDate.getMonth().getValue();
+        int y2 = dueDate.getYear();
+
+        try {
+        double score = Double.parseDouble(tfScore.getText());
+
+        if (Main.gs.changeCategoryDate(Cat, d1, m1, y1, d2, m2, y2) && Main.gs.changeCategoryTotalScore(Cat, score)) {
+            info.setText("Save Detail Success");
+        } else {
+            info.setText("Save Detail Fail");
+            loadData3();
+        }} catch (Exception ex) {
+            loadData3();
+        }
     }
 }

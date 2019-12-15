@@ -6,12 +6,27 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import main.backend.Criteria;
+import main.backend.Semester;
+
+import java.util.ArrayList;
 
 public class addOneCourseController {
 
+    private String[] sList;
+    private String[] cList;
+
+    @FXML
+    TextField tfName;
+
     @FXML
     ChoiceBox cbSemester;
+
+    @FXML
+    ComboBox cbCriteria;
 
     @FXML
     Label info;
@@ -24,6 +39,7 @@ public class addOneCourseController {
                 if (newScreen.equals("addOneCourse")) {
 //                    System.out.println(newScreen+", "+userData);
                     loadSemesterData();
+                    loadGradingCriteriaData();
                 }
             }
         });
@@ -41,14 +57,22 @@ public class addOneCourseController {
             semesterNames[i] = semesterList[i][1];
         }
         cbSemester.setItems(FXCollections.observableArrayList(semesterNames));
-//        cbSemester.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-//                System.out.println("number : "+number.intValue());
-//                String semesterId = semesterIDs[t1.intValue()];
-//                System.out.println(semesterId);
-//            }
-//        });
+        sList = semesterIDs;
+    }
+
+    private void loadGradingCriteriaData() {
+        String[][] gradingCriteriaData = Main.gs.getCriteriaTemplateList();
+        if (gradingCriteriaData == null) {
+            return;
+        }
+        String[] gcIDs = new String[gradingCriteriaData.length];
+        String[] gcNames = new String[gradingCriteriaData.length];
+        for (int i = 0; i < gradingCriteriaData.length; i++) {
+            gcIDs[i] = gradingCriteriaData[i][0];
+            gcNames[i] = gradingCriteriaData[i][1];
+        }
+        cbCriteria.setItems(FXCollections.observableArrayList(gcNames));
+        cList = gcIDs;
     }
 
     @FXML
@@ -67,11 +91,24 @@ public class addOneCourseController {
 
     @FXML
     protected void btCreate(ActionEvent e) {
-        Main.changeScreen("coursesList");
+        int a = cbSemester.getSelectionModel().getSelectedIndex();
+        int b = cbCriteria.getSelectionModel().getSelectedIndex();
+        if (a < 0 || b < 0) {
+            info.setText("Fail to Create");
+            return;
+        }
+        String sID = sList[a];
+        Semester s;
+        String cID = cList[b];
+        Criteria c;
+        String name = tfName.getText();
+        Main.gs.createCourseByTemplate(c, name, s);
+//        Main.changeScreen("coursesList");
     }
 
     @FXML
     protected void btCancel(ActionEvent e) {
+        Main.gs.deleteNewCriteriaTemplate();
         Main.changeScreen("coursesList");
     }
 }
