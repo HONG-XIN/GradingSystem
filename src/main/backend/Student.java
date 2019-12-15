@@ -43,7 +43,6 @@ public class Student {
         return this.idNumber;
     }
 
-    public String getName(){
     public Name getName() {
         return this.name;
     }
@@ -62,6 +61,10 @@ public class Student {
 
     public String getEmail() {
         return email.getEmail();
+    }
+
+    public BUemail getEmailObject(){
+        return this.email;
     }
 
     public String getTypeString(){
@@ -131,6 +134,9 @@ public class Student {
     public Document write(){
         Document StudentDoc = new Document();
         StudentDoc.put("BUID", getBUID());
+        if (this.getEmailObject() != null){
+            StudentDoc.put("email", getEmailObject().write());
+        }
         if(this.getNameObject() != null){
             StudentDoc.put("name", getNameObject().write());
         }
@@ -139,6 +145,14 @@ public class Student {
         }
         if(this.getStudentTypeObject() != null){
             StudentDoc.put("type", getType());
+        }
+        if (this.state != null) {
+            if (this.state == StudentState.ACTIVE){
+                StudentDoc.put("state", "ACTIVE");
+            }
+            else if (this.state == StudentState.FREEZE){
+                StudentDoc.put("state", "FREEZE");
+            }
         }
         return StudentDoc;
     }
@@ -154,6 +168,12 @@ public class Student {
             else if (studentType.equals("grad")){
                 this.type = StudentType.GRAD;
             }
+            Document BUEmailDoc = (Document) doc.get("email");
+            if (BUEmailDoc != null){
+                BUemail email = new BUemail();
+                email.read(BUEmailDoc);
+                this.email = email;
+            }
             Document NameDoc = (Document) doc.get("name");
             if(NameDoc != null){
                 Name name = new Name();
@@ -165,6 +185,15 @@ public class Student {
                 IdNumberStudent idNumber = new IdNumberStudent();
                 idNumber.read(idNumberDoc);
                 this.idNumber = idNumber;
+            }
+            String StudentStateString = (String) doc.get("state");
+            if (StudentStateString != null){
+                if (StudentStateString.equals("ACTIVE")){
+                    this.state = StudentState.ACTIVE;
+                }
+                else if (StudentStateString.equals("FREEZE")){
+                    this.state = StudentState.FREEZE;
+                }
             }
         }
     }

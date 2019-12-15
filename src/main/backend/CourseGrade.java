@@ -49,11 +49,10 @@ public class CourseGrade {
     }
 
     public String getLetterGrade(){
-    public Score getFinalScoreObject(){return this.finalScore;}
-
-    public char getLetterGrade(){
         return this.letterGrade;
     }
+    public Score getFinalScoreObject(){return this.finalScore;}
+
 
     public String getComment(){
         if(comment == null) {
@@ -63,6 +62,10 @@ public class CourseGrade {
     }
 
     public int getBonus(){ return this.bonus;}
+
+    public IdNumberCourseGrade getCourseGradeIdObject(){
+        return this.courseGradeId;
+    }
 
     //mutator
     public void setCourseGradeId(String id) {
@@ -114,6 +117,7 @@ public class CourseGrade {
         Document courseGradeDoc = new Document();
         courseGradeDoc.put("comment", getComment());
         courseGradeDoc.put("letterGrade", getLetterGrade());
+        courseGradeDoc.put("bonus", getBonus());
         if (getFinalScoreObject() != null){
             courseGradeDoc.put("finalScore", getFinalScoreObject().write());
         }
@@ -123,6 +127,9 @@ public class CourseGrade {
         if (getStudentIdObject() != null){
             courseGradeDoc.put("studentId", getStudentIdObject().write());
         }
+        if (getCourseGradeIdObject() != null){
+            courseGradeDoc.put("courseGradeId", getCourseGradeIdObject().write());
+        }
         return courseGradeDoc;
     }
 
@@ -130,7 +137,8 @@ public class CourseGrade {
     public void read(Document doc){
         if (doc != null) {
             setComment((String) doc.get("comment"));
-            setLetterGrade((char) doc.get("letterGrade"));
+            setLetterGrade((String) doc.get("letterGrade"));
+            setBonus((int) doc.get("bonus"));
             Document finalScoreDoc = (Document) doc.get("finalScore");
             if(finalScoreDoc != null){
                 Score finalScore = new Score();
@@ -148,6 +156,12 @@ public class CourseGrade {
                 IdNumberStudent studentId = new IdNumberStudent();
                 studentId.read(studentIdDoc);
                 this.studentId = studentId;
+            }
+            Document courseGradeIdDoc = (Document) doc.get("courseGradeId");
+            if (courseGradeIdDoc != null){
+                IdNumberCourseGrade courseGradeId = new IdNumberCourseGrade();
+                courseGradeId.read(courseGradeIdDoc);
+                this.courseGradeId = courseGradeId;
             }
         }
     }

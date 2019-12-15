@@ -52,6 +52,8 @@ public class Semester {
 
     public Date getEndDateObject() {return this.endDate;}
 
+    public IdNumberSemester getIdNumberObject() {return this.idNumber;}
+
     //mutator
     public void setId(String id) {
         this.idNumber.setId(id);
@@ -93,7 +95,12 @@ public class Semester {
         SemesterDoc.put("name", getName());
         if(this.getStartDateObject() != null){
             SemesterDoc.put("startDate", getStartDateObject().write());
+        }
+        if (this.getEndDateObject() != null){
             SemesterDoc.put("endDate", getEndDateObject().write());
+        }
+        if (this.getIdNumberObject() != null){
+            SemesterDoc.put("idNumber", getIdNumberObject().write());
         }
         return SemesterDoc;
     }
@@ -113,6 +120,12 @@ public class Semester {
                 Date endDate = new Date();
                 endDate.read(endDateDoc);
                 this.endDate = endDate;
+            }
+            Document IdNumberSemesterDoc = (Document) doc.get("idNumber");
+            if (IdNumberSemesterDoc != null){
+                IdNumberSemester idNumber = new IdNumberSemester();
+                idNumber.read(IdNumberSemesterDoc);
+                this.idNumber = idNumber;
             }
         }
     }

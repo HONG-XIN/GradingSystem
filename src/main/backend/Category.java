@@ -68,8 +68,6 @@ public class Category {
 
     public Weight getWeightObject() { return weight;}
 
-    public ScoreType getScoreType() {
-        return totalScore.getType();
     public Date getAssignDate() {
         return this.assignDate;
     }
@@ -84,7 +82,6 @@ public class Category {
 
     public Date getAssignDateObject() {return assignDate;}
 
-    public String getDueDate() {
     public String getDueDateString() {
         return dueDate.toString();
     }
@@ -137,7 +134,7 @@ public class Category {
         if(this.getWeightObject() != null){
             CategoryDoc.put("weight", getWeightObject().write());
         }
-        if(this.getAssignDateObject() != null){
+        if(this.getAssignDate() != null){
             CategoryDoc.put("assignDate", getAssignDateObject().write());
         }
         if(this.getDueDateObject() != null){

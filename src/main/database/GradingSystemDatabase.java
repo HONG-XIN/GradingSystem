@@ -13,19 +13,19 @@ public interface GradingSystemDatabase {
     //from RAM to DB
     public static Document write(GradingSystem gradingSystem) {
         Document GradingSystemDoc = new Document();
+        ArrayList<Document> SemesterList = new ArrayList<Document>();
         ArrayList<Document> CoursesList = new ArrayList<Document>();
-        ArrayList<Document> StudentsList = new ArrayList<Document>();
         ArrayList<Document> criteriaTemplatesList = new ArrayList<Document>();
         ArrayList<Document> categoryGradesList = new ArrayList<Document>();
         ArrayList<Document> courseGradesList = new ArrayList<Document>();
+        if(gradingSystem.getSemesters() != null){
+            for (int i = 0; i < gradingSystem.getSemesters().size(); i++) {
+                SemesterList.add(gradingSystem.getSemesters().get(i).write());
+            }
+        }
         if (gradingSystem.getCourses() != null) {
             for (int i = 0; i < gradingSystem.getCourses().size(); i++) {
                 CoursesList.add(gradingSystem.getCourses().get(i).write());
-            }
-        }
-        if(gradingSystem.getStudents() != null){
-            for (int i = 0; i < gradingSystem.getStudents().size(); i++) {
-                StudentsList.add(gradingSystem.getStudents().get(i).write());
             }
         }
         if (gradingSystem.getCriteriaTemplates() != null) {
@@ -43,11 +43,12 @@ public interface GradingSystemDatabase {
                 courseGradesList.add(gradingSystem.getCourseGrades().get(i).write());
             }
         }
+        GradingSystemDoc.put("semesters", SemesterList);
         GradingSystemDoc.put("courses", CoursesList);
-        GradingSystemDoc.put("students", StudentsList);
         GradingSystemDoc.put("criteriaTemplates", criteriaTemplatesList);
         GradingSystemDoc.put("categoryGrades", categoryGradesList);
         GradingSystemDoc.put("courseGrades", courseGradesList);
+        GradingSystemDoc.put("password", gradingSystem.getPassword());
         return GradingSystemDoc;
     }
 
@@ -56,6 +57,7 @@ public interface GradingSystemDatabase {
         RecordIterable<Document> result = GradingSystemCollection.find();
         for(Document GradingSystemDoc: result){
             if(GradingSystemDoc != null) {
+                gradingSystem.SetPassword((String) GradingSystemDoc.get("password"));
                 for (Document CourseDoc : (ArrayList<Document>) GradingSystemDoc.get("courses")) {
                     if (CourseDoc != null) {
                         Course course = new Course();
@@ -63,11 +65,11 @@ public interface GradingSystemDatabase {
                         gradingSystem.getCourses().add(course);
                     }
                 }
-                for (Document StudentDoc : (ArrayList<Document>) GradingSystemDoc.get("students")) {
-                    if (StudentDoc != null) {
-                        Student student = new Student();
-                        student.read(StudentDoc);
-                        gradingSystem.getStudents().add(student);
+                for (Document SemesterDoc : (ArrayList<Document>) GradingSystemDoc.get("semesters")) {
+                    if (SemesterDoc != null) {
+                        Semester semester = new Semester();
+                        semester.read(SemesterDoc);
+                        gradingSystem.getSemesters().add(semester);
                     }
                 }
                 for (Document criteriaTemplatesDoc : (ArrayList<Document>) GradingSystemDoc.get("criteriaTemplates")) {
