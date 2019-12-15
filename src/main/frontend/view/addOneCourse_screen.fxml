@@ -38,6 +38,7 @@
         <items>
           <Button mnemonicParsing="false" onAction="#btCancel" prefWidth="100.0" text="Cancel" />
             <Button mnemonicParsing="false" onAction="#btCreate" prefWidth="100.0" text="Create" />
+            <Label fx:id="info" />
         </items>
       </ToolBar>
    </bottom>

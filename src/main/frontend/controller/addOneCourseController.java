@@ -6,11 +6,15 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 
 public class addOneCourseController {
 
     @FXML
     ChoiceBox cbSemester;
+
+    @FXML
+    Label info;
 
     @FXML
     protected void initialize() {
@@ -54,7 +58,11 @@ public class addOneCourseController {
 
     @FXML
     protected void btNewGradingCriteria(ActionEvent e) {
-        Main.changeScreen("newGradingCriteria");
+        if (Main.gs.createCriteriaTemplate("New")) {
+            Main.changeScreen("newGradingCriteria");
+        } else {
+            info.setText("New Grading Criteria has been created.");
+        }
     }
 
     @FXML

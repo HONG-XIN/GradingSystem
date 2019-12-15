@@ -10,9 +10,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import main.backend.Criteria;
 import main.frontend.model.LabelWeight;
 
 public class newGradingCriteriaController {
+
+    private Criteria newC;
 
     @FXML
     Button btAddGroup, btDelGroup, btAddCategory, btDelCategory;
@@ -29,6 +32,15 @@ public class newGradingCriteriaController {
     @FXML
     protected void initialize() {
         initTable();
+        Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
+            public void onScreenChanged(String newScreen, Object userData) {
+                if (newScreen.equals("newGradingCriteria")) {
+//                    newC = Main.gs.;
+//                    System.out.println(newScreen+", "+userData);
+                    initTable();
+                }
+            }
+        });
     }
 
     private void initTable() {
