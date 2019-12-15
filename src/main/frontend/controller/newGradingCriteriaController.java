@@ -36,7 +36,7 @@ public class newGradingCriteriaController {
         Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
             public void onScreenChanged(String newScreen, Object userData) {
                 if (newScreen.equals("newGradingCriteria")) {
-//                    newC = Main.gs.;
+//                    newC = Main.gs.get;
 //                    System.out.println(newScreen+", "+userData);
                     initTable();
                 }
