@@ -4,6 +4,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import main.backend.CategoryGroup;
 import main.backend.Criteria;
 import main.frontend.model.LabelWeight;
 
@@ -36,7 +38,7 @@ public class newGradingCriteriaController {
         Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
             public void onScreenChanged(String newScreen, Object userData) {
                 if (newScreen.equals("newGradingCriteria")) {
-//                    newC = Main.gs.get;
+                    newC = Main.gs.getNewCriteriaTemplate();
 //                    System.out.println(newScreen+", "+userData);
                     initTable();
                 }
@@ -88,6 +90,21 @@ public class newGradingCriteriaController {
     private void loadData() {
         ObservableList<LabelWeight> table_data1 = FXCollections.observableArrayList();
 
+        String[][] groups = Main.gs.getGroupListByCriteria(newC);
+
+        for (int i = 0; i < groups.length; i++) {
+            String id = groups[i][0];
+            String name = groups[i][1];
+            CategoryGroup cg = Main.gs.getCategoryGroupByIdInCriteria(newC, id);
+            Button delete = new Button("x");
+            delete.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    Main.gs.deleteCategoryGroupInCriteria(newC, cg);
+                }
+            });
+        }
+
         for (int i = 0; i < 3; i++) {
             table_data1.add(new LabelWeight(String.valueOf(i), "weight "+i, new Button("x")));
         }
@@ -107,8 +124,20 @@ public class newGradingCriteriaController {
 
     @FXML
     protected void btAddGroup(ActionEvent e) {
-        System.out.println("add group");
-        tvGroup.getItems().add(new LabelWeight("Default", "0", new Button("x")));
+        String weight = "0";
+        if (tvGroup.getItems().size() == 0) {
+            weight = "100";
+        }
+        Main.gs.addGroupInCriteria(newC, "Default", Double.valueOf(weight));
+        CategoryGroup newG = Main.gs.getCategoryGroupByIdInCriteria(newC, "sss");
+        Button delete = new Button("x");
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Main.gs.deleteCategoryGroupInCriteria(newC, null);
+            }
+        });
+        tvGroup.getItems().add(new LabelWeight("Default", weight, delete));
         btAddGroup.setDisable(true);
     }
 
