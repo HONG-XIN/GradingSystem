@@ -1,6 +1,7 @@
 # ignore bin folder
 ## project compiler output folder
 /bin
+/out
 ## intelliJ folder
 /.idea
 *.iml
