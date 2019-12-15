@@ -104,6 +104,7 @@ public class addOneCourseController {
         String name = tfName.getText();
         try  {
             if (Main.gs.createCourseByTemplate(c, name, s)) {
+                Main.gs.deleteNewCriteriaTemplate();
                 Main.changeScreen("coursesList");
             } else {
                 info.setText("Fail to Create");

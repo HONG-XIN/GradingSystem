@@ -30,25 +30,24 @@
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="562.0" minWidth="10.0" prefWidth="104.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="562.0" minWidth="10.0" prefWidth="316.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="222.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="102.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="234.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Statistics on Final Score" />
-            <TableView fx:id="tableStatistics" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <TableView fx:id="tableStatistics" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
               <columns>
                 <TableColumn fx:id="colMin" prefWidth="75.0" text="MIN" />
                 <TableColumn fx:id="colMax" prefWidth="75.0" text="MAX" />
                   <TableColumn fx:id="colAvg" prefWidth="75.0" text="AVG" />
-                  <TableColumn fx:id="colMed" prefWidth="75.0" text="MEDIAN" />
                   <TableColumn fx:id="colStd" prefWidth="75.0" text="STD" />
               </columns>
             </TableView>
-            <TableView fx:id="tableFinal" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <TableView fx:id="tableFinal" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
               <columns>
                 <TableColumn fx:id="colSName" prefWidth="134.0" text="Student Name" />
                 <TableColumn fx:id="colBonus" prefWidth="88.0" text="Bonus" />
@@ -59,6 +58,15 @@
                   <TableColumn fx:id="colDelete" prefWidth="57.0" text="Delete" />
               </columns>
             </TableView>
+            <TextArea fx:id="taComment" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <ChoiceBox fx:id="cbFilter" prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </bottom>
+               <center>
+                  <Label text="Statistics" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
          </children>
       </GridPane>
    </center>

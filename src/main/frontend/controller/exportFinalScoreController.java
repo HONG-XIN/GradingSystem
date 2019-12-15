@@ -2,6 +2,7 @@ package main.frontend.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import main.backend.Course;
 
 import javax.swing.*;
@@ -10,6 +11,9 @@ public class exportFinalScoreController {
 
     private String courseId;
     private Course course;
+
+    @FXML
+    CheckBox cbStudentName, cbFinalScore, cbBonus, cbLetter, cbComment, cbBUID, cbEmail;
 
     @FXML
     protected void initialize() {
@@ -45,7 +49,13 @@ public class exportFinalScoreController {
 
     @FXML
     protected void btExport(ActionEvent e) {
-
+        boolean hasStudentName = cbStudentName.isSelected();
+        boolean hasFinalScore = cbFinalScore.isSelected();
+        boolean hasBonus = cbBonus.isSelected();
+        boolean hasLetter = cbLetter.isSelected();
+        boolean hasComment = cbComment.isSelected();
+        boolean hasBUID = cbBUID.isSelected();
+        boolean hasEmail = cbEmail.isSelected();
     }
 
     @FXML
