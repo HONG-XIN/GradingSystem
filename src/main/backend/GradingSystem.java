@@ -958,6 +958,13 @@ For all String[][] first element is Id, Second element is name
         return  statisticList;
     }
 
+    /**
+     *
+     * @param path path to dictionary
+     * @param sheetname name of sheet
+     * @param headtable a list of first row, name of each column
+     * @param value
+     */
     public void exportTable(String path, String sheetname, List<String> headtable, List<List<String>> value){
         ExcelUtils.exportExcel(path,sheetname,headtable,value);
     }
