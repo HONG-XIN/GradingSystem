@@ -1,5 +1,6 @@
 package main.backend;
-
+import org.dizitart.no2.Document;
+import org.dizitart.no2.sync.ReplicationType;
 public class Score implements Cloneable{
 
     private double value;
@@ -24,4 +25,21 @@ public class Score implements Cloneable{
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+
+    //DB function
+    //from RAM to DB
+    public Document write(){
+        Document ScoreDoc = new Document();
+        ScoreDoc.put("value", getValue());
+        return ScoreDoc;
+    }
+
+    //from DB to RAM
+    public void read(Document doc){
+        if(doc != null){
+            setValue((double) doc.get("value"));
+        }
+    }
+
 }

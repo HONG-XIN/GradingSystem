@@ -1,4 +1,8 @@
 package main.backend;
+import org.dizitart.no2.Document;
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.NitriteCollection;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -75,5 +79,44 @@ public class Criteria implements Cloneable{
         }
         cloned.setCategoryGroups(newCategoryGroups);
         return cloned;
+    }
+
+    //DB function
+    //from RAM to DB
+    public Document write(){
+        Document CriteriaDoc = new Document();
+        CriteriaDoc.put("name", getName());
+        if(this.getIdNumber() != null){
+            CriteriaDoc.put("idNumber", getIdNumber().write());
+        }
+        ArrayList<Document> groupsList = new ArrayList<Document>();
+        for(int i = 0; i < groups.size(); i++){
+            groupsList.add(groups.get(i).write());
+        }
+        CriteriaDoc.put("groups", groupsList);
+        return CriteriaDoc;
+    }
+
+    //FROM DB TO RAM
+    public void read(Document doc){
+        if(doc != null){
+            setName((String) doc.get("name"));
+            Document idNumberDoc = (Document) doc.get("idNumber");
+            if (idNumberDoc != null){
+                IdNumberCriteria idNumber = new IdNumberCriteria();
+                idNumber.read(idNumberDoc);
+                this.idNumber = idNumber;
+            }
+            ArrayList<Document> groupsList = (ArrayList<Document>) doc.get("groups");
+            if (groupsList != null){
+                for(Document group: groupsList){
+                    if (group != null){
+                        CategoryGroup categoryGroup = new CategoryGroup();
+                        categoryGroup.read(group);
+                        groups.add(categoryGroup);
+                    }
+                }
+            }
+        }
     }
 }

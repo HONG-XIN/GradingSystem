@@ -1,5 +1,10 @@
 package main.backend;
 
+import org.dizitart.no2.Document;
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.NitriteCollection;
+
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -38,6 +43,8 @@ public class CategoryGroup implements Cloneable{
     public String getId() {
         return this.idNumber.getId();
     }
+
+    public IdNumberCategoryGroup getIdNumberObject() {return this.idNumber;}
 
     public String getName() {
         return this.name;
@@ -101,5 +108,53 @@ public class CategoryGroup implements Cloneable{
         }
         cloned.setCategories(newCategories);
         return cloned;
+    }
+
+    //DB function
+    //from RAM to DB
+    public Document write(){
+        Document CategoryGroupDoc = new Document();
+        CategoryGroupDoc.put("name", getName());
+        if(this.getIdNumberObject() != null){
+            CategoryGroupDoc.put("idNumber", getIdNumberObject().write());
+        }
+        if(this.getWeightObject() != null){
+            CategoryGroupDoc.put("weight", getWeightObject().write());
+        }
+        ArrayList<Document> CategoriesList = new ArrayList<Document>();
+        for(int i = 0; i < categories.size(); i++){
+            CategoriesList.add(categories.get(i).write());
+        }
+        CategoryGroupDoc.put("categories", CategoriesList);
+        return CategoryGroupDoc;
+    }
+
+    //FROM DB TO RAM
+    public void read(Document doc){
+        if (doc != null){
+            setName((String) doc.get("name"));
+            Document idNumberDoc = (Document) doc.get("idNumber");
+            if(idNumberDoc != null){
+                IdNumberCategoryGroup idNumber = new IdNumberCategoryGroup();
+                idNumber.read(idNumberDoc);
+                this.idNumber = idNumber;
+            }
+            Document weightDoc = (Document) doc.get("weight");
+            if (weightDoc != null){
+                Weight weight = new Weight();
+                weight.read(weightDoc);
+                this.weight = weight;
+            }
+            ArrayList<Document> categoriesDoc = (ArrayList<Document>) doc.get("categories");
+            if (categoriesDoc != null){
+                for (Document categoryDoc: categoriesDoc){
+                    if (categoryDoc != null){
+                        Category category = new Category();
+                        category.read(categoryDoc);
+                        categories.add(category);
+                    }
+                }
+            }
+        }
     }
 }

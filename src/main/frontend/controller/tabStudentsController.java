@@ -46,6 +46,7 @@ public class tabStudentsController {
                 if (newScreen.equals("tabStudents")) {
                     courseId = userData.toString();
                     course = Main.gs.getCourseById(courseId);
+                    gIDs = null;
                     loadGroupData();
                     initTable();
                     loadDate();
@@ -137,9 +138,13 @@ public class tabStudentsController {
                 double score = Double.parseDouble(e.getNewValue());
                 String id = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
                 CategoryGrade grade = Main.gs.getCategoryGradeById(id);
-                grade.setScore(score);
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setScore(e.getNewValue());
-                info.setText("Success");
+                if (Main.gs.changeCategoryGradeValue(grade, score)) {
+                    info.setText("Change Score Success");
+                    loadDate();
+                } else {
+                    info.setText("Change Score Fail");
+                    loadDate();
+                }
             } catch (Exception ex) {
                 info.setText("Fail");
                 loadDate();
@@ -158,6 +163,7 @@ public class tabStudentsController {
         Criteria criteria = Main.gs.getCriteriaInCourse(course);
         CategoryGroup cg = Main.gs.getCategoryGroupByIdInCriteria(criteria, groupId);
         Category cat = Main.gs.getCategoryByIdInCategoryGroup(cg, categoryId);
+//        System.out.println();
         String[][] data = Main.gs.getGradeListInCourseByCategory(course, cat);
         if (data == null) {
             return;
