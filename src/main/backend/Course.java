@@ -93,6 +93,7 @@ public class Course {
     public Document write(){
         Document CourseDoc = new Document();
         CourseDoc.put("name", getName());
+        CourseDoc.put("curveValue", getCurveValue());
         if(this.getSemester() != null){
             CourseDoc.put("semester", getSemester().write());
         }
@@ -116,6 +117,7 @@ public class Course {
     public void read(Document doc){
         if (doc != null) {
             setName((String) doc.get("name"));
+            setCurveValue((int) doc.get("curveValue"));
             Document docId = (Document) doc.get("idNumber");
             if(docId != null){
                 IdNumberCourse idNumber = new IdNumberCourse();

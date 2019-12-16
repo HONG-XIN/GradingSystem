@@ -86,8 +86,8 @@ public class Criteria implements Cloneable{
     public Document write(){
         Document CriteriaDoc = new Document();
         CriteriaDoc.put("name", getName());
-        if(this.getIdNumberObject() != null){
-            CriteriaDoc.put("idNumber", getIdNumberObject().write());
+        if(this.getIdNumber() != null){
+            CriteriaDoc.put("idNumber", getIdNumber().write());
         }
         ArrayList<Document> groupsList = new ArrayList<Document>();
         for(int i = 0; i < groups.size(); i++){

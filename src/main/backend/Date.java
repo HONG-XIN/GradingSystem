@@ -1,14 +1,11 @@
 package main.backend;
-
-public class Date implements Comparable<Date> , Cloneable{
 import main.backend.Course;
 import main.backend.GradingSystem;
 import org.dizitart.no2.Document;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
 import org.dizitart.no2.RecordIterable;
-
-public class Date implements Comparable<Date> {
+public class Date implements Comparable<Date> , Cloneable{
     private int day;
     private int month;
     private int year;

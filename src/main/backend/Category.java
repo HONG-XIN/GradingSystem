@@ -1,9 +1,6 @@
 package main.backend;
-
-public class Category implements Cloneable{
 import org.dizitart.no2.Document;
-
-public class Category {
+public class Category implements Cloneable{
     private IdNumberCategory idNumber;
     private String name;
     private Score totalScore;

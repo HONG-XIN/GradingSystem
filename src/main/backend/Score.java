@@ -1,10 +1,7 @@
 package main.backend;
-
-public class Score implements Cloneable{
 import org.dizitart.no2.Document;
 import org.dizitart.no2.sync.ReplicationType;
-
-public class Score {
+public class Score implements Cloneable{
 
     private double value;
 
