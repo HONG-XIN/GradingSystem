@@ -94,6 +94,9 @@ public class Student {
     }
     //check function
     public static boolean isValidBUID(String buID) { // U12345678
+        if("".equals(buID)) {
+            return false;
+        }
         if(buID.length() != 9 && buID.charAt(0) != 'U'){
             return false;
         } else {

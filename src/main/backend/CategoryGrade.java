@@ -77,7 +77,7 @@ public class CategoryGrade {
     }
 
     public double gradeConvert(double total, double deduction) {
-        double score = (total + deduction) / total;
+        double score = (total + deduction) / total * 100.0;
         return Math.max(score, 0.0);
     }
 }
