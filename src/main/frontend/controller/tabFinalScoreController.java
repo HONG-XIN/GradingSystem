@@ -263,7 +263,7 @@ public class tabFinalScoreController {
 
     @FXML
     protected void btCalLetter(ActionEvent e) {
-
+        Main.changeScreen("letterGrade", courseId);
     }
 
     @FXML

@@ -35,6 +35,7 @@ public class Main extends Application {
     private static Scene tabGradingCriteriaScene;
     private static Scene tabStudentsScene;
     private static Scene changePasswordScene;
+    private static Scene letterGradeScene;
 
     protected static Scene curveScene;
 
@@ -86,6 +87,9 @@ public class Main extends Application {
 
         Parent fxmlCurve = FXMLLoader.load(getClass().getResource("../view/curve_screen.fxml"));
         curveScene = new Scene(fxmlCurve, 320, 200);
+
+        Parent fxmlLetterGrade = FXMLLoader.load(getClass().getResource("../view/letterGrade_screen.fxml"));
+        letterGradeScene = new Scene(fxmlLetterGrade, 640, 400);
 
         primaryStage.setScene(loginScene);
 //        primaryStage.setScene(coursesListScene);
@@ -145,6 +149,10 @@ public class Main extends Application {
             case "changePassword":
                 stage.setScene(changePasswordScene);
                 notifyAllListeners("changePassword", userData);
+                break;
+            case "letterGrade":
+                stage.setScene(letterGradeScene);
+                notifyAllListeners("letterGrade", userData);
                 break;
         }
     }
