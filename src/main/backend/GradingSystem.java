@@ -554,6 +554,45 @@ public class GradingSystem {
         }
     }
     //statistics functions
+    private void updateFinalLetterGrade(Course course, double Aplus, double A, double AMinus, double Bplus, double B, double Bminus, double Cplus, double C, double Cminus, double Dplus, double D, double Dminus) {
+        for(CourseGrade courseGrade : courseGrades) {
+            if (courseGrade.getCourseId().equals(course.getId())) {
+                Student student = course.getStudentById(courseGrade.getStudentId());
+                double finalScore = courseGrade.getFinalScore();
+                if(student.getState().equals(StudentState.FREEZE)) {
+                    courseGrade.setLetterGrade("W");
+                } else if (finalScore >= Aplus) {
+                    courseGrade.setLetterGrade("A+");
+                } else if (finalScore <= A) {
+                    courseGrade.setLetterGrade("A");
+                } else if (finalScore >= AMinus) {
+                    courseGrade.setLetterGrade("A-");
+                } else if (finalScore >= Bplus) {
+                    courseGrade.setLetterGrade("B+");
+                } else if (finalScore >= B) {
+                    courseGrade.setLetterGrade("B");
+                } else if (finalScore >= Bminus) {
+                    courseGrade.setLetterGrade("B-");
+                } else if (finalScore >= Cplus) {
+                    courseGrade.setLetterGrade("C+");
+                } else if (finalScore >= C) {
+                    courseGrade.setLetterGrade("C");
+                } else if (finalScore >= Cminus) {
+                    courseGrade.setLetterGrade("C-");
+                } else if (finalScore >= Dplus) {
+                    courseGrade.setLetterGrade("D+");
+                } else if (finalScore >= D) {
+                    courseGrade.setLetterGrade("D");
+                } else if (finalScore >= Dminus) {
+                    courseGrade.setLetterGrade("D-");
+                } else {
+                    courseGrade.setLetterGrade("F");
+                }
+            }
+        }
+        //97, 93, 90, 87, 83, 80, 77, 73, 70, 67, 64, 61
+    }
+
     private double calFinalScoreByStudent(Course course, Student student) {
         double finalScore = 0.0;
         double groupScore = 0.0;
@@ -570,10 +609,10 @@ public class GradingSystem {
                         break;
                     }
                 }
-                groupScore += categoryScore * category.getWeight();
+                groupScore += categoryScore * category.getWeight() / 100.0;
                 categoryScore = 0.0;
             }
-            finalScore += groupScore * group.getWeight();
+            finalScore += groupScore * group.getWeight() / 100.0;
             groupScore = 0.0;
         }
         return finalScore + course.getCurveValue();
