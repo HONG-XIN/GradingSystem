@@ -147,7 +147,7 @@ public class Student {
             StudentDoc.put("idNumber", getIdNumberObject().write());
         }
         if(this.getStudentTypeObject() != null){
-            StudentDoc.put("type", getType());
+            StudentDoc.put("type", getTypeString());
         }
         if (this.state != null) {
             if (this.state == StudentState.ACTIVE){
