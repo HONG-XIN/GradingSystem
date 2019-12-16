@@ -2,6 +2,7 @@ package main.backend;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.List;
 
 public class GradingSystem {
     private String password;
@@ -1003,6 +1004,17 @@ For all String[][] first element is Id, Second element is name
         statisticList[0][2] = Double.toString(getUnderGradMaxFinalScore(course));
         statisticList[0][3] = Double.toString(getUnderGradSdFinalScore(course));
         return  statisticList;
+    }
+
+    /**
+     *
+     * @param path path to dictionary
+     * @param sheetname name of sheet
+     * @param headtable a list of first row, name of each column
+     * @param value
+     */
+    public void exportTable(String path, String sheetname, List<String> headtable, List<List<String>> value){
+        ExcelUtils.exportExcel(path,sheetname,headtable,value);
     }
 
 }
