@@ -1,5 +1,6 @@
 package main.backend;
 
+public class Category implements Cloneable{
 import org.dizitart.no2.Document;
 
 public class Category {
@@ -56,17 +57,21 @@ public class Category {
         return name;
     }
 
+    public Score getTotalScoreObject() {
+        return this.totalScore;
+    }
+
     public double getTotalScore() {
         return totalScore.getValue();
     }
-
-    public Score getTotalScoreObject() { return totalScore;}
 
     public double getWeight() {
         return weight.getValue();
     }
 
-    public Weight getWeightObject() { return weight;}
+    public Weight getWeightObject() {
+        return this.weight;
+    }
 
     public Date getAssignDate() {
         return this.assignDate;
@@ -93,12 +98,24 @@ public class Category {
         this.idNumber.setId(id);
     }
 
+    public void setIdNumber(IdNumberCategory idNumber) {
+        this.idNumber = idNumber;
+    }
+
     public void setName (String name) {
         this.name = name;
     }
 
+    public void setTotalScoreObject (Score totalScore) {
+        this.totalScore = totalScore;
+    }
+
     public void setTotalScore(double value) {
         this.totalScore.setValue(value);
+    }
+
+    public void setWeightObject(Weight weight) {
+        this.weight = weight;
     }
 
     public void setWeight (double value) {
@@ -119,6 +136,18 @@ public class Category {
 
     public void setDueDate (Date date) {
         this.dueDate = date;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Category cloned = (Category) super.clone();
+
+        cloned.setIdNumber((IdNumberCategory) cloned.getIdNumber().clone());
+        cloned.setTotalScoreObject((Score) cloned.getTotalScoreObject().clone());
+        cloned.setWeightObject((Weight) cloned.getWeightObject().clone());
+        cloned.setAssignDate((Date) cloned.getAssignDate().clone());
+        cloned.setDueDate((Date) cloned.getDueDate().clone());
+        return super.clone();
     }
     //DB function
     //from RAM to DB

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.tabFinalScoreController">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;" />
+          <Button mnemonicParsing="false" onAction="#btStudents" text="Students" />
+            <Button mnemonicParsing="false" onAction="#btFinalScore" text="Final Score" />
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" text="Grading Criteria" />
+        </items>
+      </ToolBar>
+   </top>
+   <bottom>
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="btExport" mnemonicParsing="false" onAction="#btExport" text="EXPORT" />
+            <Button fx:id="btCurve" mnemonicParsing="false" onAction="#btCurve" text="CURVE" />
+            <TextField fx:id="tfCurve" prefHeight="27.0" prefWidth="32.0" />
+            <Button fx:id="btFinal" mnemonicParsing="false" onAction="#btCalFinal" text="Final Score" />
+            <Button fx:id="btLetter" mnemonicParsing="false" onAction="#btCalLetter" text="Letter Grade" />
+            <Label fx:id="info" />
+        </items>
+      </ToolBar>
+   </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="562.0" minWidth="10.0" prefWidth="104.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="562.0" minWidth="10.0" prefWidth="316.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="222.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="234.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView fx:id="tableStatistics" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+              <columns>
+                <TableColumn fx:id="colMin" prefWidth="75.0" text="MIN" />
+                <TableColumn fx:id="colMax" prefWidth="75.0" text="MAX" />
+                  <TableColumn fx:id="colAvg" prefWidth="75.0" text="AVG" />
+                  <TableColumn fx:id="colStd" prefWidth="75.0" text="STD" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tableFinal" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn fx:id="colSName" prefWidth="134.0" text="Student Name" />
+                <TableColumn fx:id="colBonus" prefWidth="88.0" text="Bonus" />
+                  <TableColumn fx:id="colFinalScore" prefWidth="84.0" text="Final Score" />
+                  <TableColumn fx:id="colLetter" prefWidth="92.0" text="Letter Grade" />
+                  <TableColumn fx:id="colComment" prefWidth="71.0" text="Comment" />
+                  <TableColumn fx:id="colFreeze" prefWidth="57.0" text="Freeze" />
+                  <TableColumn fx:id="colDelete" prefWidth="57.0" text="Delete" />
+              </columns>
+            </TableView>
+            <TextArea fx:id="taComment" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <ChoiceBox fx:id="cbFilter" prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </bottom>
+               <center>
+                  <Label text="Statistics" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

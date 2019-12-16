@@ -4,7 +4,7 @@ import org.dizitart.no2.Document;
 
 import java.text.DecimalFormat;
 
-public class Weight {
+public class Weight implements Cloneable{
     private double value;
 
     //constructor
@@ -31,6 +31,10 @@ public class Weight {
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.##");
         return df.format(value) + "%";
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     //Database Function

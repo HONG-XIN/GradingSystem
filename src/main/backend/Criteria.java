@@ -4,6 +4,7 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Criteria implements Cloneable{
     private IdNumberCriteria idNumber;
@@ -27,7 +28,9 @@ public class Criteria implements Cloneable{
         return this.idNumber.getId();
     }
 
-    public IdNumberCriteria getIdNumberObject()  { return this.idNumber; }
+    public IdNumberCriteria getIdNumber() {
+        return this.idNumber;
+    }
 
     public String getName() {
         return this.name;
@@ -40,6 +43,10 @@ public class Criteria implements Cloneable{
     //mutator
     public void setId(String id) {
         this.idNumber.setId(id);
+    }
+
+    public void setIdNumber(IdNumberCriteria idNumber) {
+        this.idNumber = idNumber;
     }
 
     public void setName(String name) {
@@ -62,7 +69,16 @@ public class Criteria implements Cloneable{
     public Object clone() throws
             CloneNotSupportedException
     {
-        return super.clone();
+         Criteria cloned = (Criteria) super.clone();
+
+        cloned.setIdNumber((IdNumberCriteria) cloned.getIdNumber().clone());
+
+        ArrayList<CategoryGroup> newCategoryGroups = new ArrayList<>();
+        for (CategoryGroup group : cloned.getCategoryGroups()) {
+            newCategoryGroups.add((CategoryGroup) group.clone());
+        }
+        cloned.setCategoryGroups(newCategoryGroups);
+        return cloned;
     }
 
     //DB function

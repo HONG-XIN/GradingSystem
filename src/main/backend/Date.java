@@ -1,5 +1,6 @@
 package main.backend;
 
+public class Date implements Comparable<Date> , Cloneable{
 import main.backend.Course;
 import main.backend.GradingSystem;
 import org.dizitart.no2.Document;
@@ -77,6 +78,10 @@ public class Date implements Comparable<Date> {
         return String.format(dateFormat, day, month, year);
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
     //Database Function
     //from RAM TO DB
     public Document write(){

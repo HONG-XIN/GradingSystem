@@ -1,5 +1,6 @@
 package main.backend;
 
+public class Score implements Cloneable{
 import org.dizitart.no2.Document;
 import org.dizitart.no2.sync.ReplicationType;
 
@@ -22,6 +23,10 @@ public class Score {
     //mutator
     public void setValue(double value){
         this.value = value;
+    }
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
 

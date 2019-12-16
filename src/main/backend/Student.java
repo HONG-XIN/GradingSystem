@@ -24,7 +24,7 @@ public class Student {
         this.idNumber = new IdNumberStudent();
         this.name = new Name(firstName, lastName);
         this.email = new BUemail(email);
-        this.BUID = BUID;
+        setBUID(BUID);
         this.type = type;
         this.state = StudentState.ACTIVE;
     }
@@ -95,7 +95,7 @@ public class Student {
 
     public void setBUID(String BUID){
         if(!isValidBUID(BUID)){
-            setBUID("default");
+            this.BUID = "default";
         } else {
             this.BUID = BUID;
         }

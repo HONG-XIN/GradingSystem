@@ -6,8 +6,9 @@ import org.dizitart.no2.NitriteCollection;
 
 import javax.print.Doc;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class CategoryGroup {
+public class CategoryGroup implements Cloneable{
     private IdNumberCategoryGroup idNumber;
     private String name;
     private Weight weight;
@@ -53,7 +54,9 @@ public class CategoryGroup {
         return this.weight.getValue();
     }
 
-    public Weight getWeightObject() {return this.weight;}
+    public Weight getWeightObject() {
+        return this.weight;
+    }
 
     public ArrayList<Category> getCategories() {
         return this.categories;
@@ -64,12 +67,20 @@ public class CategoryGroup {
         this.idNumber.setId(id);
     }
 
+    public void setIdNumber(IdNumberCategoryGroup idNumber) {
+        this.idNumber = idNumber;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setWeight(double value) {
         this.weight.setValue(value);
+    }
+
+    public void setWeightObject(Weight weight) {
+        this.weight = weight;
     }
 
     public void setCategories(ArrayList<Category> categories) {
@@ -83,6 +94,20 @@ public class CategoryGroup {
 
     public void removeCategory(Category category) {
         categories.remove(category);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        CategoryGroup cloned = (CategoryGroup) super.clone();
+
+        cloned.setIdNumber((IdNumberCategoryGroup) cloned.getIdNumber().clone());
+        cloned.setWeightObject((Weight) cloned.getWeightObject().clone());
+        ArrayList<Category> newCategories = new ArrayList<>();
+        for (Category category : cloned.getCategories()) {
+            newCategories.add((Category) category.clone());
+        }
+        cloned.setCategories(newCategories);
+        return cloned;
     }
 
     //DB function

@@ -15,10 +15,12 @@ public class ArvoreDatabase {
     private ObjectRepository<Arvore> arvoreStore;
 
     public ArvoreDatabase(){
-        Nitrite db = Nitrite.builder()
-                .compressed()
-                .filePath("test.db")
-                .openOrCreate();
+//        Nitrite db = Nitrite.builder()
+//                .compressed()
+//                .filePath("test.db")
+//                .openOrCreate();
+
+        Nitrite db = Nitrite.builder().filePath("test.db").openOrCreate();
 
         arvoreStore = db.getRepository(Arvore.class);
     }
