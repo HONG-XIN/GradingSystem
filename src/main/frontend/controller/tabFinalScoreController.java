@@ -194,6 +194,7 @@ public class tabFinalScoreController {
                             comment.setText("has");
                         }
                         prevComment = null;
+                        taComment.setText("");
                     } else if (prevComment != null) {
                         info.setText("Please commit comment before editing another student.");
                         return;

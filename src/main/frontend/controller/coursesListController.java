@@ -106,7 +106,7 @@ public class coursesListController {
 //            table.setItems(table_data);
 //            return;
             String sID = sList[i];
-            System.out.println("sID :"+sID);
+
             Semester s = Main.gs.getSemesterById(sID);
             data = Main.gs.getCourseListBySemester(s);
         }
@@ -153,5 +153,15 @@ public class coursesListController {
     @FXML
     protected void btNewCourse(ActionEvent e) {
         Main.changeScreen("addOneCourse");
+    }
+
+    @FXML
+    protected void btDisplayAll(ActionEvent e) {
+        loadCoursesData(-1);
+    }
+
+    @FXML
+    protected void btExit(ActionEvent e) {
+        Main.changeScreen("login");
     }
 }

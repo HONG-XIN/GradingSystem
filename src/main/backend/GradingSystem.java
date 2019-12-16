@@ -566,7 +566,7 @@ public class GradingSystem implements GradingSystemDatabase {
         }
     }
     //statistics functions
-    private void updateFinalLetterGrade(Course course, double Aplus, double A, double AMinus, double Bplus, double B, double Bminus, double Cplus, double C, double Cminus, double Dplus, double D, double Dminus) {
+    private void (Course course, double Aplus, double A, double AMinus, double Bplus, double B, double Bminus, double Cplus, double C, double Cminus, double Dplus, double D, double Dminus) {
         for(CourseGrade courseGrade : courseGrades) {
             if (courseGrade.getCourseId().equals(course.getId())) {
                 Student student = course.getStudentById(courseGrade.getStudentId());

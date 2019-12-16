@@ -162,10 +162,14 @@ public class tabStudentsController {
             table.setItems(table_data);
             return;
         }
+        String[][] data = null;
         Criteria criteria = Main.gs.getCriteriaInCourse(course);
         CategoryGroup cg = Main.gs.getCategoryGroupByIdInCriteria(criteria, groupId);
         Category cat = Main.gs.getCategoryByIdInCategoryGroup(cg, categoryId);
-        String[][] data = Main.gs.getGradeListInCourseByCategory(course, cat);
+        try {
+            data = Main.gs.getGradeListInCourseByCategory(course, cat);
+        } catch (Exception ex) {
+        }
         if (data == null) {
             return;
         }
