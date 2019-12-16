@@ -1,5 +1,5 @@
 package main.backend;
-
+import org.dizitart.no2.Document;
 public class Category implements Cloneable{
     private IdNumberCategory idNumber;
     private String name;
@@ -82,9 +82,13 @@ public class Category implements Cloneable{
         return assignDate.toString();
     }
 
+    public Date getAssignDateObject() {return assignDate;}
+
     public String getDueDateString() {
         return dueDate.toString();
     }
+
+    public Date getDueDateObject() { return dueDate;}
 
     //mutator
     public void setId(String id) {
@@ -141,5 +145,64 @@ public class Category implements Cloneable{
         cloned.setAssignDate((Date) cloned.getAssignDate().clone());
         cloned.setDueDate((Date) cloned.getDueDate().clone());
         return super.clone();
+    }
+    //DB function
+    //from RAM to DB
+    public Document write(){
+        Document CategoryDoc = new Document();
+        CategoryDoc.put("name", getName());
+        if(this.getIdNumber() != null){
+            CategoryDoc.put("idNumber", getIdNumber().write());
+        }
+        if(this.getTotalScoreObject() != null){
+            CategoryDoc.put("totalScore", getTotalScoreObject().write());
+        }
+        if(this.getWeightObject() != null){
+            CategoryDoc.put("weight", getWeightObject().write());
+        }
+        if(this.getAssignDate() != null){
+            CategoryDoc.put("assignDate", getAssignDateObject().write());
+        }
+        if(this.getDueDateObject() != null){
+            CategoryDoc.put("dueDate", getDueDateObject().write());
+        }
+        return CategoryDoc;
+    }
+
+    //FROM DB TO RAM
+    public void read(Document doc){
+        if(doc != null){
+            setName((String) doc.get("name"));
+            Document idNumberDoc = (Document) doc.get("idNumber");
+            if (idNumberDoc != null){
+                IdNumberCategory idNumber = new IdNumberCategory();
+                idNumber.read(idNumberDoc);
+                this.idNumber = idNumber;
+            }
+            Document scoreDoc = (Document) doc.get("totalScore");
+            if(scoreDoc != null){
+                Score totalScore = new Score();
+                totalScore.read(scoreDoc);
+                this.totalScore = totalScore;
+            }
+            Document weightDoc = (Document) doc.get("weight");
+            if(weightDoc != null){
+                Weight weight = new Weight();
+                weight.read(weightDoc);
+                this.weight = weight;
+            }
+            Document assignDateDoc = (Document) doc.get("assignDate");
+            if(assignDateDoc != null){
+                Date assignDate = new Date();
+                assignDate.read(assignDateDoc);
+                this.assignDate = assignDate;
+            }
+            Document dueDateDoc = (Document) doc.get("dueDate");
+            if(dueDateDoc != null){
+                Date dueDate = new Date();
+                dueDate.read(dueDateDoc);
+                this.dueDate = dueDate;
+            }
+        }
     }
 }

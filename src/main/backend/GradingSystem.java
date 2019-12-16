@@ -1,10 +1,14 @@
 package main.backend;
 
+import main.database.GradingSystemDatabase;
+import org.dizitart.no2.Document;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
 
-public class GradingSystem {
+public class GradingSystem implements GradingSystemDatabase {
+
     private String password;
     private ArrayList<Course> courses;
     private ArrayList<Criteria> criteriaTemplates;
@@ -48,6 +52,10 @@ public class GradingSystem {
             if(course.getId().equals(id)) return course;
         }
         return null;
+    }
+
+    public String getPassword(){
+        return this.password;
     }
 
     public Criteria getCriteriaTemplateById (String id) {
@@ -118,10 +126,13 @@ public class GradingSystem {
         return Objects.requireNonNull(getCourseGradeById(id)).getComment();
     }
 
+
     //mutator helper
     private void setPassword(String password) {
         this.password = password;
     }
+
+    public void SetPassword(String password) {this.password = password;}
 
     private void setCategoryGroupWeight(CategoryGroup group, double value) {
         group.setWeight(value);
