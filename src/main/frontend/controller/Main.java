@@ -6,7 +6,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import main.backend.GradingSystem;
+import main.database.GradingSystemDatabase;
+import main.debug.Debug;
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.NitriteCollection;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -153,8 +158,23 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Nitrite db = Nitrite.builder()
+                .filePath("./GradingSystem.db")
+                .openOrCreate();
+        NitriteCollection GradingSystemCollection = db.getCollection("GradingSystem");
         gs = new GradingSystem();
+        GradingSystemDatabase.read(gs, GradingSystemCollection);
+        db.close();
+        File file = new File("./GradingSystem.db");
+        if (file.exists()) {
+            file.delete();
+        }
         launch(args);
+        Nitrite db2 = Nitrite.builder()
+                .filePath("./GradingSystem.db")
+                .openOrCreate();
+        NitriteCollection GradingSystemCollection2 = db2.getCollection("GradingSystem");
+        GradingSystemCollection2.insert(GradingSystemDatabase.write(gs));
     }
 
 
