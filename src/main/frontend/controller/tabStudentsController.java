@@ -47,6 +47,8 @@ public class tabStudentsController {
                     courseId = userData.toString();
                     course = Main.gs.getCourseById(courseId);
                     gIDs = null;
+                    groupId = null;
+                    categoryId = null;
                     loadGroupData();
                     initTable();
                     loadDate();
@@ -163,7 +165,6 @@ public class tabStudentsController {
         Criteria criteria = Main.gs.getCriteriaInCourse(course);
         CategoryGroup cg = Main.gs.getCategoryGroupByIdInCriteria(criteria, groupId);
         Category cat = Main.gs.getCategoryByIdInCategoryGroup(cg, categoryId);
-//        System.out.println();
         String[][] data = Main.gs.getGradeListInCourseByCategory(course, cat);
         if (data == null) {
             return;
