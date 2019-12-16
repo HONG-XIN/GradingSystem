@@ -566,7 +566,7 @@ public class GradingSystem implements GradingSystemDatabase {
         }
     }
     //statistics functions
-    private boolean updateFinalLetterGrade(Course course, double Aplus, double A, double AMinus, double Bplus, double B, double Bminus, double Cplus, double C, double Cminus, double Dplus, double D, double Dminus) {
+    public boolean updateFinalLetterGrade(Course course, double Aplus, double A, double AMinus, double Bplus, double B, double Bminus, double Cplus, double C, double Cminus, double Dplus, double D, double Dminus) {
         if (Aplus > A && A > AMinus && AMinus > Bplus && Bplus > B && B > Bminus && Bminus > Cplus && Cplus > C && C > Cminus && Cminus > Dplus && Dplus > D && D > Dminus && Dminus >= 0.0)
         {
             for (CourseGrade courseGrade : courseGrades) {
