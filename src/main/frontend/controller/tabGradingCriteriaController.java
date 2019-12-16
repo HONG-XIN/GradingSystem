@@ -50,12 +50,13 @@ public class tabGradingCriteriaController {
     protected void initialize() {
         Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
             public void onScreenChanged(String newScreen, Object userData) {
-                if (newScreen.equals("tabFinalScore")) {
+                if (newScreen.equals("tabGradingCriteria")) {
                     courseId = userData.toString();
                     course = Main.gs.getCourseById(courseId);
-
+                    System.out.println("courseId :"+courseId);
                     newC = course.getCriteria();
 //                    newC = Main.gs.getCriteriaInCourse(course);
+//                    newC = Main.gs.getCriteria
 
 
                     initTable();
@@ -178,7 +179,8 @@ public class tabGradingCriteriaController {
             delete.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    if (Main.gs.deleteCategoryGroupInCriteria(newC, cg)) {
+
+                    if (Main.gs.deleteCategoryGroupInCourse(course, newC, cg)) {
                         loadData1();
                         cGroup = null;
                         loadData2();
@@ -225,7 +227,7 @@ public class tabGradingCriteriaController {
                 @Override
                 public void handle(ActionEvent actionEvent) {
 
-                    if (Main.gs.deleteCategoryInGroup(cGroup, cat)) {
+                    if (Main.gs.deleteCategoryInCourse(course, cGroup, cat)) {
                         loadData2();
                         Cat = null;
                         loadData3();
@@ -386,7 +388,8 @@ public class tabGradingCriteriaController {
         if (tvCategory.getItems().size() == 0) {
             weight = "100";
         }
-        Main.gs.addCategoryInGroup(cGroup, "Default", 100, Double.valueOf(weight),1,1,2000,2,1,2000);
+        Main.gs.addCategoryInCourse(course, cGroup, "Default", 100, Double.parseDouble(weight), 1, 1, 2000, 2, 1, 2000);
+//        Main.gs.addCategoryInGroup(cGroup, "Default", 100, Double.valueOf(weight),1,1,2000,2,1,2000);
         loadData2();
         btAddCategory.setDisable(true);
     }
@@ -423,6 +426,9 @@ public class tabGradingCriteriaController {
     }
 
     private boolean check() {
+        if (newC == null) {
+            System.out.println("newC criteria is null");
+        }
         String[][] groups = Main.gs.getGroupListByCriteria(newC);
         if (groups == null) {
             info.setText("Fail");

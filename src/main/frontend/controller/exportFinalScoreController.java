@@ -3,6 +3,7 @@ package main.frontend.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import main.backend.Course;
 
 import javax.swing.*;
@@ -14,6 +15,9 @@ public class exportFinalScoreController {
 
     @FXML
     CheckBox cbStudentName, cbFinalScore, cbBonus, cbLetter, cbComment, cbBUID, cbEmail;
+
+    @FXML
+    Label info;
 
     @FXML
     protected void initialize() {

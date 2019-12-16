@@ -73,7 +73,9 @@ public class tabFinalScoreController {
                         }
                     });
 
-                    tfCurve.setText("0");
+
+                    int c = course.getCurveValue();
+                    tfCurve.setText(Integer.toString(c));
 
                 }
             }
@@ -110,10 +112,13 @@ public class tabFinalScoreController {
                 String cid = e.getTableView().getItems().get(e.getTablePosition().getRow()).getId();
                 CourseGrade cg = Main.gs.getCourseGradeById(cid);
                 int bonus = Integer.parseInt(e.getNewValue());
-                cg.setBonus(bonus);
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setBonus(e.getNewValue());
-                loadData();
-                info.setText("Change Bonus Success");
+                if (Main.gs.changeCourseGradeBonus(cg, bonus)) {
+                    info.setText("Change Bonus Success");
+                    loadData();
+                } else {
+                    info.setText("Change Bonus Fail");
+                    loadData();
+                }
             } catch (Exception ex) {
                 loadData();
                 info.setText("Change Bonus Fail");
@@ -128,6 +133,8 @@ public class tabFinalScoreController {
             cg.setLetterGrade(letter);
             info.setText("Change LetterGrade Success");
         });
+
+        tableFinal.setEditable(true);
 
     }
 
@@ -170,21 +177,21 @@ public class tabFinalScoreController {
             String sid = cg.getStudentId();
             Student student = course.getStudentById(sid);
 
-            Button comment = new Button("-");
+            Button comment = new Button("null");
             if (cg.hasComment()) {
-                comment.setText("Y");
+                comment.setText("has");
             }
             comment.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
 
-                    if (comment.getText().equals("?")) {
+                    if (comment.getText().equals("editing")) {
                         String c = taComment.getText().trim();
                         cg.setComment(c);
                         if (c.length() == 0) {
-                            comment.setText("-");
+                            comment.setText("null");
                         } else {
-                            comment.setText("Y");
+                            comment.setText("has");
                         }
                         prevComment = null;
                     } else if (prevComment != null) {
@@ -192,7 +199,7 @@ public class tabFinalScoreController {
                         return;
                     } else {
                         taComment.setText(cg.getComment());
-                        comment.setText("?");
+                        comment.setText("editing");
                         prevComment = comment;
                     }
                 }
@@ -265,8 +272,19 @@ public class tabFinalScoreController {
 
     @FXML
     protected void btCurve(ActionEvent e) {
-        Main.popup.setScene(Main.curveScene);
-        Main.popup.show();
+        try {
+            int c = Integer.parseInt(tfCurve.getText());
+            if (Main.gs.changeCourseCurve(course, c)) {
+                info.setText("Set Curve Success");
+                loadData();
+            } else {
+                info.setText("Set Curve Fail");
+                loadData();
+            }
+        } catch (Exception ex) {
+            info.setText("Set Curve Fail");
+            loadData();
+        }
     }
 
     @FXML
