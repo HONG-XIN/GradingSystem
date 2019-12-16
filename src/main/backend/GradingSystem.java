@@ -522,7 +522,7 @@ public class GradingSystem {
         return false;
     }
 
-    public boolean changeCategoryGrade(CategoryGrade grade, double value) {
+    public boolean changeCategoryGradeValue(CategoryGrade grade, double value) {
         if(value <= 100 && isCategoryGradeEdible(grade)) {
             grade.setScore(value);
             return true;
@@ -540,6 +540,15 @@ public class GradingSystem {
     public boolean changeCourseGradeBonus(CourseGrade grade, int value) {
         if(value >= 0) {
             grade.setBonus(value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean changeCourseCurve(Course course, int value) {
+        if(value >= 0) {
+            course.setCurveValue(value);
             return true;
         } else {
             return false;
@@ -568,7 +577,7 @@ public class GradingSystem {
             finalScore += groupScore * group.getWeight();
             groupScore = 0.0;
         }
-        return finalScore;
+        return finalScore + course.getCurveValue();
     }
 
     private double getActiveStudentsNumber(Course course) {
@@ -917,7 +926,7 @@ For all String[][] first element is Id, Second element is name
         for(CourseGrade courseGrade : courseGrades) {
             if(courseGrade.getCourseId().equals(course.getId())) {
                 Student student = course.getStudentById(courseGrade.getStudentId());
-                calFinalScoreByStudent(course, student);
+                courseGrade.setFinalScore(calFinalScoreByStudent(course, student));
                 gradeList[i][0] = courseGrade.getId();
                 gradeList[i][1] = student.getNameString();
                 gradeList[i][2] = student.getBUID();
