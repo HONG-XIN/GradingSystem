@@ -276,14 +276,15 @@ public class tabFinalScoreController {
             int c = Integer.parseInt(tfCurve.getText());
             if (Main.gs.changeCourseCurve(course, c)) {
                 info.setText("Set Curve Success");
-                loadData();
             } else {
                 info.setText("Set Curve Fail");
-                loadData();
             }
+            loadData();
+            loadStatistics();
         } catch (Exception ex) {
             info.setText("Set Curve Fail");
             loadData();
+            loadStatistics();
         }
     }
 
