@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.tabStudentsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.tabStudentsController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;" />
-          <Button mnemonicParsing="false" onAction="#btStudents" text="Students" />
-            <Button mnemonicParsing="false" onAction="#btFinalScore" text="Final Score" />
-            <Button mnemonicParsing="false" onAction="#btGradingCriteria" text="Grading Criteria" />
+            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+          <Button mnemonicParsing="false" onAction="#btStudents" prefWidth="200.0" text="Students">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btFinalScore" prefWidth="200.0" text="Final Score">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="200.0" text="Grading Criteria">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
         </items>
       </ToolBar>
    </top>
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <Button mnemonicParsing="false" onAction="#btNewStudent" prefWidth="150.0" text="NEW STUDENT" />
+            <Button mnemonicParsing="false" onAction="#btNewStudent" prefWidth="200.0" text="NEW STUDENT">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
             <Label fx:id="info" />
         </items>
       </ToolBar>
@@ -27,30 +43,36 @@
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="147.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="159.0" />
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="152.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="145.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="247.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="204.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="170.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="381.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="279.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="425.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="606.0" minHeight="9.0" prefHeight="602.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Category Group" />
+            <Label text="Category Group">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
             <ChoiceBox fx:id="cBox" prefWidth="150.0" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin></ChoiceBox>
             <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="1">
               <columns>
-                <TableColumn fx:id="colName" prefWidth="147.0" text="Student Name" />
-                  <TableColumn fx:id="colBUid" prefWidth="111.0" text="BU ID" />
-                  <TableColumn fx:id="colEmail" prefWidth="172.0" text="Email" />
-                  <TableColumn fx:id="colCategory" prefWidth="108.0" text="Grade" />
+                <TableColumn fx:id="colName" prefWidth="239.0" text="Student Name" />
+                  <TableColumn fx:id="colBUid" prefWidth="220.0" text="BU ID" />
+                  <TableColumn fx:id="colEmail" prefWidth="316.0" text="Email" />
+                  <TableColumn fx:id="colCategory" prefWidth="172.0" text="Grade" />
               </columns>
             </TableView>
-            <Label text="Category" GridPane.columnIndex="2" />
+            <Label text="Category" GridPane.columnIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
             <ChoiceBox fx:id="cbCategory" prefWidth="150.0" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />

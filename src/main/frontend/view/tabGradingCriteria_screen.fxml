@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.tabGradingCriteriaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.tabGradingCriteriaController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;" />
-          <Button mnemonicParsing="false" onAction="#btStudents" text="Students" />
-            <Button mnemonicParsing="false" onAction="#btFinalScore" text="Final Score" />
-            <Button mnemonicParsing="false" onAction="#btGradingCriteria" text="Grading Criteria" />
+            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+          <Button mnemonicParsing="false" onAction="#btStudents" prefWidth="200.0" text="Students">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btFinalScore" prefWidth="200.0" text="Final Score">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="200.0" text="Grading Criteria">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
             <Label fx:id="info" />
         </items>
       </ToolBar>
@@ -31,20 +44,29 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                        <Button fx:id="btSaveGroup" mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE" />
-                      <Button fx:id="btAddGroup" mnemonicParsing="false" onAction="#btAddGroup" text="ADD" />
+                        <Button fx:id="btSaveGroup" mnemonicParsing="false" onAction="#btSaveGroup" text="SAVE">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
+                      <Button fx:id="btAddGroup" mnemonicParsing="false" onAction="#btAddGroup" text="ADD">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
                     </items>
                   </ToolBar>
                </bottom>
                <top>
-                  <Label text="Category Group" BorderPane.alignment="CENTER" />
+                  <Label text="Category Group" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
                </top>
                <center>
                   <TableView fx:id="tvGroup" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn fx:id="tcLabel1" prefWidth="81.0" text="Label" />
-                      <TableColumn fx:id="tcWeight1" prefWidth="56.0" text="Weight" />
-                        <TableColumn fx:id="tcDel1" prefWidth="47.0" text="del" />
+                      <TableColumn fx:id="tcLabel1" prefWidth="130.0" text="Label" />
+                      <TableColumn fx:id="tcWeight1" prefWidth="120.0" text="Weight" />
+                        <TableColumn fx:id="tcDel1" prefWidth="60.0" text="del" />
                     </columns>
                   </TableView>
                </center>
@@ -53,20 +75,29 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                        <Button fx:id="btSaveCategory" mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE" />
-                      <Button fx:id="btAddCategory" mnemonicParsing="false" onAction="#btAddCategory" text="ADD" />
+                        <Button fx:id="btSaveCategory" mnemonicParsing="false" onAction="#btSaveCategory" text="SAVE">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
+                      <Button fx:id="btAddCategory" mnemonicParsing="false" onAction="#btAddCategory" text="ADD">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
                     </items>
                   </ToolBar>
                </bottom>
                <top>
-                  <Label text="Category" BorderPane.alignment="CENTER" />
+                  <Label text="Category" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
                </top>
                <center>
                   <TableView fx:id="tvCategory" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn fx:id="tcLabel2" prefWidth="90.0" text="Label" />
-                      <TableColumn fx:id="tcWeight2" prefWidth="54.0" text="Weight" />
-                        <TableColumn fx:id="tcDel2" prefWidth="41.0" text="del" />
+                      <TableColumn fx:id="tcLabel2" prefWidth="130.0" text="Label" />
+                      <TableColumn fx:id="tcWeight2" prefWidth="120.0" text="Weight" />
+                        <TableColumn fx:id="tcDel2" prefWidth="60.0" text="del" />
                     </columns>
                   </TableView>
                </center>
@@ -75,18 +106,24 @@
                <bottom>
                   <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                      <Button fx:id="btSave3" mnemonicParsing="false" onAction="#btSaveDetail" text="SAVE" />
+                      <Button fx:id="btSave3" mnemonicParsing="false" onAction="#btSaveDetail" text="SAVE">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
                     </items>
                   </ToolBar>
                </bottom>
                <top>
-                  <Label text="Detail" BorderPane.alignment="CENTER" />
+                  <Label text="Detail" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
                </top>
                <center>
                   <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
-                      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="89.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="111.0" />
+                      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="137.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="10.0" prefWidth="204.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -94,10 +131,22 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Issue Date" />
-                        <Label text="Due Date" GridPane.rowIndex="1" />
-                        <Label text="Total Score" GridPane.rowIndex="2" />
-                        <TextField fx:id="tfScore" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Issue Date">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Label>
+                        <Label text="Due Date" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Label>
+                        <Label text="Total Score" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Label>
+                        <TextField fx:id="tfScore" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="24.0" />
+                           </font></TextField>
                         <DatePicker fx:id="dpIssue" GridPane.columnIndex="1" />
                         <DatePicker fx:id="dpDue" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>

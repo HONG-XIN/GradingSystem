@@ -30,6 +30,13 @@ public class exportFinalScoreController {
                 if (newScreen.equals("exportFinalScore")) {
                     courseId = userData.toString();
                     course = Main.gs.getCourseById(courseId);
+                    cbStudentName.setSelected(true);
+                    cbFinalScore.setSelected(true);
+                    cbBonus.setSelected(true);
+                    cbLetter.setSelected(true);
+                    cbComment.setSelected(true);
+                    cbBUID.setSelected(true);
+                    cbEmail.setSelected(true);
                 }
             }
         });
@@ -157,9 +164,9 @@ public class exportFinalScoreController {
         }
         String path = "";
         System.out.println(System.getProperty("os.name"));
-        if (System.getProperty("os.name").equalsIgnoreCase("windows")) {
+        if (System.getProperty("os.name").split(" ")[0].equalsIgnoreCase("windows")) {
             path = System.getProperty("user.home") + "/Desktop/export_data.csv";
-        } else if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
+        } else if (System.getProperty("os.name").split(" ")[0].equalsIgnoreCase("Mac")) {
             path = System.getProperty("user.home") + "/Desktop/export_data.csv";
         }
         System.out.println(path);

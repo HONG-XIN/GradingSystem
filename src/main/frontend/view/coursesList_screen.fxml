@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.coursesListController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.coursesListController">
    <top>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane prefHeight="73.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="88.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="88.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="233.0" />
             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="165.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -19,28 +21,43 @@
         </rowConstraints>
          <children>
             <ChoiceBox fx:id="cbSemester" prefWidth="150.0" GridPane.columnIndex="1" />
-            <Label text="Filter Semester" />
-            <Button mnemonicParsing="false" onAction="#btDisplayAll" text="Display ALL" GridPane.columnIndex="3" />
+            <Label text="Filter Semester">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Button mnemonicParsing="false" onAction="#btDisplayAll" text="Display ALL" GridPane.columnIndex="3">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
          </children>
       </GridPane>
    </top>
    <center>
-      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" prefHeight="613.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="colCourseName" prefWidth="197.0" text="Course Name" />
-          <TableColumn fx:id="colSemester" minWidth="0.0" prefWidth="89.0" text="Semester" />
-            <TableColumn fx:id="colStart" minWidth="0.0" prefWidth="94.0" text="Start Date" />
-            <TableColumn fx:id="colEnd" minWidth="0.0" prefWidth="94.0" text="End Date" />
-            <TableColumn fx:id="colAction" minWidth="0.0" prefWidth="92.0" text="Action" />
+          <TableColumn fx:id="colCourseName" prefWidth="267.0" text="Course Name" />
+          <TableColumn fx:id="colSemester" minWidth="0.0" prefWidth="153.0" text="Semester" />
+            <TableColumn fx:id="colStart" minWidth="0.0" prefWidth="215.0" text="Start Date" />
+            <TableColumn fx:id="colEnd" minWidth="0.0" prefWidth="215.0" text="End Date" />
+            <TableColumn fx:id="colAction" minWidth="0.0" prefWidth="111.0" text="Action" />
         </columns>
       </TableView>
    </center>
    <bottom>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" onAction="#btNewCourse" text="Add Course" />
+          <Button mnemonicParsing="false" onAction="#btNewCourse" prefWidth="180.0" text="Add Course">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
             <Label fx:id="info" />
-            <Button mnemonicParsing="false" onAction="#btExit" text="EXIT" />
+            <Button mnemonicParsing="false" onAction="#btExit" prefWidth="180.0" text="EXIT">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
         </items>
       </ToolBar>
    </bottom>

@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.exportFinalScoreController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.exportFinalScoreController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;" />
-          <Button mnemonicParsing="false" onAction="#btStudents" text="Students" />
-            <Button mnemonicParsing="false" onAction="#btFinalScore" text="Final Score" />
-            <Button mnemonicParsing="false" onAction="#btGradingCriteria" text="Grading Criteria" />
+            <Button mnemonicParsing="false" onAction="#btLeave" text="&lt;">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+          <Button mnemonicParsing="false" onAction="#btStudents" prefWidth="230.0" text="Students">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btFinalScore" prefWidth="230.0" text="Final Score">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="230.0" text="Grading Criteria">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
         </items>
       </ToolBar>
    </top>
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" onAction="#btBack" text="BACK" />
-            <Button mnemonicParsing="false" onAction="#btExport" text="EXPORT" />
+          <Button mnemonicParsing="false" onAction="#btBack" prefWidth="150.0" text="BACK">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btExport" prefWidth="150.0" text="EXPORT">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
             <Label fx:id="info" />
         </items>
       </ToolBar>
@@ -39,13 +58,34 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox fx:id="cbStudentName" mnemonicParsing="false" text="Students' Names" />
-            <CheckBox fx:id="cbFinalScore" mnemonicParsing="false" text="Final Scores" GridPane.rowIndex="1" />
-            <CheckBox fx:id="cbBonus" mnemonicParsing="false" text="Bonus Scores" GridPane.rowIndex="2" />
-            <CheckBox fx:id="cbLetter" mnemonicParsing="false" text="Letter Grades" GridPane.rowIndex="3" />
-            <CheckBox fx:id="cbComment" mnemonicParsing="false" text="Comments" GridPane.rowIndex="4" />
-            <CheckBox fx:id="cbBUID" mnemonicParsing="false" text="BU IDs" GridPane.rowIndex="5" />
-            <CheckBox fx:id="cbEmail" mnemonicParsing="false" text="BU Emails" GridPane.rowIndex="6" />
+            <CheckBox fx:id="cbStudentName" mnemonicParsing="false" text="Students' Names">
+               <font>
+                  <Font size="24.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="cbFinalScore" mnemonicParsing="false" text="Final Scores" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="cbBonus" mnemonicParsing="false" text="Bonus Scores" GridPane.rowIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="cbLetter" mnemonicParsing="false" text="Letter Grades" GridPane.rowIndex="3">
+               <font>
+                  <Font size="24.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="cbComment" mnemonicParsing="false" text="Comments" GridPane.rowIndex="4">
+               <font>
+                  <Font size="24.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="cbBUID" mnemonicParsing="false" text="BU IDs" GridPane.rowIndex="5">
+               <font>
+                  <Font size="24.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="cbEmail" mnemonicParsing="false" text="BU Emails" GridPane.rowIndex="6">
+               <font>
+                  <Font size="24.0" />
+               </font></CheckBox>
          </children>
       </GridPane>
    </center>

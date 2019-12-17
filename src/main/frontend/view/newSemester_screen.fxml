@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.newSemesterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.newSemesterController">
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" onAction="#btBack" prefWidth="100.0" text="BACK" />
-            <Button mnemonicParsing="false" onAction="#btSave" prefWidth="100.0" text="SAVE" />
+            <Button mnemonicParsing="false" onAction="#btBack" prefWidth="150.0" text="BACK">
+              <font>
+                   <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btSave" prefWidth="150.0" text="SAVE">
+                <font>
+                    <Font size="24.0" />
+                </font></Button>
             <Label fx:id="info" />
         </items>
       </ToolBar>
@@ -18,8 +25,8 @@
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="177.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="423.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="612.0" minWidth="10.0" prefWidth="364.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="682.0" minWidth="10.0" prefWidth="660.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -27,24 +34,36 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Semester Name" />
-            <Label text="Start Date" GridPane.rowIndex="1" />
-            <Label text="End Date" GridPane.rowIndex="2" />
-            <DatePicker fx:id="dpStart" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="20.0" />
+            <Label text="Semester Name">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label text="Start Date" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label text="End Date" GridPane.rowIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+             <TextField fx:id="tfName" GridPane.columnIndex="1">
+                 <GridPane.margin>
+                     <Insets left="20.0" right="20.0" />
+                 </GridPane.margin>
+                 <font>
+                     <Font size="24.0" />
+                 </font>
+             </TextField>
+             <DatePicker fx:id="dpStart" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <GridPane.margin>
+                   <Insets left="20.0" />
                </GridPane.margin>
             </DatePicker>
-            <DatePicker fx:id="dpEnd" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="20.0" />
+             <DatePicker fx:id="dpEnd" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <GridPane.margin>
+                   <Insets left="20.0" />
                </GridPane.margin>
             </DatePicker>
-            <TextField fx:id="tfName" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </TextField>
          </children>
       </GridPane>
    </center>
