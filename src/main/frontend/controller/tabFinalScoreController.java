@@ -195,12 +195,14 @@ public class tabFinalScoreController {
                         }
                         prevComment = null;
                         taComment.setText("");
+                        taComment.setDisable(true);
                     } else if (prevComment != null) {
                         info.setText("Please commit comment before editing another student.");
                         return;
                     } else {
                         taComment.setText(cg.getComment());
                         comment.setText("editing");
+                        taComment.setDisable(false);
                         prevComment = comment;
                     }
                 }

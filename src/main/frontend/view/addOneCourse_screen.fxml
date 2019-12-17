@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.addOneCourseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.frontend.controller.addOneCourseController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="169.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="220.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="205.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="333.0" minWidth="10.0" prefWidth="318.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="430.0" minWidth="10.0" prefWidth="372.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="316.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -19,25 +20,55 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Course Name" />
-            <Label text="Semester" GridPane.rowIndex="1" />
-            <Label text="Grading Criteria" GridPane.rowIndex="2" />
+            <Label text="Course Name">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label text="Semester" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label text="Grading Criteria" GridPane.rowIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
             <TextField fx:id="tfName" GridPane.columnIndex="1">
                <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin></TextField>
-            <ChoiceBox fx:id="cbSemester" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#btNewSemester" text="New Semester" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#btNewGradingCriteria" text="New Grading Criteria" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <ComboBox fx:id="cbCriteria" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Insets left="20.0" right="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="24.0" />
+               </font></TextField>
+            <ChoiceBox fx:id="cbSemester" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></ChoiceBox>
+            <Button mnemonicParsing="false" onAction="#btNewSemester" prefWidth="280.0" text="New Semester" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btNewGradingCriteria" prefWidth="280.0" text="New Grading Criteria" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <ComboBox fx:id="cbCriteria" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></ComboBox>
          </children>
       </GridPane>
    </center>
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" onAction="#btCancel" prefWidth="100.0" text="Cancel" />
-            <Button mnemonicParsing="false" onAction="#btCreate" prefWidth="100.0" text="Create" />
+          <Button mnemonicParsing="false" onAction="#btCancel" prefWidth="150.0" text="Cancel">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#btCreate" prefWidth="150.0" text="Create">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
             <Label fx:id="info" />
         </items>
       </ToolBar>

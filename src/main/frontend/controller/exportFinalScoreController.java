@@ -30,6 +30,13 @@ public class exportFinalScoreController {
                 if (newScreen.equals("exportFinalScore")) {
                     courseId = userData.toString();
                     course = Main.gs.getCourseById(courseId);
+                    cbStudentName.setSelected(true);
+                    cbFinalScore.setSelected(true);
+                    cbBonus.setSelected(true);
+                    cbLetter.setSelected(true);
+                    cbComment.setSelected(true);
+                    cbBUID.setSelected(true);
+                    cbEmail.setSelected(true);
                 }
             }
         });

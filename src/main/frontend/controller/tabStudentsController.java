@@ -117,7 +117,7 @@ public class tabStudentsController {
                     try {
                         categoryId = ids[a];
                     } catch (Exception ex) {
-
+                        categoryId = null;
                     }
                     loadDate();
                 }
