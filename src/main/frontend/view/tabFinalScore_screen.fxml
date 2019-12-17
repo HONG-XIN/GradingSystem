@@ -21,7 +21,7 @@
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="200.0" text="Grading Criteria">
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="250.0" text="Grading Criteria">
                <font>
                   <Font size="24.0" />
                </font></Button>
@@ -75,9 +75,9 @@
               <columns>
                 <TableColumn fx:id="colSName" prefWidth="282.0" text="Student Name" />
                 <TableColumn fx:id="colBonus" prefWidth="121.0" text="Bonus" />
-                  <TableColumn fx:id="colFinalScore" prefWidth="194.0" text="Final Score" />
-                  <TableColumn fx:id="colLetter" prefWidth="157.0" text="Letter Grade" />
-                  <TableColumn fx:id="colComment" prefWidth="97.0" text="Comment" />
+                  <TableColumn fx:id="colFinalScore" prefWidth="126.0" text="Final Score" />
+                  <TableColumn fx:id="colLetter" prefWidth="122.0" text="Letter Grade" />
+                  <TableColumn fx:id="colComment" prefWidth="200.0" text="Comment" />
                   <TableColumn fx:id="colFreeze" prefWidth="71.0" text="Freeze" />
                   <TableColumn fx:id="colDelete" prefWidth="63.0" text="Delete" />
               </columns>

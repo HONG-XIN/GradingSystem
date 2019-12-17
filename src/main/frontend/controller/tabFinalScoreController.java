@@ -183,7 +183,7 @@ public class tabFinalScoreController {
 
             Button comment = new Button("null");
             if (cg.hasComment()) {
-                comment.setText("has");
+                comment.setText("has comment");
             }
             comment.setOnAction(new EventHandler<ActionEvent>() {
                 @Override

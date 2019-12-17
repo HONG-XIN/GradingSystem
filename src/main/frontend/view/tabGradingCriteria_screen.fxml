@@ -21,7 +21,7 @@
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="200.0" text="Grading Criteria">
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="250.0" text="Grading Criteria">
                <font>
                   <Font size="24.0" />
                </font></Button>
