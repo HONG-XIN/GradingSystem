@@ -46,8 +46,8 @@ public class Main extends Application {
 
         primaryStage.setTitle("Grading System");
 
-        int width = 1200;
-        int height = 800;
+        int width = 1024;
+        int height = 768;
 
         Parent fxmlMain = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
         mainScene = new Scene(fxmlMain, 640, 400);
