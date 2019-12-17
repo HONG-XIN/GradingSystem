@@ -17,7 +17,7 @@ public class CourseGrade {
         this.courseId = new IdNumberCourse();
         this.studentId = new IdNumberStudent();
         this.finalScore = new Score();
-        this.letterGrade = "";
+        this.letterGrade = "-";
         this.bonus = 0;
         this.comment = "";
     }
