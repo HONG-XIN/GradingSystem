@@ -80,7 +80,11 @@ public class tabStudentsController {
                 if (index < 0) {
                     groupId = null;
                 } else {
-                    groupId = groupIDs[index];
+                    try {
+                        groupId = groupIDs[index];
+                    } catch (Exception ex) {
+                        groupId = null;
+                    }
                 }
                 loadCategoryData(index);
             }
