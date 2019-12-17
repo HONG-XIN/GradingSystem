@@ -623,7 +623,7 @@ public class GradingSystem implements GradingSystemDatabase {
                 for(CategoryGrade grade : this.categoryGrades) {
                     if(isStudentGradeInCourseInCategory(grade, course, category, student)) {
                         double score = grade.getScore();
-                        categoryScore = score < 0 ? grade.gradeConvert(category.getTotalScore(), score) : score;
+                        categoryScore = 1 / score < 0 ? grade.gradeConvert(category.getTotalScore(), score) : score;
                         break;
                     }
                 }
@@ -633,7 +633,7 @@ public class GradingSystem implements GradingSystemDatabase {
             finalScore += groupScore * group.getWeight() / 100.0;
             groupScore = 0.0;
         }
-        return finalScore + course.getCurveValue();
+        return Math.round((finalScore + course.getCurveValue())*100.0)/100.0;
     }
 
     private double getActiveStudentsNumber(Course course) {
@@ -662,7 +662,7 @@ public class GradingSystem implements GradingSystemDatabase {
                 }
             }
         }
-        return totalFinalScore / studentCount;
+        return studentCount > 0 ? Math.round((totalFinalScore / studentCount)*100.0)/100.0 : 0.0;
     }
 
     public double getUnderGradAvgFinalScore(Course course) {
@@ -680,7 +680,7 @@ public class GradingSystem implements GradingSystemDatabase {
                 }
             }
         }
-        return totalFinalScore / studentCount;
+        return studentCount > 0 ? Math.round((totalFinalScore / studentCount)*100.0)/100.0 : 0.0;
     }
 
     public double getGradAvgFinalScore(Course course) {
@@ -698,7 +698,7 @@ public class GradingSystem implements GradingSystemDatabase {
                 }
             }
         }
-        return totalFinalScore / studentCount;
+        return studentCount > 0 ? Math.round((totalFinalScore / studentCount)*100.0)/100.0 : 0;
     }
 
     public double getMaxFinalScore(Course course) {
@@ -812,7 +812,7 @@ public class GradingSystem implements GradingSystemDatabase {
                 }
             }
         }
-        return Math.sqrt(sd);
+        return Math.round(Math.sqrt(sd)*100.0)/100.0;
     }
 
     public double getUnderGradSdFinalScore(Course course) {
@@ -830,7 +830,7 @@ public class GradingSystem implements GradingSystemDatabase {
                 }
             }
         }
-        return Math.sqrt(sd);
+        return Math.round(Math.sqrt(sd)*100.0)/100.0;
     }
 
     public double getGradSdFinalScore(Course course) {
@@ -848,7 +848,7 @@ public class GradingSystem implements GradingSystemDatabase {
                 }
             }
         }
-        return Math.sqrt(sd);
+        return Math.round(Math.sqrt(sd)*100.0)/100.0;
     }
 
     /*
@@ -1028,7 +1028,7 @@ For all String[][] first element is Id, Second element is name
      * @param path path to dictionary
      * @param sheetname name of sheet
      * @param headtable a list of first row, name of each column
-     * @param value
+     * @param value dataset
      */
     public void exportTable(String path, String sheetname, List<String> headtable, List<List<String>> value){
         ExcelUtils.exportExcel(path,sheetname,headtable,value);
