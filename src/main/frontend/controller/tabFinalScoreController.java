@@ -78,6 +78,8 @@ public class tabFinalScoreController {
                     int c = course.getCurveValue();
                     tfCurve.setText(Integer.toString(c));
 
+                    taComment.setDisable(true);
+
                 }
             }
         });
