@@ -16,3 +16,5 @@
 >
 > GUI: JavaFX
 
+#### UML Diagram
+![setup uml](https://github.com/HONG-XIN/GradingSystem/blob/master/doc/UML.png)
