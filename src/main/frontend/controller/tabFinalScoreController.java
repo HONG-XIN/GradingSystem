@@ -69,6 +69,7 @@ public class tabFinalScoreController {
                     cbFilter.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
                         @Override
                         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                            cbFilter.getSelectionModel().select(t1.intValue());
                             loadStatistics();
                         }
                     });
@@ -119,6 +120,7 @@ public class tabFinalScoreController {
                     info.setText("Change Bonus Fail");
                     loadData();
                 }
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setBonus(e.getNewValue());
             } catch (Exception ex) {
                 loadData();
                 info.setText("Change Bonus Fail");
@@ -132,6 +134,7 @@ public class tabFinalScoreController {
             String letter = e.getNewValue();
             cg.setLetterGrade(letter);
             info.setText("Change LetterGrade Success");
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setLetter(e.getNewValue());
         });
 
         tableFinal.setEditable(true);
@@ -140,6 +143,7 @@ public class tabFinalScoreController {
 
     private void loadStatistics() {
         String filter = cbFilter.getValue().toString();
+        System.out.println("Choose to show statistics in :"+filter);
         String[][] statistics = Main.gs.getStatisticListInCourse(course);
         if (filter.equals("graduate")) {
             statistics = Main.gs.getGradStatisticListInCourse(course);
