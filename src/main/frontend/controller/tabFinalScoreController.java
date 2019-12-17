@@ -195,7 +195,7 @@ public class tabFinalScoreController {
                         if (c.length() == 0) {
                             comment.setText("null");
                         } else {
-                            comment.setText("has");
+                            comment.setText("has comment");
                         }
                         prevComment = null;
                         taComment.setText("");
