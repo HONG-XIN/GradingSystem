@@ -114,7 +114,11 @@ public class tabStudentsController {
                 if (a < 0) {
                     categoryId = null;
                 } else {
-                    categoryId = ids[a];
+                    try {
+                        categoryId = ids[a];
+                    } catch (Exception ex) {
+
+                    }
                     loadDate();
                 }
             }

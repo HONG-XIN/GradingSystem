@@ -46,6 +46,9 @@ public class Main extends Application {
 
         primaryStage.setTitle("Grading System");
 
+        int width = 1024;
+        int height = 768;
+
         Parent fxmlMain = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
         mainScene = new Scene(fxmlMain, 640, 400);
 
@@ -53,43 +56,43 @@ public class Main extends Application {
         detailsScene = new Scene(fxmlDetails, 640, 400);
 
         Parent fxmlLogin = FXMLLoader.load(getClass().getResource("../view/login_screen.fxml"));
-        loginScene = new Scene(fxmlLogin, 640, 400);
+        loginScene = new Scene(fxmlLogin, width, height);
 
         Parent fxmlCoursesList = FXMLLoader.load(getClass().getResource("../view/coursesList_screen.fxml"));
-        coursesListScene = new Scene(fxmlCoursesList, 640, 400);
+        coursesListScene = new Scene(fxmlCoursesList, width, height);
 
         Parent fxmlAddOneCourse = FXMLLoader.load(getClass().getResource("../view/addOneCourse_screen.fxml"));
-        addOneCourseScene = new Scene(fxmlAddOneCourse, 640, 400);
+        addOneCourseScene = new Scene(fxmlAddOneCourse, width, height);
 
         Parent fxmlExportFinalScore = FXMLLoader.load(getClass().getResource("../view/exportFinalScore_screen.fxml"));
-        exportFinalScoreScene = new Scene(fxmlExportFinalScore, 640, 400);
+        exportFinalScoreScene = new Scene(fxmlExportFinalScore, width, height);
 
         Parent fxmlNewGradingCriteria = FXMLLoader.load(getClass().getResource("../view/newGradingCriteria_screen.fxml"));
-        newGradingCriteriaScene = new Scene(fxmlNewGradingCriteria, 640, 400);
+        newGradingCriteriaScene = new Scene(fxmlNewGradingCriteria, width, height);
 
         Parent fxmlNewSemester = FXMLLoader.load(getClass().getResource("../view/newSemester_screen.fxml"));
-        newSemesterScene = new Scene(fxmlNewSemester, 640, 400);
+        newSemesterScene = new Scene(fxmlNewSemester, width, height);
 
         Parent fxmlStudentInfo = FXMLLoader.load(getClass().getResource("../view/studentInfo_screen.fxml"));
-        studentInfoScene = new Scene(fxmlStudentInfo, 640, 400);
+        studentInfoScene = new Scene(fxmlStudentInfo, width, height);
 
         Parent fxmlTabFinalScore = FXMLLoader.load(getClass().getResource("../view/tabFinalScore_screen.fxml"));
-        tabFinalScoreScene = new Scene(fxmlTabFinalScore, 640, 400);
+        tabFinalScoreScene = new Scene(fxmlTabFinalScore, width, height);
 
         Parent fxmlTabGradingCriteria = FXMLLoader.load(getClass().getResource("../view/tabGradingCriteria_screen.fxml"));
-        tabGradingCriteriaScene = new Scene(fxmlTabGradingCriteria, 640, 400);
+        tabGradingCriteriaScene = new Scene(fxmlTabGradingCriteria, width, height);
 
         Parent fxmlTabStudents = FXMLLoader.load(getClass().getResource("../view/tabStudents_screen.fxml"));
-        tabStudentsScene = new Scene(fxmlTabStudents, 640, 400);
+        tabStudentsScene = new Scene(fxmlTabStudents, width, height);
 
         Parent fxmlChangePassword = FXMLLoader.load(getClass().getResource("../view/changePassword_screen.fxml"));
-        changePasswordScene = new Scene(fxmlChangePassword, 640, 400);
+        changePasswordScene = new Scene(fxmlChangePassword, width, height);
 
         Parent fxmlCurve = FXMLLoader.load(getClass().getResource("../view/curve_screen.fxml"));
         curveScene = new Scene(fxmlCurve, 320, 200);
 
         Parent fxmlLetterGrade = FXMLLoader.load(getClass().getResource("../view/letterGrade_screen.fxml"));
-        letterGradeScene = new Scene(fxmlLetterGrade, 640, 400);
+        letterGradeScene = new Scene(fxmlLetterGrade, width, height);
 
         primaryStage.setScene(loginScene);
 //        primaryStage.setScene(coursesListScene);
