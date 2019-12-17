@@ -157,9 +157,9 @@ public class exportFinalScoreController {
         }
         String path = "";
         System.out.println(System.getProperty("os.name"));
-        if (System.getProperty("os.name").equalsIgnoreCase("windows")) {
+        if (System.getProperty("os.name").split(" ")[0].equalsIgnoreCase("windows")) {
             path = System.getProperty("user.home") + "/Desktop/export_data.csv";
-        } else if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
+        } else if (System.getProperty("os.name").split(" ")[0].equalsIgnoreCase("Mac OS X")) {
             path = System.getProperty("user.home") + "/Desktop/export_data.csv";
         }
         System.out.println(path);
