@@ -577,7 +577,7 @@ public class GradingSystem implements GradingSystemDatabase {
                         courseGrade.setLetterGrade("W");
                     } else if (finalScore >= Aplus) {
                         courseGrade.setLetterGrade("A+");
-                    } else if (finalScore <= A) {
+                    } else if (finalScore >= A) {
                         courseGrade.setLetterGrade("A");
                     } else if (finalScore >= AMinus) {
                         courseGrade.setLetterGrade("A-");
