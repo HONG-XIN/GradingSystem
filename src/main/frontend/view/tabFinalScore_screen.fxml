@@ -65,21 +65,21 @@
          <children>
             <TableView fx:id="tableStatistics" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
               <columns>
-                <TableColumn fx:id="colMin" prefWidth="75.0" text="MIN" />
-                <TableColumn fx:id="colMax" prefWidth="75.0" text="MAX" />
-                  <TableColumn fx:id="colAvg" prefWidth="75.0" text="AVG" />
-                  <TableColumn fx:id="colStd" prefWidth="75.0" text="STD" />
+                <TableColumn fx:id="colMin" prefWidth="114.0" text="MIN" />
+                <TableColumn fx:id="colMax" prefWidth="108.0" text="MAX" />
+                  <TableColumn fx:id="colAvg" prefWidth="113.0" text="AVG" />
+                  <TableColumn fx:id="colStd" prefWidth="100.0" text="STD" />
               </columns>
             </TableView>
             <TableView fx:id="tableFinal" prefHeight="213.0" prefWidth="1024.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
               <columns>
-                <TableColumn fx:id="colSName" prefWidth="134.0" text="Student Name" />
-                <TableColumn fx:id="colBonus" prefWidth="88.0" text="Bonus" />
-                  <TableColumn fx:id="colFinalScore" prefWidth="84.0" text="Final Score" />
-                  <TableColumn fx:id="colLetter" prefWidth="92.0" text="Letter Grade" />
-                  <TableColumn fx:id="colComment" prefWidth="71.0" text="Comment" />
-                  <TableColumn fx:id="colFreeze" prefWidth="57.0" text="Freeze" />
-                  <TableColumn fx:id="colDelete" prefWidth="57.0" text="Delete" />
+                <TableColumn fx:id="colSName" prefWidth="282.0" text="Student Name" />
+                <TableColumn fx:id="colBonus" prefWidth="121.0" text="Bonus" />
+                  <TableColumn fx:id="colFinalScore" prefWidth="194.0" text="Final Score" />
+                  <TableColumn fx:id="colLetter" prefWidth="157.0" text="Letter Grade" />
+                  <TableColumn fx:id="colComment" prefWidth="97.0" text="Comment" />
+                  <TableColumn fx:id="colFreeze" prefWidth="71.0" text="Freeze" />
+                  <TableColumn fx:id="colDelete" prefWidth="63.0" text="Delete" />
               </columns>
             </TableView>
             <TextArea fx:id="taComment" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />

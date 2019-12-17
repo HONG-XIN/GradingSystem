@@ -22,7 +22,7 @@
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="200.0" text="Grading Criteria">
+            <Button mnemonicParsing="false" onAction="#btGradingCriteria" prefWidth="250.0" text="Grading Criteria">
                <font>
                   <Font size="24.0" />
                </font></Button>
@@ -32,7 +32,7 @@
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <Button mnemonicParsing="false" onAction="#btNewStudent" prefWidth="200.0" text="NEW STUDENT">
+            <Button mnemonicParsing="false" onAction="#btNewStudent" prefWidth="250.0" text="NEW STUDENT">
                <font>
                   <Font size="24.0" />
                </font></Button>
