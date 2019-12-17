@@ -19,7 +19,7 @@ public class CourseGrade {
         this.finalScore = new Score();
         this.letterGrade = "";
         this.bonus = 0;
-        this.comment = null;
+        this.comment = "";
     }
 
     public CourseGrade(String courseId, String studentId) {
@@ -55,9 +55,6 @@ public class CourseGrade {
 
 
     public String getComment(){
-        if(comment == null) {
-            return "no comments";
-        }
         return this.comment;
     }
 
@@ -104,7 +101,7 @@ public class CourseGrade {
 
     //function
     public boolean hasComment() {
-        return comment != null;
+        return !comment.equals("");
     }
 
     public boolean checkGradeByCourseIdAndStudentId(String courseId, String studentId){
